@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ledige stillinger</title>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://career.talentech.com/css/index-style.css">
+<link rel="stylesheet" href="./css/index-style.css">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
@@ -35,10 +35,14 @@
 <body>
 
 
+<style>
+</style>
+
+
 <nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: rgba(0, 0, 0, 0.0);">
     <div class="container">
         <a class="navbar-brand" href="/" aria-label="Home">
-            <img src="./files/TT-2.png" height="40" class="d-inline-block align-top" alt="">
+            <img src="./files/NAF-logo.jpeg" height="40" class="d-inline-block align-top" alt="">
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -91,12 +95,13 @@ $(document).ready(function() {
 
 
     <div class="hero-section">
-        <video playsinline autoplay loop muted class="hero-video">
+        <div class="naf-hero"></div>
+		<!--<video playsinline autoplay loop muted class="hero-video">
             <source src="https://career.talentech.com/files/Compressed-TT.mp4" type="video/mp4">
-        </video>
+        </video>-->
         <div class="hero-content">
-            <h1>Join our <span style="font-weight: 800;">journey</span></h1>
-            <a href="#jobs-anchor" class="btn btn-primary btn-lg"><strong>See available positions</strong></a>
+            <h1>Jobb hos <span style="font-weight: 800;">oss!</span></h1>
+            <a href="#jobs-anchor" class="btn btn-primary btn-lg"><strong>Se ledige stillinger</strong></a>
         </div>
     </div>
 
@@ -109,12 +114,12 @@ document.addEventListener('DOMContentLoaded', function() {
     .then(jobs => {
       const positionsCount = jobs.length; // Get the count of jobs from the feed
       const btnText = positionsCount === 1 ? 'See 1 available position' : `See ${positionsCount} available positions`; // Update button text based on count
-      document.querySelector('a.btn.btn-primary.btn-lg strong').textContent = positionsCount > 0 ? btnText : 'See available positions';
+      document.querySelector('a.btn.btn-primary.btn-lg strong').textContent = positionsCount > 0 ? btnText : 'Se ledige stillinger';
     })
     .catch(error => {
       console.error('Error fetching job details:', error);
       // If there is an error fetching the jobs, show default text
-      document.querySelector('a.btn.btn-primary.btn-lg strong').textContent = 'See available positions';
+      document.querySelector('a.btn.btn-primary.btn-lg strong').textContent = 'Se ledige stillinger';
     });
 });
 </script>
@@ -132,11 +137,13 @@ document.addEventListener('DOMContentLoaded', function() {
 	
 	<div class="talentech-section" id="company-section">
     <div class="container mt-5 pt-4 m-mt-2">
-        <h2 class="m-px-2">Life at <span style="font-weight: 800;">Talentech</span></h2>
-        <p class="my-4  m-px-2">Talentech has set out to become the largest and most innovative HR tech company of its kind. The product suite today spans the entire talent pipeline from recruitment, to onboarding and talent management with our products Talent Recruiter, ReachMee, Webcruiter, Talmundo, Weekli, irecommend and ontame.</p>
-        <p class="m-px-2">We know that great HR makes a difference and we want to be a part of shaping the future with the vision that all companies should know that Talent Comes First. To reach our goals we need you! Talentech as a workplace is characterized by a lot of great and engaged colleges that really believe in what we do.</p>
+        <h2 class="m-px-2">Velkommen til <span style="font-weight: 800;">NAF</span></h2>
+        <p class="my-4  m-px-2"><strong>Neste kapittel i vår 100 år lange historie starter med deg.</strong></p>
+        <p class="m-px-2">NAF er en av Norges mest kjente organisasjoner, med over 750.000 medlemmer og kunder. Det skal vi fortsette å være fremover, og da trenger vi flere gode medarbeidere, både i Forbundet, på våre øvingsbaner og ute på NAF-sentrene!</p>
+        <p class="m-px-2">Vi ser etter problemløsere – enten du er en dyktig bilmekaniker, en kreativ UX-designer eller fremoverlent utvikler.  </p>
     </div>
 </div>
+
 
 
 
@@ -190,10 +197,13 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 </script>
 
+
+
+
 <div class="talentech-section pb-4 mb-5 m-mb-3">
     <div class="container mt-4 pt-2 mb-5 pb-3 video-container m-my-0">
-        <video id="talentechVideo" class="rounded-video" playsinline autoplay loop muted>
-            <source src="./files/This-is-us-TT.mp4" type="video/mp4">
+        <video id="talentechVideo" class="square-video" playsinline autoplay muted>
+            <source src="./files/videoplayback.mp4" type="video/mp4">
             Your browser does not support the video tag.
         </video>
         <div class="video-controls">
@@ -204,63 +214,221 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
+
+
+
+        <h2 class="container pt-5 mt-5 m-my-0 m-px-4 m-pb-0"><span style="font-weight: 800;">Stillingskategorier</span></h2>
+	<div id="teamCarousel" class="carousel slide" data-interval="false">
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <div class="container">
+                <div class="row ">
+                    <!-- Team Member 1 -->
+                    <div class="col-md-4 team-member">
+<div class="team-background-image mb-3" alt="" style="background-image: url('./files/2.jpg')"></div>
+                        <p class="role mb-3">Jobb hos Norges Automobil Forbud</p>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    </div>
+                    <!-- Team Member 2 -->
+                    <div class="col-md-4 team-member">
+<div class="team-background-image mb-3" alt="" style="background-image: url('./files/1.webp')"></div>
+                        <p class="role mb-3">Jobb hos NAF Øvingsbaner</p>
+                        <p>Donec hendrerit ultricies ex, vitae hendrerit libero cursus ut.</p>
+                    </div>
+                    <!-- Team Member 3 -->
+                    <div class="col-md-4 team-member">
+					<a href="#">
+<div class="team-background-image mb-3" alt="" style="background-image: url('./files/3.webp')"></div>
+                        <p class="role mb-3">Jobb hos NAF senterne</p>
+                        <p>Orci varius natoque penatibus et magnis dis parturient pretium .</p>
+					</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
 	
 
 
-<section class="team-section my-2 py-5 m-my-0" id="meet-the-team" style="background-color: #eeeef2;">
-        <h2 class="container pt-5 mb-0 pb-0 m-px-4">Meet the <span style="font-weight: 800;">team</span></h2>
+<section class="team-section my-2 py-5 m-my-0" id="meet-the-team" style="background-color: rgb(233, 243, 230);">
+        <h2 class="container pt-5 mb-0 pb-0 m-px-4">Møt teamet hos <span style="font-weight: 800;">NAF</span></h2>
     <div class="container mt-0 pt-2">
         <div class="row mt-3 m-mt-2 m-mx-1">
             <!-- team 1 -->
 		    <script src="https://widget.gobistories.com/gwi/6" async onload="gobi.discover()"></script>
 
-<div class="gobi-collection" data-gobi-collection-id="tavnb"></div>
+<div class="gobi-collection" data-gobi-collection-id="r8fo6"></div>
 		    
     </div>
 </section>
 
 
+
+
+
 	
 
+<section class="process-section mb-5 py-5 m-my-0 m-pt-0 m-pb-4" id="recruitment-process" style="">
+    <div class="container pt-5 m-px-4 m-pb-2">
+        <h2>Vår <span style="font-weight: 800;">rekrutteringsprosess</span></h2>
+    </div>
+    <div class="container"><!--
+        <div class="row">
+            <div class="col-md-4 px-0">
+<script src="https://widget.gobistories.com/gwi/6" async onload="gobi.discover()"></script>
+
+<div class="gobi-collection" data-gobi-collection-id="j2jom"></div>
+            </div>-->
+            <!-- Existing Content in Right Column -->
+            <div class="col-md-12 pl-5 m-px-4">
+                <div class="row process-row">
+                    <!-- Benefit 1 -->
+                    <div class="col-md-4 col-sm-4 process-item">
+                        <div class="process-icon">
+                            <h3>1</h3>
+                        </div>
+						<div class="process-content">
+							<h3>Send søknad</h3>
+							<p>Start reisen din ved å søke gjennom vår karriereportal; last opp CV-en din og del litt om deg selv.</p>
+						</div>
+						</div>
+						<!-- Benefit 2 -->
+						<div class="col-md-4 col-sm-4 process-item">
+							<div class="process-icon">
+								<h3>2</h3>
+							</div>
+							<div class="process-content">
+								<h3>Innledende screening</h3>
+								<p>Vi vil gjennomgå søknaden din for å vurdere samsvaret mellom ferdighetene dine og jobbkravene.</p>
+							</div>
+						</div>
+						<!-- Benefit 3 -->
+						<div class="col-md-4 col-sm-4 process-item">
+							<div class="process-icon">
+								<h3>3</h3>
+							</div>
+							<div class="process-content">
+								<h3>Intervjuprosess</h3>
+								<p>Delta i en eller flere intervjuer for å diskutere erfaringene dine, ferdighetene dine og ambisjonene dine.</p>
+							</div>
+						</div>
+						<!-- Benefit 4 -->
+						<div class="col-md-4 col-sm-4 process-item">
+							<div class="process-icon">
+								<h3>4</h3>
+							</div>
+							<div class="process-content">
+								<h3>Vurdering</h3>
+								<p>Avhengig av rollen, kan du bli invitert til å fullføre oppgaver eller vurderinger for å vise frem ferdighetene dine.</p>
+							</div>
+						</div>
+						<!-- Benefit 5 -->
+						<div class="col-md-4 col-sm-4 process-item">
+							<div class="process-icon">
+								<h3>5</h3>
+							</div>
+							<div class="process-content">
+								<h3>Tilbud & onboarding</h3>
+								<p>Hvis det er en match, vil vi gi et tilbud. Når det er akseptert, vil vi veilede deg gjennom alle trinnene i onboarding-prosessen.</p>
+							</div>
+						</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+<section class="benefits-section my-5 pb-4 m-py-0 m-mt-0">
+    <h2 class="container pt-5 m-pt-4 m-px-4 m-pb-2">Ansattgoder hos <span style="font-weight: 800;">Benefits</span></h2>
+    <div class="container">
+        <div class="row">
+            <!-- Benefit 1 -->
+            <div class="col-md-3 col-sm-4 benefit-item">
+                <div class="benefit-icon">
+                    <i class="fa-solid fa-display-code"></i>
+                </div>
+                <div class="benefit-content">
+                    <strong>Hjemmekontor</strong>
+                    <p>Du får nødvendig utstyr til ditt hjemmekontor</p>
+                </div>
+            </div>
+            <!-- Benefit 2 -->
+            <div class="col-md-3 col-sm-4 benefit-item">
+                <div class="benefit-icon">
+                    <i class="fa-solid fa-notes-medical"></i>
+                </div>
+                <div class="benefit-content">
+                    <strong>Velvære</strong>
+                    <p>Helsegodtgjørelse for medlemskap på treningssentre, etc.</p>
+                </div>
+            </div>
+            <!-- Benefit 3 -->
+            <div class="col-md-3 col-sm-4 benefit-item">
+                <div class="benefit-icon">
+                    <i class="fa-solid fa-laptop"></i>
+                </div>
+                <div class="benefit-content">
+                    <strong>PC eller Mac</strong>
+                    <p>Velg ditt foretrukne arbeidsutstyr</p>
+                </div>
+            </div>
+            <!-- Benefit 4 -->
+            <div class="col-md-3 col-sm-4 benefit-item">
+                <div class="benefit-icon">
+                    <i class="fa-solid fa-map-location-dot"></i>
+                </div>
+                <div class="benefit-content">
+                    <strong>Feriedager</strong>
+                    <p>Nyt flere feriedager utover markedets normer</p>
+                </div>
+            </div>
+            <!-- Benefit 5 -->
+            <div class="col-md-3 col-sm-4 benefit-item">
+                <div class="benefit-icon">
+                    <i class="fa-solid fa-pot-food"></i>
+                </div>
+                <div class="benefit-content">
+                    <strong>Lunchrabatt</strong>
+                    <p>Rabatt på lunsjer – betalt av oss!</p>
+                </div>
+            </div>
+            <!-- Benefit 6 -->
+            <div class="col-md-3 col-sm-4 benefit-item">
+                <div class="benefit-icon">
+                    <i class="fa-solid fa-house-building"></i>
+                </div>
+                <div class="benefit-content">
+                    <strong>Hybridarbeid</strong>
+                    <p>Arbeid både fra våre fine kontorer og hjemmefra</p>
+                </div>
+            </div>
+            <!-- Benefit 7 -->
+            <div class="col-md-3 col-sm-6 benefit-item">
+                <div class="benefit-icon">
+                    <i class="fa-solid fa-dog"></i>
+                </div>
+                <div class="benefit-content">
+                    <strong>Hundevennlig</strong>
+                    <p>Hunder er velkomne på kontoret</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
 	
-
-
-
-<div class="feature-section" style="">
-    <div class="container py-5 m-py-0">
-        <h2 class="pt-5 m-px-2">Our <span style="font-weight: 800;">culture</span></h2>
-        <div class="row align-items-center mt-5 mb-5 pb-3 flex-lg-row m-mt-4 m-mb-0"> <!-- Changes for mobile first -->
-            <div class="col-lg-7">
-                <div class="background-image rounded-image m-mb-0" style="background-image: url('./files/TT-fabian-3.jpg');"></div>
-            </div>
-            <div class="col-lg-5 text-padding m-p-4"> <!-- text-padding class for more padding -->
-                <h3 style="font-size: 24px;font-weight: 800;">Fabian Söderström</h3>
-				<p><strong>Advertising Manager</strong></p>
-				<p>"Working on new products where my work has real impact on technical decision is really inspirational. At Talentech a programmer is more of a partner when it comes to decision making, so your voice is heard and that truly matters. But Talentech isn’t only work – it’s the people you work with - and that's the main reason why I love to work at Talentech."</p>
-            </div>
-        </div>
-<div class="row align-items-center mt-5 mb-5 pt-5 pb-3 m-my-0 m-pt-0">
-    <div class="col-lg-5 text-padding m-p-4 order-2 order-lg-1">
-        <h3 style="font-size: 24px;font-weight: 800;">Carolina Asp</h3>
-        <p><strong>Senior Implementation Consultant</strong></p>
-        <p>"The biggest reason why I work at Talentech is the opportunity you have to evolve and constantly learn while working across countries, departments and with a wide range of different customers, all with their own experience and a goal to be as awesome as possible. Plus you have the most amazing colleagues. At Talentech new ideas are always welcome and there is always someone who can help in our team of ambitious Talentecher’s."</p>
-    </div>
-    <div class="col-lg-7 order-1 order-lg-2">
-        <div class="background-image rounded-image m-mb-0" style="background-image: url('./files/TT-carolina-1.jpg');"></div>
-    </div>
-</div>
-        <div class="row align-items-center mt-5 mb-5 pb-3 pt-5 flex-lg-row m-mt-0 m-pt-0 m-mb-0 m-pb-4"> <!-- Changes for mobile first -->
-            <div class="col-lg-7">
-                <div class="background-image rounded-image m-mb-0" style="background-image: url('./files/TT-roger-1.jpg');"></div>
-            </div>
-            <div class="col-lg-5 text-padding m-p-4"> <!-- text-padding class for more padding -->
-                <h3 style="font-size: 24px;font-weight: 800;">Roger Larsson</h3>
-				<p><strong>Head of Group IT Operations</strong></p>
-				<p>"I work with various projects both internally and externally, which helps to develop me both personally and professionally. We have a lot of social events and we have so much fun together across all departments."</p>
-            </div>
-        </div>
-    </div>
-</div>
 
 
 
@@ -273,8 +441,8 @@ document.addEventListener('DOMContentLoaded', () => {
 <div class="quote-section py-5">
     <div class="container py-5 mt-3 m-py-2">
         <blockquote class="blockquote text-center">
-            <p class="mb-4">"Starting at Talentech, I immediately felt welcomed and part of a dynamic, innovative team."</p>
-            <footer class="blockquote-footer">Henrik Moberg</footer>
+            <p class="mb-4">"Det er fokus på stolthet, utvikling og mestring i faget. Det er samarbeid og fellesskap for å løse problemer på best mulig måte, god «team spirit."</p>
+            <footer class="blockquote-footer">Lasse, Bilmekaniker NAF Senter Oslo</footer>
         </blockquote>
     </div>
 </div>
@@ -283,234 +451,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
-<section class="process-section mb-5 py-5 m-my-0 m-pt-0 m-pb-4" id="recruitment-process" style="background-color: #eeeef2;">
-    <div class="container pt-5 m-px-4 m-pb-2">
-        <h2>Our <span style="font-weight: 800;">recruitment process</span></h2>
-    </div>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-4 px-0">
-<script src="https://widget.gobistories.com/gwi/6" async onload="gobi.discover()"></script>
-
-<div class="gobi-collection" data-gobi-collection-id="j2jom"></div>
-            </div>
-            <!-- Existing Content in Right Column -->
-            <div class="col-md-8 pl-5 m-px-4">
-                <div class="row process-row">
-                    <!-- Benefit 1 -->
-                    <div class="col-md-4 col-sm-4 process-item">
-                        <div class="process-icon">
-                            <h3>1</h3>
-                        </div>
-                        <div class="process-content">
-                            <h3>Submit Your Application</h3>
-                            <p>Start your journey by applying through our career portal; upload your CV and share a bit about yourself.</p>
-                        </div>
-                    </div>
-                    <!-- Benefit 2 -->
-                    <div class="col-md-4 col-sm-4 process-item">
-                        <div class="process-icon">
-                            <h3>2</>
-                        </div>
-                        <div class="process-content">
-                            <h3>Initial Screening</h3>
-                            <p>We will review your application to assess the alignment between your skills and the job requirements.</p>
-                        </div>
-                    </div>
-                    <!-- Benefit 3 -->
-                    <div class="col-md-4 col-sm-4 process-item">
-                        <div class="process-icon">
-                            <h3>3</h3>
-                        </div>
-                        <div class="process-content">
-                            <h3>Interview Process</h3>
-                            <p>Engage with us through one or more interviews to discuss your experiences, skills, and aspirations.</p>
-                        </div>
-                    </div>
-                    <!-- Benefit 4 -->
-                    <div class="col-md-4 col-sm-4 process-item">
-                        <div class="process-icon">
-                            <h3>4</h3>
-                        </div>
-                        <div class="process-content">
-                            <h3>Assessment</h3>
-                            <p>Depending on the role, you may be invited to complete assignments or assessments to showcase your capabilities.</p>
-                        </div>
-                    </div>
-                    <!-- Benefit 5 -->
-                    <div class="col-md-4 col-sm-4 process-item">
-                        <div class="process-icon">
-                            <h3>5</h3>
-                        </div>
-                        <div class="process-content">
-                            <h3>Offer & Onboarding</h3>
-                            <p>If it's a match, we'll extend an offer. Once accepted, we'll guide you through every step of your onboarding journey.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-
-
-
 	
 	
 	
 	
-        <h2 class="container pt-5 mt-5 m-my-0 m-px-4 m-pb-0">Job <span style="font-weight: 800;">categories</span></h2>
-	<div id="teamCarousel" class="carousel slide" data-interval="false">
-    <div class="carousel-inner">
-        <div class="carousel-item active">
-            <div class="container">
-                <div class="row ">
-                    <!-- Team Member 1 -->
-                    <div class="col-md-4 team-member">
-<div class="team-background-image mb-3" alt="" style="background-image: url('./files/HR-image.jpg')"></div>
-                        <p class="role mb-3">Software Development</p>
-                        <p>Join our Software Development team to innovate and build cutting-edge technology solutions that revolutionize talent management.</p>
-                    </div>
-                    <!-- Team Member 2 -->
-                    <div class="col-md-4 team-member">
-<div class="team-background-image mb-3" alt="" style="background-image: url('./files/cat-2.jpg')"></div>
-                        <p class="role mb-3">Customer Success</p>
-                        <p>Be a part of our Customer Success team, where your efforts directly contribute to our clients' growth and satisfaction.</p>
-                    </div>
-                    <!-- Team Member 3 -->
-                    <div class="col-md-4 team-member">
-<div class="team-background-image mb-3" alt="" style="background-image: url('./files/Data-1.jpg')"></div>
-                        <p class="role mb-3">Sales and Marketing</p>
-                        <p>Drive growth and build meaningful relationships in our Sales and Marketing team, connecting clients with the solutions they need.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- New Carousel Item -->
-        <div class="carousel-item">
-            <div class="container">
-                <div class="row ">
-                    <!-- Additional Team Member -->
-                    <div class="col-md-4 team-member">
-<div class="team-background-image mb-3" alt="" style="background-image: url('./files/cat-4.jpg')"></div>
-                        <p class="role mb-3">Product Management</p>
-                        <p>Shape the future of our offerings as a member of the Product Management team, where you can transform the talent  landscape.</p>
-                    </div>
-                    <div class="col-md-4 team-member">
-<div class="team-background-image mb-3" alt="" style="background-image: url('./files/cat-1.jpg')"></div>
-                        <p class="role mb-3">Human Resources</p>
-                        <p>Empower and enrich our company culture as part of the Human Resources team, focusing on talent development and organizational growth.</p>
-                    </div>
-                    <div class="col-md-4 team-member">
-<div class="team-background-image mb-3" alt="" style="background-image: url('./files/cat-3.jpg')"></div>
-                        <p class="role mb-3">Data Analysis & Insights</p>
-                        <p>Join our Data Analysis & Insights team to harness the power of data, driving strategic decisions and enhancing our product offerings.</p>
-                    </div>
-                    <!-- You can duplicate previous members here or add new ones -->
-                    <!-- Placeholder for additional team members if needed -->
-                    <div class="col-md-4 team-member"> <!-- Placeholder if you want more than one member per slide -->
-                        <!-- Content for another member -->
-                    </div>
-                    <div class="col-md-4 team-member"> <!-- Placeholder if you want more than one member per slide -->
-                        <!-- Content for another member -->
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- End of New Carousel Item -->
-    </div>
-    <a class="carousel-control-prev" href="#teamCarousel" role="button" data-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span>
-    </a>
-    <a class="carousel-control-next" href="#teamCarousel" role="button" data-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="sr-only">Next</span>
-    </a>
-</div>
-
-
-
-
-
-<section class="benefits-section my-5 pb-4 m-py-0 m-mt-0">
-        <h2 class="container pt-5 m-pt-4 m-px-4 m-pb-2">Some of our <span style="font-weight: 800;">local Benefits</span></h2>
-    <div class="container">
-        <div class="row">
-            <!-- Benefit 1 -->
-            <div class="col-md-3 col-sm-4 benefit-item">
-                <div class="benefit-icon">
-				<i class="fa-solid fa-display-code"></i>
-                </div>
-    <div class="benefit-content">
-                <strong>Home office</strong>
-                <p>You get necessary equipment for your home office</p>
-            </div>
-            </div>
-            <!-- Benefit 2 -->
-            <div class="col-md-3 col-sm-4 benefit-item">
-                <div class="benefit-icon">
-                    <i class="fa-solid fa-notes-medical"></i>
-                </div>
-    <div class="benefit-content">
-                <strong>Wellness</strong>
-                <p>Health allowance for gym memberships, etc</p>
-            </div>
-            </div>
-            <!-- Benefit 3 -->
-            <div class="col-md-3 col-sm-4 benefit-item">
-                <div class="benefit-icon">
-                    <i class="fa-solid fa-laptop"></i>
-                </div>
-    <div class="benefit-content">
-                <strong>PC or Mac</strong>
-                <p>Choose your preferred work equipment</p>
-            </div>
-            </div>
-            <!-- Benefit 4 -->
-            <div class="col-md-3 col-sm-4 benefit-item">
-                <div class="benefit-icon">
-                    <i class="fa-solid fa-map-location-dot"></i>
-                </div>
-    <div class="benefit-content">
-                <strong>Vacation days</strong>
-                <p>Enjoy additional vacation days  beyond market norms</p>
-            </div>
-            </div>
-            <!-- Benefit 5 -->
-            <div class="col-md-3 col-sm-4 benefit-item">
-                <div class="benefit-icon">
-                    <i class="fa-solid fa-pot-food"></i>
-                </div>
-    <div class="benefit-content">
-                <strong>Lunch discount</strong>
-                <p>Discount on lunches – paid by us!</p>
-            </div>
-            </div>
-            <!-- Benefit 6 -->
-            <div class="col-md-3 col-sm-4 benefit-item">
-                <div class="benefit-icon">
-                    	<i class="fa-solid fa-house-building"></i>
-                </div>
-    <div class="benefit-content">
-                <strong>Hybrid work</strong>
-                <p>Work both from our nice offices as well as remote</p>
-            </div>
-            </div>
-            <!-- Benefit 7 -->
-            <div class="col-md-3 col-sm-6 benefit-item">
-                <div class="benefit-icon">
-                    <i class="fa-solid fa-dog"></i>
-                </div>
-    <div class="benefit-content">
-                <strong>Dog friendly</strong>
-                <p>Dogs are welcome in the office</p>
-            </div>
-            </div>
-        </div>
-    </div>
-</section>
 
 
 	
@@ -839,6 +783,52 @@ $(document).ready(function () {
 
 	
 <script>
+function fetchJobs() {
+    fetch('https://api.talentech.io/reachmee/feed/naf') // Ensure this URL is correct
+        .then(response => response.json())
+        .then(data => {
+            jobs = data; // Store fetched jobs
+            displayedJobs = Math.min(jobsToShow, jobs.length); // Initialize displayedJobs
+            populateFilters(); // Fill dropdowns with options
+            displayJobs(); // Show initial jobs
+            updateMapWithJobLocations(jobs); // Update map with job locations
+        })
+        .catch(error => {
+            console.error('Error fetching jobs:', error);
+        });
+}
+
+
+
+function updateMapWithJobLocations(jobs) {
+    // Define a custom icon for the map markers
+    var customIcon = L.icon({
+        iconUrl: './files/TT-fav.svg',
+        iconSize: [38, 95],
+        iconAnchor: [22, 50],
+        popupAnchor: [1, -15]
+    });
+
+    // Loop through jobs and add markers for those with locations
+    jobs.forEach(job => {
+        if (job.areas && job.areas.length > 0) {
+            job.areas.forEach(area => {
+                // Example: Assuming each area has lat and lon properties
+                let locationName = area.name;
+                // Dummy coordinates for demonstration; replace with real lat/lon
+                let lat = 59.9139; // Replace with actual latitude
+                let lon = 10.7522; // Replace with actual longitude
+
+                // Add marker to the map
+                L.marker([lat, lon], { icon: customIcon })
+                    .bindPopup(locationName)
+                    .addTo(mymap);
+            });
+        }
+    });
+}
+
+
 // Initialize the map
 var mymap = L.map('mapid', {
     attributionControl: false,
@@ -855,30 +845,6 @@ L.tileLayer('https://api.mapbox.com/styles/v1/inequi/clu45jmjw007101qrhjb35kmh/t
     accessToken: 'yourMapboxAccessToken'
 }).addTo(mymap);
 
-// Create a custom icon
-var customIcon = L.icon({
-    iconUrl: './files/TT-fav.svg',
-    iconSize: [38, 95], 
-    iconAnchor: [22, 50], 
-    popupAnchor: [1, -15]
-});
-
-// Locations - Manual. Must be updated to automatic from feed
-var jobLocations = [
-    {name: "Oslo", lat: 59.9139, lon: 10.7522},
-    {name: "Stockholm", lat: 59.3293, lon: 18.0686},
-    {name: "København", lat: 55.6761, lon: 12.5683},
-    {name: "Helsinki", lat: 60.1699, lon: 24.9384},
-    {name: "Gdansk", lat: 54.3520, lon: 18.6466},
-    {name: "Amsterdam", lat: 52.3676, lon: 4.9041}
-];
-
-// Add pins to the map with custom icons and styled popups
-jobLocations.forEach(function(location) {
-    L.marker([location.lat, location.lon], {icon: customIcon})
-    .bindPopup(location.name) // Binding a popup with the location name
-    .addTo(mymap);
-});
 </script>
 	
 	
