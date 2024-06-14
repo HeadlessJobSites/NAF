@@ -781,59 +781,9 @@ $(document).ready(function () {
 
 
 
-	
 <script>
-function fetchJobs() {
-    fetch('https://api.talentech.io/reachmee/feed/naf') // Ensure this URL is correct
-        .then(response => response.json())
-        .then(data => {
-            jobs = data; // Store fetched jobs
-            displayedJobs = Math.min(jobsToShow, jobs.length); // Initialize displayedJobs
-            populateFilters(); // Fill dropdowns with options
-            displayJobs(); // Show initial jobs
-            updateMapWithJobLocations(jobs); // Update map with job locations
-        })
-        .catch(error => {
-            console.error('Error fetching jobs:', error);
-        });
-}
-
-
-
-function updateMapWithJobLocations(jobs) {
-    // Define a custom icon for the map markers
-    var customIcon = L.icon({
-        iconUrl: './files/TT-fav.svg',
-        iconSize: [38, 95],
-        iconAnchor: [22, 50],
-        popupAnchor: [1, -15]
-    });
-
-    // Loop through jobs and add markers for those with locations
-    jobs.forEach(job => {
-        if (job.areas && job.areas.length > 0) {
-            job.areas.forEach(area => {
-                // Example: Assuming each area has lat and lon properties
-                let locationName = area.name;
-                // Dummy coordinates for demonstration; replace with real lat/lon
-                let lat = 59.9139; // Replace with actual latitude
-                let lon = 10.7522; // Replace with actual longitude
-
-                // Add marker to the map
-                L.marker([lat, lon], { icon: customIcon })
-                    .bindPopup(locationName)
-                    .addTo(mymap);
-            });
-        }
-    });
-}
-
-
 // Initialize the map
-var mymap = L.map('mapid', {
-    attributionControl: false,
-    scrollWheelZoom: false
-}).setView([59.9139, 10.7522], 4);
+var mymap = L.map('mapid').setView([59.9139, 10.7522], 5); // Default view set to Norway
 
 // Set up the map tiles
 L.tileLayer('https://api.mapbox.com/styles/v1/inequi/clu45jmjw007101qrhjb35kmh/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoiaW5lcXVpIiwiYSI6ImNsdTQ0c2FybTFiZG4ya3FzZjQxOW91ejUifQ.Z_vyEld041G0LshX2Mdtpw', {
@@ -844,6 +794,17 @@ L.tileLayer('https://api.mapbox.com/styles/v1/inequi/clu45jmjw007101qrhjb35kmh/t
     zoomOffset: -1,
     accessToken: 'yourMapboxAccessToken'
 }).addTo(mymap);
+
+// Sample data from your feed, replace this with dynamic data fetching and geocoding
+var jobLocations = [
+    {name: "Stockholm", lat: 59.3293, lon: 18.0686}, // Coordinates for Stockholm
+    {name: "Oslo", lat: 59.9139, lon: 10.7522} // Coordinates for Oslo
+];
+
+// Add pins to the map without popups
+jobLocations.forEach(function(location) {
+    L.marker([location.lat, location.lon]).addTo(mymap);
+});
 
 </script>
 	
