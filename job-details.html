@@ -585,7 +585,7 @@ $(document).ready(function () {
     // Adjust accordingly if your detail page has a different URL structure
     const jobDetailUrl = `job-details.html?jobId=${job.ad_id}`;
         // Use the second organization unit if available, otherwise use the first one
-        const organizationUnitName = job.organizations.length > 1 ? job.organizations[1].nameorgunit : job.organizations[0]?.nameorgunit || 'Not specified';
+        const organizationUnitName = job.organizations.length > 1 ? job.organizations[1].nameorgunit : job.organizations[0]?.nameorgunit || 'Ikke spesifisert';
         return `
 <div class="col-12 col-md-4 col-lg-4 mb-4">
     <a href="${jobDetailUrl}" class="" style="text-decoration: none; color: inherit;">
@@ -677,8 +677,8 @@ $(document).ready(function() {
         .then(jobs => {
             const job = jobs.find(job => job.ad_id === jobId);
             if (job) {
-                const organizationUnit = job.organizations && job.organizations.length > 1 ? job.organizations[1].nameorgunit : job.organizations[0]?.nameorgunit || 'Not specified';
-                const city = job.areas && job.areas.length > 0 ? job.areas[0].name : 'Not specified';
+                const organizationUnit = job.organizations && job.organizations.length > 1 ? job.organizations[1].nameorgunit : job.organizations[0]?.nameorgunit || 'Ikke spesifisert';
+                const city = job.areas && job.areas.length > 0 ? job.areas[0].name : ' ';
 
                 const applicationLink = job.link.replace("rmpage=job", "rmpage=apply");
                 $('#applyButton').attr('onclick', `window.location.href='${applicationLink}'`);
