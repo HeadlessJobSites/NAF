@@ -889,8 +889,8 @@ jobLocations.forEach(function(location) {
             }
         }
 
-        // Adjust the map view to fit all markers
-        if (markers.length) {
+        // Adjust the map view to fit all markers only if there are markers
+        if (markers.length > 0) {
             const group = new L.featureGroup(markers);
             map.fitBounds(group.getBounds(), {padding: [50, 50]});
         }
