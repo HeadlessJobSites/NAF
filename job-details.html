@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stillingsannonse</title>
+    <title>Stillingsannonse1</title>
     <!-- Bootstrap CSS -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://career.talentech.com/css/job-details-style.css">
@@ -17,7 +17,7 @@
 <script src="https://kit.fontawesome.com/ca38a06270.js" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
 <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
-<script type="text/javascript" src="https://web103.reachmee.com/customerjs/helper.js"></script>
+<script type="text/javascript" src="https://web106.reachmee.com/customerjs/helper.js"></script>
 	
   <meta property="og:title" content="Ledig stilling">
   <meta property="og:image" content="https://career.talentech.com/files/NAF-test.webp">
@@ -206,7 +206,7 @@ document.addEventListener("DOMContentLoaded", function() {
 function loadExternalScriptAndBuildIframe() {
     var script = document.createElement('script');
     script.type = 'text/javascript';
-    script.src = 'https://web103.reachmee.com/customerjs/I020-787-58.js';
+    script.src = 'https://web106.reachmee.com/customerjs/I020-787-58.js';
     script.onload = function() {
         buildIframe();
     };
@@ -214,7 +214,7 @@ function loadExternalScriptAndBuildIframe() {
 }
 
 function buildIframe() {
-    var iFrameUrl = 'https://web103.reachmee.com/ext/';
+    var iFrameUrl = 'https://web106.reachmee.com/ext/';
     var validator = '8bd450e11350447150df52325f46f68b';
     var iid = 'I020';
     var customer = '787';
@@ -383,7 +383,7 @@ document.addEventListener('DOMContentLoaded', function() {
 // Consolidate message listener, adding security check
 window.addEventListener('message', function(event) {
     // Verify the origin of your iframe content
-    const expectedOrigin = 'https://web103.reachmee.com';
+    const expectedOrigin = 'https://web106.reachmee.com';
     if (event.origin === expectedOrigin && typeof event.data === 'string' && event.data.startsWith('resize::')) {
         const height = event.data.split('resize::')[1];
         if (height) {
@@ -467,7 +467,7 @@ window.addEventListener('message', function(event) {
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('agent').addEventListener('click', function() {
-        var iframeUrl = "https://web103.reachmee.com/ext/I020/787/subscribe?site=58&lang=NO&validator=8bd450e11350447150df52325f46f68b";
+        var iframeUrl = "https://web106.reachmee.com/ext/I020/787/subscribe?site=58&lang=NO&validator=8bd450e11350447150df52325f46f68b";
         document.getElementById('modalIframe').src = iframeUrl;
         $('#exampleModal').modal('show');
     });
@@ -759,7 +759,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (openApplication !== null) {
         // Change the src of the iframe
         const applicationFormIframe = document.getElementById('applicationFormIframe');
-        applicationFormIframe.src = "https://web103.reachmee.com/ext/I020/787/apply?site=58&lang=NO&validator=8bd450e11350447150df52325f46f68b&job_id=-1";
+        applicationFormIframe.src = "https://web106.reachmee.com/ext/I020/787/apply?site=58&lang=NO&validator=8bd450e11350447150df52325f46f68b&job_id=-1";
         
         // Hide the job description and metadata
         document.getElementById('our-process').style.display = 'none';
