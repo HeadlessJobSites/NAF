@@ -19,13 +19,13 @@
 <script src="https://widget.gobistories.com/gwi/6" async onload="gobi.discover()"></script>
 
 	
-  <meta property="og:title" content="Talentech Career Portal">
-  <meta property="og:description" content="See available jobs at Talentech.">
+  <meta property="og:title" content="NAF Karriereportal">
+  <meta property="og:description" content="Se ledige stillinger hos NAF">
   <meta property="og:image" content="https://career.talentech.com/files/Career-preview.jpg">
   <meta property="og:url" content="https://career.talentech.com">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Talentech Career Portal">
-  <meta name="twitter:description" content="See available jobs at Talentech.">
+  <meta name="twitter:title" content="NAF Karriereportal">
+  <meta name="twitter:description" content="Se ledige stillinger hos NAF">
   <meta name="twitter:image" content="https://career.talentech.com/files/Career-preview.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -52,7 +52,7 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="./#jobs-anchor">Jobs</a>
+                    <a class="nav-link" href="./#jobs-anchor">Stillinger</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="./#meet-the-team">Møt teamet</a>
@@ -857,7 +857,30 @@ $(document).ready(function () {
     document.addEventListener('DOMContentLoaded', initMap);
 </script>
 
+	
+<!-- Set meta values dynamically -->
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    // Get the image URL from the background of the div with class "naf-hero"
+    const heroDiv = document.querySelector('.naf-hero');
+    const backgroundImage = window.getComputedStyle(heroDiv).backgroundImage;
+    const imageUrl = backgroundImage.slice(5, -2);
 
+    // Get the title from the first <h1> on the page
+    const title = document.querySelector('h1').innerText;
+
+    // Get the description from the first <p> on the page
+    const description = document.querySelector('p').innerText;
+
+    // Update the meta tags
+    document.querySelector('meta[property="og:title"]').setAttribute('content', title);
+    document.querySelector('meta[property="og:description"]').setAttribute('content', description);
+    document.querySelector('meta[property="og:image"]').setAttribute('content', imageUrl);
+    document.querySelector('meta[name="twitter:title"]').setAttribute('content', title);
+    document.querySelector('meta[name="twitter:description"]').setAttribute('content', description);
+    document.querySelector('meta[name="twitter:image"]').setAttribute('content', imageUrl);
+  });
+</script>
 	
 	
 </body>
