@@ -12,9 +12,9 @@
 	background-size: cover;
 }
 .btn-primary {
-	background-color: rgb(255, 219, 22);
+	background-color: rgb(255, 219, 22) !important;
 	border-radius: 5px;
-    color: rgb(6, 46, 42);
+    color: rgb(6, 46, 42) !important;
 }
 .square-video {
 	width: 100%;
