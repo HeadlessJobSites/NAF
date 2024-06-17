@@ -48,4 +48,31 @@
 .max-width-container {
     max-width: 1600px;
 }
+.card {
+	rgb(232, 232, 232) solid 1px;
+	border-radius: 2px;
+}
+.stretched-link {
+    background: rgb(211, 234, 194);
+    border-radius: 50%;
+    height: 80px;
+    width: 80px;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    position: inherit;
+    margin-top: 20px;
+}
+
+
+
+
+
+
+
+
+
+
 
