@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stillingsannonse1</title>
+    <title>Stillingsannonse</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://career.talentech.com/css/job-details-style.css">
@@ -670,7 +670,7 @@ $(document).ready(function() {
     const params = new URLSearchParams(window.location.search);
     const jobId = params.get('rmjob') ? parseInt(params.get('rmjob'), 10) : parseInt(params.get('jobId'), 10);
 
-    fetch('https://api.talentech.io/reachmee/feed/')
+    fetch('https://api.talentech.io/reachmee/feed/naf')
         .then(response => response.json())
         .then(jobs => {
             const job = jobs.find(job => job.ad_id === jobId);
