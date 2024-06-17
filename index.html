@@ -7,7 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ledige stillinger</title>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<link rel="stylesheet" href="./css/index-style.css">
+<link rel="stylesheet" href="https://career.talentech.com/css/index-style.css">
+<link rel="stylesheet" href="./css/naf-index.css">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
@@ -16,7 +17,6 @@
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
 <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
 <script src="https://widget.gobistories.com/gwi/6" async onload="gobi.discover()"></script>
-<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 
 	
   <meta property="og:title" content="Talentech Career Portal">
@@ -125,7 +125,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 
-
+<!--
 <div class="gobi-stories-container" id="gobi-stories-container">
   <button aria-label="Close video" class="close-btn" onclick="document.getElementById('gobi-stories-container').style.display='none';"><i class="fa-regular fa-xmark"></i></button>
 <script src="https://widget.gobistories.com/gwi/6" async onload="gobi.discover()"></script>
@@ -133,7 +133,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <div class="gobi-collection" data-gobi-collection-id="pncc7"></div>
   <a href="#company-section" aria-label="Get to know us"><div class="gobi-stories-text">Get to know us</div></a>
 </div>
-
+-->
 	
 	
 	<div class="talentech-section" id="company-section">
@@ -201,7 +201,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
-<div class="talentech-section pb-4 mb-5 m-mb-3">
+<div class="talentech-section pb-4 mb-5 m-mb-0 m-pb-0">
     <div class="container mt-4 pt-2 mb-5 pb-3 video-container m-my-0">
         <video id="talentechVideo" class="square-video" playsinline autoplay muted>
             <source src="./files/videoplayback.mp4" type="video/mp4">
@@ -257,7 +257,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	
 
 
-<section class="team-section my-2 py-5 m-my-0" id="meet-the-team" style="background-color: rgb(233, 243, 230);">
+<section class="team-section my-2 py-5 m-pt-3 m-mb-0 m-mt-5" id="meet-the-team" style="background-color: rgb(233, 243, 230);">
         <h2 class="container pt-5 mb-0 pb-0 m-px-4">Møt teamet hos <span style="font-weight: 800;">NAF</span></h2>
     <div class="container mt-0 pt-2">
         <div class="row mt-3 m-mt-2 m-mx-1">
@@ -277,9 +277,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
 <section class="process-section mb-5 py-5 m-my-0 m-pt-0 m-pb-4" id="recruitment-process" style="">
     <div class="container pt-5 m-px-4 m-pb-2">
-        <h2>Vår <span style="font-weight: 800;">rekrutteringsprosess</span></h2>
+        <h2>Vår <span style="font-weight: 800;">rekrutterings&shy;prosess</span></h2>
     </div>
-    <div class="container"><!--
+    <div class="container m-px-0">
+	<!--
         <div class="row">
             <div class="col-md-4 px-0">
 <script src="https://widget.gobistories.com/gwi/6" async onload="gobi.discover()"></script>
@@ -287,7 +288,7 @@ document.addEventListener('DOMContentLoaded', () => {
 <div class="gobi-collection" data-gobi-collection-id="j2jom"></div>
             </div>-->
             <!-- Existing Content in Right Column -->
-            <div class="col-md-12 pl-5 m-px-4">
+            <div class="col-md-12 pl-5 m-pl-4">
                 <div class="row process-row">
                     <!-- Benefit 1 -->
                     <div class="col-md-4 col-sm-4 process-item">
@@ -349,9 +350,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
+<div class="quote-section py-5 max-width-container mx-auto">
+    <div class="container py-5 mt-3 m-py-2">
+        <blockquote class="blockquote text-center">
+            <p class="mb-4">"Det er fokus på stolthet, utvikling og mestring i faget. Det er samarbeid og fellesskap for å løse problemer på best mulig måte, god «team spirit."</p>
+            <footer class="blockquote-footer">Lasse, Bilmekaniker NAF Senter Oslo</footer>
+        </blockquote>
+    </div>
+</div>
+
+
+
+
+
+
 
 <section class="benefits-section my-5 pb-4 m-py-0 m-mt-0">
-    <h2 class="container pt-5 m-pt-4 m-px-4 m-pb-2">Ansattgoder hos <span style="font-weight: 800;">Benefits</span></h2>
+    <h2 class="container pt-5 m-px-4 m-pb-2">Ansattgoder hos <span style="font-weight: 800;">NAF</span></h2>
     <div class="container">
         <div class="row">
             <!-- Benefit 1 -->
@@ -433,20 +448,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
-
-
-
-
-
-
-<div class="quote-section py-5">
-    <div class="container py-5 mt-3 m-py-2">
-        <blockquote class="blockquote text-center">
-            <p class="mb-4">"Det er fokus på stolthet, utvikling og mestring i faget. Det er samarbeid og fellesskap for å løse problemer på best mulig måte, god «team spirit."</p>
-            <footer class="blockquote-footer">Lasse, Bilmekaniker NAF Senter Oslo</footer>
-        </blockquote>
-    </div>
-</div>
 
 
 
@@ -782,6 +783,51 @@ $(document).ready(function () {
 
 
 
+	
+<script>
+// Initialize the map
+var mymap = L.map('mapid', { 
+    attributionControl: false,
+    scrollWheelZoom: false
+}).setView([59.9139, 10.7522], 4);
+
+// Set up the map tiles
+L.tileLayer('https://api.mapbox.com/styles/v1/inequi/clu45jmjw007101qrhjb35kmh/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoiaW5lcXVpIiwiYSI6ImNsdTQ0c2FybTFiZG4ya3FzZjQxOW91ejUifQ.Z_vyEld041G0LshX2Mdtpw', {
+    maxZoom: 19,
+    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+    id: 'mapbox/streets-v11',
+    tileSize: 512,
+    zoomOffset: -1,
+    accessToken: 'yourMapboxAccessToken'
+}).addTo(mymap);
+
+// Create a custom icon
+var customIcon = L.icon({
+    iconUrl: './files/TT-fav.svg',
+    iconSize: [38, 95], 
+    iconAnchor: [22, 50], 
+    popupAnchor: [1, -15]
+});
+
+// Locations - Manual. Must be updated to automatic from feed
+var jobLocations = [
+    {name: "Oslo", lat: 59.9139, lon: 10.7522},
+    {name: "Stockholm", lat: 59.3293, lon: 18.0686},
+    {name: "København", lat: 55.6761, lon: 12.5683},
+    {name: "Helsinki", lat: 60.1699, lon: 24.9384},
+    {name: "Gdansk", lat: 54.3520, lon: 18.6466},
+    {name: "Amsterdam", lat: 52.3676, lon: 4.9041}
+];
+
+// Add pins to the map with custom icons and styled popups
+jobLocations.forEach(function(location) {
+    L.marker([location.lat, location.lon], {icon: customIcon})
+    .bindPopup(location.name) // Binding a popup with the location name
+    .addTo(mymap);
+});
+</script>
+
+<!-- DYNAMISK KART SOM FUNGERER
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script>
         async function fetchFeed() {
@@ -827,7 +873,7 @@ $(document).ready(function () {
 
         document.addEventListener('DOMContentLoaded', initMap);
     </script>
-
+-->
 	
 	
 </body>
