@@ -859,7 +859,7 @@ jobLocations.forEach(function(location) {
         const map = L.map('mapid', {
             attributionControl: false,
             scrollWheelZoom: false
-        }).setView([60.4720, 8.4689], -15); // Set initial view with a further out zoom level
+        }).setView([20.0, 0.0], 2); // Set initial view with a further out zoom level (2 is quite zoomed out)
 
         L.tileLayer('https://api.mapbox.com/styles/v1/inequi/cksdgny7b0vrk17ocyud79yck/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoiaW5lcXVpIiwiYSI6ImNsdTQ0c2FybTFiZG4ya3FzZjQxOW91ejUifQ.Z_vyEld041G0LshX2Mdtpw', {
             maxZoom: 19,
@@ -874,7 +874,7 @@ jobLocations.forEach(function(location) {
         var customIcon = L.icon({
             iconUrl: './files/NAF-logo.jpeg',
             iconSize: [20, 20],
-            iconAnchor: [18, 18],
+            iconAnchor: [10, 10],
             popupAnchor: [1, -15]
         });
 
