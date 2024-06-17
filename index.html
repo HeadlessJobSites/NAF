@@ -859,9 +859,9 @@ jobLocations.forEach(function(location) {
         const map = L.map('mapid', {
             attributionControl: false,
             scrollWheelZoom: false
-        }).setView([60.4720, 8.4689], -10); // Set initial view with a further out zoom level
+        }).setView([60.4720, 8.4689], -15); // Set initial view with a further out zoom level
 
-        L.tileLayer('https://api.mapbox.com/styles/v1/inequi/clxiryhky00ab01qngprwgbfn/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoiaW5lcXVpIiwiYSI6ImNsdTQ0c2FybTFiZG4ya3FzZjQxOW91ejUifQ.Z_vyEld041G0LshX2Mdtpw', {
+        L.tileLayer('https://api.mapbox.com/styles/v1/inequi/cksdgny7b0vrk17ocyud79yck/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoiaW5lcXVpIiwiYSI6ImNsdTQ0c2FybTFiZG4ya3FzZjQxOW91ejUifQ.Z_vyEld041G0LshX2Mdtpw', {
             maxZoom: 19,
             attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
             id: 'mapbox/streets-v11',
@@ -873,8 +873,8 @@ jobLocations.forEach(function(location) {
         // Create a custom icon
         var customIcon = L.icon({
             iconUrl: './files/NAF-logo.jpeg',
-            iconSize: [38, 38],
-            iconAnchor: [22, 25],
+            iconSize: [20, 20],
+            iconAnchor: [18, 18],
             popupAnchor: [1, -15]
         });
 
