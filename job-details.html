@@ -354,7 +354,7 @@ function buildIframe() {
 
 
 <section class="process-section mb-5 m-my-0 m-pt-0 m-pb-4" style="">
-    <h2 id="appform-header" class="container pt-5 m-px-3 m-pb-2" id="appFormWrapper">Søknads<span style="font-weight: 800;">skjema</span></h2>
+    <h2 id="appform-header" class="container pt-5 m-px-3 m-pb-2" id="appFormWrapper"><span style="font-weight: 800;">Søknadsskjema</span></h2>
     <!-- Application form -->
     <div id="originalContentContainer">
         <div id="applicationFormContainer"></div>
@@ -373,9 +373,9 @@ document.addEventListener('DOMContentLoaded', function() {
         iframe.style.border = "none";
         iframe.id = "applicationFormIframe";
         // Adjust the iframe source URL to use the correct job ID
-        const iframeSrc = `https://web106.reachmee.com/ext/I020/787/apply?job_id=${jobId}&site=58&validator=8bd450e11350447150df52325f46f68b&lang=NO&ihelper=${encodeURIComponent('https://headlessjobsites.github.io/NAF/jobs/rm?rmpage=job&rmjob=' + jobId)}`;
+        const iframeSrc = `https://web106.reachmee.com/ext/I020/787/apply?job_id=${jobId}&site=58&validator=8bd450e11350447150df52325f46f68b&lang=NO&ihelper=${encodeURIComponent('https://naf.attract.reachmee.com/jobs/rm?rmpage=job&rmjob=' + jobId)}`;
         iframe.setAttribute('src', iframeSrc);
-
+			   
         document.getElementById('applicationFormContainer').appendChild(iframe);
     }
 });
