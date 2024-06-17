@@ -859,7 +859,7 @@ jobLocations.forEach(function(location) {
         const map = L.map('mapid', {
             attributionControl: false,
             scrollWheelZoom: false
-        }).setView([60.4720, 8.4689], 5); // Set initial view with a further out zoom level
+        }).setView([60.4720, 8.4689]); // Set initial view with a further out zoom level
 
         L.tileLayer('https://api.mapbox.com/styles/v1/inequi/clxiryhky00ab01qngprwgbfn/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoiaW5lcXVpIiwiYSI6ImNsdTQ0c2FybTFiZG4ya3FzZjQxOW91ejUifQ.Z_vyEld041G0LshX2Mdtpw', {
             maxZoom: 19,
@@ -872,9 +872,9 @@ jobLocations.forEach(function(location) {
 
         // Create a custom icon
         var customIcon = L.icon({
-            iconUrl: './files/TT-fav.svg',
-            iconSize: [38, 95],
-            iconAnchor: [22, 50],
+            iconUrl: './files/NAF-logo.jpeg',
+            iconSize: [38, 38],
+            iconAnchor: [22, 25],
             popupAnchor: [1, -15]
         });
 
