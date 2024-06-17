@@ -49,7 +49,7 @@
     max-width: 1600px;
 }
 .card {
-	rgb(232, 232, 232) solid 1px;
+	outline: rgb(232, 232, 232) solid 1px;
 	border-radius: 2px;
 }
 .stretched-link {
@@ -63,7 +63,9 @@
     -webkit-box-pack: center;
     justify-content: center;
 }
-
+.stretched-link img {
+    width: 17px;
+}
 
 
 
