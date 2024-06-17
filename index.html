@@ -858,30 +858,6 @@ $(document).ready(function () {
 </script>
 
 	
-<!-- Set meta values dynamically -->
-<script>
-  document.addEventListener("DOMContentLoaded", function() {
-    // Get the image URL from the background of the div with class "naf-hero"
-    const heroDiv = document.querySelector('.naf-hero');
-    const backgroundImage = window.getComputedStyle(heroDiv).backgroundImage;
-    const imageUrl = backgroundImage.slice(5, -2);
-
-    // Get the title from the first <h1> on the page
-    const title = document.querySelector('h1').innerText;
-
-    // Get the description from the first <p> on the page
-    const description = document.querySelector('p').innerText;
-
-    // Update the meta tags
-    document.querySelector('meta[property="og:title"]').setAttribute('content', title);
-    document.querySelector('meta[property="og:description"]').setAttribute('content', description);
-    document.querySelector('meta[property="og:image"]').setAttribute('content', imageUrl);
-    document.querySelector('meta[name="twitter:title"]').setAttribute('content', title);
-    document.querySelector('meta[name="twitter:description"]').setAttribute('content', description);
-    document.querySelector('meta[name="twitter:image"]').setAttribute('content', imageUrl);
-  });
-</script>
-	
 	
 </body>
 
