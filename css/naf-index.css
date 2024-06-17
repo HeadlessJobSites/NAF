@@ -1,0 +1,51 @@
+.hero-section .naf-hero {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+	background: url(../files/NAF-test.webp);
+	background-size: cover;
+}
+.btn-primary {
+	background-color: rgb(255, 219, 22);
+	border-radius: 5px;
+    color: rgb(6, 46, 42);
+}
+.square-video {
+	width: 100%;
+	border-radius: 2px;
+	overflow: hidden;
+}
+.team-member a {
+	color: #000 !important;
+}
+.process-content {
+	background-color: rgb(241, 241, 241);
+	border-radius: 2px;
+}
+.benefit-content {
+    background-color: rgb(233, 243, 230);
+    border-radius: 2px;
+}
+.benefit-icon {
+	background-color: rgb(6, 46, 42);
+	color: rgb(233, 243, 230);
+}
+.quote-section .container {
+	max-width: 1000px;
+}
+.team-background-image {
+    border-radius: 2px;
+}
+.quote-section {
+    background-color: rgb(6, 46, 42);
+}
+.max-width-container {
+    max-width: 1600px;
+}
+
