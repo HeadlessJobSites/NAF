@@ -55,15 +55,13 @@
 .stretched-link {
     background: rgb(211, 234, 194);
     border-radius: 50%;
-    height: 80px;
-    width: 80px;
+    height: 40px;
+    width: 40px;
     display: flex;
     -webkit-box-align: center;
     align-items: center;
     -webkit-box-pack: center;
     justify-content: center;
-    position: inherit;
-    margin-top: 20px;
 }
 
 
