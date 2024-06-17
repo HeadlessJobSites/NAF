@@ -678,7 +678,7 @@ $(document).ready(function() {
             const job = jobs.find(job => job.ad_id === jobId);
             if (job) {
                 const organizationUnit = job.organizations && job.organizations.length > 1 ? job.organizations[1].nameorgunit : job.organizations[0]?.nameorgunit || 'Ikke spesifisert';
-                const city = job.areas && job.areas.length > 0 ? job.areas[0].name : '&nbsp;';
+                const city = job.areas && job.areas.length > 0 ? job.areas[0].name : ' ';
 
                 const applicationLink = job.link.replace("rmpage=job", "rmpage=apply");
                 $('#applyButton').attr('onclick', `window.location.href='${applicationLink}'`);
