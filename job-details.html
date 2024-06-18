@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stillingsannonse1</title>
+    <title>Stillingsannonse</title>
     <!-- Bootstrap CSS -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://career.talentech.com/css/job-details-style.css">
@@ -446,7 +446,7 @@ window.addEventListener('message', function(event) {
     </div>
  
 
-    <button id="agent" class="mt-3 btn btn-primary" style="font-weight:800">Sign up</button>
+    <button id="agent" class="mt-3 btn btn-primary" style="font-weight:800">Registrer deg</button>
 
 
 <div class="modal fade modal-fullscreen-90w" id="exampleModal" tabindex="-1" aria-hidden="true">
@@ -501,7 +501,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 	
-
 
 <script>
 $(document).ready(function () {
@@ -575,17 +574,17 @@ $(document).ready(function () {
     // Adjust accordingly if your detail page has a different URL structure
     const jobDetailUrl = `job-details.html?jobId=${job.ad_id}`;
         // Use the second organization unit if available, otherwise use the first one
-        const organizationUnitName = job.organizations.length > 1 ? job.organizations[1].nameorgunit : job.organizations[0]?.nameorgunit || 'Ikke spesifisert';
+        const organizationUnitName = job.organizations.length > 1 ? job.organizations[1].nameorgunit : job.organizations[0]?.nameorgunit || 'Not specified';
         return `
 <div class="col-12 col-md-4 col-lg-4 mb-4">
-    <a href="${jobDetailUrl}" class="" style="text-decoration: none; color: inherit;" aria-label="Job details">
+    <a href="${jobDetailUrl}" class="" style="text-decoration: none; color: inherit;">
         <div class="card h-100">
             <div class="card-body">
 		        <div class="card-category"><span>${organizationUnitName}</span></div>
-                <div class="card-title">${job.title}</div>
-                <p class="card-text">${displayLocation}</p>
+                <h5 class="card-title">${job.title}</h5>
+                <p class="card-text">${job.country}</p>
 			    <a href="${jobDetailUrl}" class="stretched-link">
-                <img src="./files/arrow-right-regular.svg" class="" alt="Details" style="">
+                <img src="/files/arrow-right-thin.svg" class="stretched-link" alt="Details" style="">
 		</a>
             </div>
         </div>
@@ -609,7 +608,7 @@ $(document).ready(function () {
 });
 
 function fetchJobs(currentJobId) {
-    fetch('https://api.talentech.io/reachmee/feed/naf')
+    fetch('https://api.talentech.io/reachmee/feed/')
         .then(response => response.json())
         .then(data => {
             jobs = data.filter(job => job.ad_id !== parseInt(currentJobId));
@@ -651,7 +650,6 @@ function fetchJobs(currentJobId) {
     });
 });
 </script>
-
 
 
 
