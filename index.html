@@ -794,7 +794,10 @@ $(document).ready(function () {
 
 	
 	
-	
+	<div class=" mt-5">
+    <div id="mapid" style="height: 400px; overflow: hidden;"></div>
+</div>
+
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 <script>
     async function fetchFeed() {
@@ -810,21 +813,13 @@ $(document).ready(function () {
 
     async function initMap() {
         const feed = await fetchFeed();
-        const areaNames = new Set();
         const markers = [];
-
-        // Extract unique area names
-        feed.forEach(item => {
-            item.areas.forEach(area => {
-                areaNames.add(area.name);
-            });
-        });
 
         // Initialize the map with custom settings and an initial zoom level
         const map = L.map('mapid', {
             attributionControl: false,
             scrollWheelZoom: false
-	}).setView([59.9139, 10.7522], 5);
+        }).setView([59.9139, 10.7522], 5);
 
         L.tileLayer('https://api.mapbox.com/styles/v1/inequi/cksdgny7b0vrk17ocyud79yck/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoiaW5lcXVpIiwiYSI6ImNsdTQ0c2FybTFiZG4ya3FzZjQxOW91ejUifQ.Z_vyEld041G0LshX2Mdtpw', {
             maxZoom: 19,
@@ -843,21 +838,38 @@ $(document).ready(function () {
             popupAnchor: [1, -15]
         });
 
-        // Geocode areas and add pins with custom icons and styled popups
-        for (const area of areaNames) {
-            const coords = await geocodeArea(area);
-            if (coords) {
-                const marker = L.marker([coords.lat, coords.lon], {icon: customIcon})
-                    .bindPopup(area)
-                    .addTo(map);
-                markers.push(marker);
-            }
-        }
+        // Process each job in the feed
+        for (const item of feed) {
+            let coords = null;
 
+            // Find the first valid area with coordinates
+            for (const area of item.areas) {
+                coords = await geocodeArea(area.name);
+                if (coords) {
+                    break;
+                }
+            }
+
+            // If no valid area found, use default coordinates
+            if (!coords) {
+                coords = { lat: 61.99589575051149, lon: 9.423291957454996 };
+            }
+
+            // Add a pin for the job
+            const marker = L.marker([coords.lat, coords.lon], { icon: customIcon })
+                .bindPopup(item.areas.length > 0 ? item.areas[0].name : 'Default Location')
+                .addTo(map);
+            markers.push(marker);
+        }
     }
 
     document.addEventListener('DOMContentLoaded', initMap);
 </script>
+
+
+
+
+	
 
 	
 	
