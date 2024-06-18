@@ -1,0 +1,873 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ledige stillinger</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://career.talentech.com/css/index-style.css">
+<link rel="stylesheet" href="./css/naf-index.css">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://kit.fontawesome.com/ca38a06270.js" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+<script src="https://widget.gobistories.com/gwi/6" async onload="gobi.discover()"></script>
+
+	
+  <meta property="og:title" content="NAF Karriereportal">
+  <meta property="og:description" content="Se ledige stillinger hos NAF">
+  <meta property="og:image" content="https://career.talentech.com/files/Career-preview.jpg">
+  <meta property="og:url" content="https://career.talentech.com">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="NAF Karriereportal">
+  <meta name="twitter:description" content="Se ledige stillinger hos NAF">
+  <meta name="twitter:image" content="https://career.talentech.com/files/Career-preview.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:type" content="website">
+	
+</head>
+
+<body>
+
+
+<style>
+</style>
+
+
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: rgba(0, 0, 0, 0.0);">
+    <div class="container">
+        <a class="navbar-brand" href="/" aria-label="Home">
+            <img src="./files/NAF-logo.jpeg" height="40" class="d-inline-block align-top" alt="">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="./#jobs-anchor">Stillinger</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="./#meet-the-team">Møt teamet</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="./#recruitment-process">Rekrutteringsprosess</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" target="blank" href="https://naf.no">naf.no <span class="sr-only">(current)</span></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+
+<script>
+$(document).ready(function() {
+  $(window).scroll(function() {
+    if ($(window).scrollTop() > 56) {
+      $(".navbar").addClass("bg-dark");
+    } else {
+      $(".navbar").removeClass("bg-dark");
+    }
+  });
+  $(".navbar-toggler").click(function() {
+    if (!$(".navbar-collapse").hasClass("show")) {
+      $(".navbar").addClass("bg-dark");
+    } else {
+      if ($(window).scrollTop() < 56) {
+        $(".navbar").removeClass("bg-dark");
+      } else {
+      }
+    }
+  });
+});
+</script>
+
+
+
+
+    <div class="hero-section">
+        <div class="naf-hero"></div>
+		<!--<video playsinline autoplay loop muted class="hero-video">
+            <source src="https://career.talentech.com/files/Compressed-TT.mp4" type="video/mp4">
+        </video>-->
+        <div class="hero-content">
+            <h1>NAF <span style="font-weight: 800;">senter</span></h1>
+            <a href="#jobs-anchor" class="btn btn-primary btn-lg"><strong>Bli kjent med oss</strong></a>
+        </div>
+    </div>
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Fetch the jobs from the feed
+  fetch('https://api.talentech.io/reachmee/feed/naf')
+    .then(response => response.json())
+    .then(jobs => {
+      const positionsCount = jobs.length; // Get the count of jobs from the feed
+      const btnText = positionsCount === 1 ? 'Se 1 ledig stilling' : `Se ${positionsCount} ledige stillinger`; // Update button text based on count
+      document.querySelector('a.btn.btn-primary.btn-lg strong').textContent = positionsCount > 0 ? btnText : 'Se ledige stillinger';
+    })
+    .catch(error => {
+      console.error('Error fetching job details:', error);
+      // If there is an error fetching the jobs, show default text
+      document.querySelector('a.btn.btn-primary.btn-lg strong').textContent = 'Se ledige stillinger';
+    });
+});
+</script>
+
+<!--
+<div class="gobi-stories-container" id="gobi-stories-container">
+  <button aria-label="Close video" class="close-btn" onclick="document.getElementById('gobi-stories-container').style.display='none';"><i class="fa-regular fa-xmark"></i></button>
+<script src="https://widget.gobistories.com/gwi/6" async onload="gobi.discover()"></script>
+
+<div class="gobi-collection" data-gobi-collection-id="pncc7"></div>
+  <a href="#company-section" aria-label="Get to know us"><div class="gobi-stories-text">Get to know us</div></a>
+</div>
+-->
+	
+	
+	<div class="talentech-section" id="company-section">
+    <div class="container mt-5 pt-4 m-mt-2">
+        <h2 class="m-px-2">Om <span style="font-weight: 800;">NAF senter</span></h2>
+        <p class="my-4  m-px-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum malesuada nulla vitae quam laoreet pellentesque. Donec efficitur diam a suscipit posuere.</p>
+        <p class="m-px-2">Nunc commodo cursus sapien, sagittis aliquam dui tincidunt sit amet. Nam sed eros ipsum. Proin tincidunt nunc velit, vitae dignissim tortor bibendum vel. Morbi tellus metus, tincidunt in ante a, congue rhoncus lorem. Nam vitae ante eu lorem mollis scelerisque in ut felis. Duis non orci et nulla dapibus sollicitudin sit amet vel turpis. Nullam posuere magna vel convallis facilisis. Vivamus scelerisque, massa in dignissim cursus, ipsum tellus posuere ante, nec finibus odio magna id nisl. Etiam vel neque a metus pretium commodo vitae ut orci. Vivamus a scelerisque velit. Sed vehicula magna lorem, laoreet volutpat diam placerat nec. Morbi pulvinar sem eu ante tempor egestas. Donec eu nunc ipsum. Fusce gravida volutpat nisi, at tempus lectus.</p>
+    </div>
+</div>
+
+
+
+
+
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const video = document.getElementById('talentechVideo');
+    const muteBtn = document.getElementById('muteBtn');
+    const muteIcon = muteBtn.querySelector('img');
+
+    // Function to toggle video play/pause
+    const togglePlayPause = () => {
+        if (video.paused || video.ended) {
+            video.play();
+        } else {
+            video.pause();
+        }
+    };
+
+    // Setup Intersection Observer for autoplay/pause based on visibility
+    // This part will now work on all devices
+    const observer = new IntersectionObserver((entries) => {
+        const [entry] = entries;
+        if (entry.isIntersecting) {
+            video.play();
+        } else {
+            video.pause();
+        }
+    }, {
+        root: null,
+        threshold: 0.5
+    });
+
+    observer.observe(video);
+
+    // Check if we are on desktop before adding event listeners for play/pause and mute controls
+    if (window.innerWidth > 992) {
+        // Click event for the video itself
+        video.addEventListener('click', () => {
+            togglePlayPause();
+        });
+
+        // Event listener for the mute button
+        muteBtn.addEventListener('click', () => {
+            video.muted = !video.muted;
+            muteIcon.src = video.muted ? "./files/volume-xmark-thin.svg" : "./files/volume-off-thin.svg";
+            muteIcon.alt = video.muted ? "Mute" : "Unmute";
+        });
+    }
+});
+</script>
+
+
+
+
+<div class="talentech-section pb-0 mb-5 m-mb-0">
+    <div class="container mt-4 pt-2 mb-5 pb-3 video-container m-my-0">
+        <video id="talentechVideo" class="square-video" playsinline autoplay muted>
+            <source src="./files/videoplayback.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <div class="video-controls">
+            <button id="muteBtn"><img src="./files/volume-xmark-thin.svg" alt="Mute"></button>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+	
+
+
+<section class="team-section my-2 mt-5 py-5 m-pt-3 m-mb-0 m-mt-5" id="meet-the-team" style="background-color: rgb(233, 243, 230);">
+        <h2 class="container pt-5 mb-0 pb-0 m-px-4">Møt teamet hos <span style="font-weight: 800;">NAF</span></h2>
+    <div class="container mt-0 pt-2">
+        <div class="row mt-3 m-mt-2 m-mx-1">
+            <!-- team 1 -->
+		    <script src="https://widget.gobistories.com/gwi/6" async onload="gobi.discover()"></script>
+
+<div class="gobi-collection" data-gobi-collection-id="r8fo6"></div>
+		    
+    </div>
+</section>
+
+
+
+
+
+	
+
+<section class="process-section mb-5 py-5 m-my-0 m-pt-0 m-pb-4" id="recruitment-process" style="">
+    <div class="container pt-5 m-px-4 m-pb-2">
+        <h2>Vår <span style="font-weight: 800;">rekrutterings&shy;prosess</span></h2>
+    </div>
+    <div class="container m-px-0">
+	<!--
+        <div class="row">
+            <div class="col-md-4 px-0">
+<script src="https://widget.gobistories.com/gwi/6" async onload="gobi.discover()"></script>
+
+<div class="gobi-collection" data-gobi-collection-id="j2jom"></div>
+            </div>-->
+            <!-- Existing Content in Right Column -->
+            <div class="col-md-12 pl-5 m-pl-4">
+                <div class="row process-row">
+                    <!-- Benefit 1 -->
+                    <div class="col-md-4 col-sm-4 process-item">
+                        <div class="process-icon">
+                            <h3>1</h3>
+                        </div>
+						<div class="process-content">
+							<h3>Send søknad</h3>
+							<p>Start reisen din ved å søke gjennom vår karriereportal; last opp CV-en din og del litt om deg selv.</p>
+						</div>
+						</div>
+						<!-- Benefit 2 -->
+						<div class="col-md-4 col-sm-4 process-item">
+							<div class="process-icon">
+								<h3>2</h3>
+							</div>
+							<div class="process-content">
+								<h3>Innledende screening</h3>
+								<p>Vi vil gjennomgå søknaden din for å vurdere samsvaret mellom ferdighetene dine og jobbkravene.</p>
+							</div>
+						</div>
+						<!-- Benefit 3 -->
+						<div class="col-md-4 col-sm-4 process-item">
+							<div class="process-icon">
+								<h3>3</h3>
+							</div>
+							<div class="process-content">
+								<h3>Intervjuprosess</h3>
+								<p>Delta i en eller flere intervjuer for å diskutere erfaringene dine, ferdighetene dine og ambisjonene dine.</p>
+							</div>
+						</div>
+						<!-- Benefit 4 -->
+						<div class="col-md-4 col-sm-4 process-item">
+							<div class="process-icon">
+								<h3>4</h3>
+							</div>
+							<div class="process-content">
+								<h3>Vurdering</h3>
+								<p>Avhengig av rollen, kan du bli invitert til å fullføre oppgaver eller vurderinger for å vise frem ferdighetene dine.</p>
+							</div>
+						</div>
+						<!-- Benefit 5 -->
+						<div class="col-md-4 col-sm-4 process-item">
+							<div class="process-icon">
+								<h3>5</h3>
+							</div>
+							<div class="process-content">
+								<h3>Tilbud & onboarding</h3>
+								<p>Hvis det er en match, vil vi gi et tilbud. Når det er akseptert, vil vi veilede deg gjennom alle trinnene i onboarding-prosessen.</p>
+							</div>
+						</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+<div class="quote-section py-5 max-width-container mx-auto">
+    <div class="container py-5 mt-3 m-py-2">
+        <blockquote class="blockquote text-center">
+            <p class="mb-4">"Det er fokus på stolthet, utvikling og mestring i faget. Det er samarbeid og fellesskap for å løse problemer på best mulig måte, god «team spirit."</p>
+            <footer class="blockquote-footer">Lasse, Bilmekaniker NAF Senter Oslo</footer>
+        </blockquote>
+    </div>
+</div>
+
+
+
+
+
+
+
+<section class="benefits-section my-5 py-4 m-py-0 m-mt-0">
+    <h2 class="container pt-5 m-px-4 m-pb-2">Ansattgoder hos <span style="font-weight: 800;">NAF</span></h2>
+    <div class="container">
+        <div class="row">
+            <!-- Benefit 1 -->
+            <div class="col-md-3 col-sm-4 benefit-item">
+                <div class="benefit-icon">
+                    <i class="fa-solid fa-display-code"></i>
+                </div>
+                <div class="benefit-content">
+                    <strong>Hjemmekontor</strong>
+                    <p>Du får nødvendig utstyr til ditt hjemmekontor</p>
+                </div>
+            </div>
+            <!-- Benefit 2 -->
+            <div class="col-md-3 col-sm-4 benefit-item">
+                <div class="benefit-icon">
+                    <i class="fa-solid fa-notes-medical"></i>
+                </div>
+                <div class="benefit-content">
+                    <strong>Velvære</strong>
+                    <p>Helsegodtgjørelse for medlemskap på treningssentre, etc.</p>
+                </div>
+            </div>
+            <!-- Benefit 3 -->
+            <div class="col-md-3 col-sm-4 benefit-item">
+                <div class="benefit-icon">
+                    <i class="fa-solid fa-laptop"></i>
+                </div>
+                <div class="benefit-content">
+                    <strong>PC eller Mac</strong>
+                    <p>Velg ditt foretrukne arbeidsutstyr</p>
+                </div>
+            </div>
+            <!-- Benefit 4 -->
+            <div class="col-md-3 col-sm-4 benefit-item">
+                <div class="benefit-icon">
+                    <i class="fa-solid fa-map-location-dot"></i>
+                </div>
+                <div class="benefit-content">
+                    <strong>Feriedager</strong>
+                    <p>Nyt flere feriedager utover markedets normer</p>
+                </div>
+            </div>
+            <!-- Benefit 5 -->
+            <div class="col-md-3 col-sm-4 benefit-item">
+                <div class="benefit-icon">
+                    <i class="fa-solid fa-pot-food"></i>
+                </div>
+                <div class="benefit-content">
+                    <strong>Lunchrabatt</strong>
+                    <p>Rabatt på lunsjer – betalt av oss!</p>
+                </div>
+            </div>
+            <!-- Benefit 6 -->
+            <div class="col-md-3 col-sm-4 benefit-item">
+                <div class="benefit-icon">
+                    <i class="fa-solid fa-house-building"></i>
+                </div>
+                <div class="benefit-content">
+                    <strong>Hybridarbeid</strong>
+                    <p>Arbeid både fra våre fine kontorer og hjemmefra</p>
+                </div>
+            </div>
+            <!-- Benefit 7 -->
+            <div class="col-md-3 col-sm-6 benefit-item">
+                <div class="benefit-icon">
+                    <i class="fa-solid fa-dog"></i>
+                </div>
+                <div class="benefit-content">
+                    <strong>Hundevennlig</strong>
+                    <p>Hunder er velkomne på kontoret</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+	
+
+
+
+
+
+
+
+
+	
+	
+	
+	
+
+
+	
+
+	
+<div class=" mt-5">
+    <div id="mapid" style="height: 400px; overflow: hidden;"></div>
+</div>
+	
+
+
+
+	
+<div class="feature-section pt-3 pb-2" id="jobs-anchor" style="">
+<div class="container mt-3 mb-0 m-mb-0">
+    <h2 class="my-5 m-px-2 m-my-0">Ledige <span style="font-weight: 800">stillinger</span></h2>
+    <div class="row my-3">
+        <div class="col-md-3 mb-3">
+            <label for="locationFilter">Sted</label>
+            <select id="locationFilter" class="form-control">
+                <option value="All">Alle steder</option>
+                <!-- Location options will be dynamically added here -->
+            </select>
+        </div>
+        <div class="col-md-3 mb-3">
+            <label for="jobTypeFilter">Stillingstyper</label>
+            <select id="jobTypeFilter" class="form-control">
+                <option value="All">Alle stillingstyper</option>
+                <!-- Job type options will be dynamically added here -->
+            </select>
+        </div>
+    </div>
+    <div id="jobList" class="row"></div>
+	<div class="text-center mt-2">
+    <button id="loadMore" class="btn btn-primary">Se flere</button>
+	</div>
+</div>
+</div>
+
+
+
+  
+
+
+
+
+        <h2 class="container pt-5 mt-5 m-my-0 m-px-4 m-pb-0"><span style="font-weight: 800;">Stillingskategorier</span></h2>
+	<div id="teamCarousel" class="carousel slide" data-interval="false">
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <div class="container">
+                <div class="row ">
+                    <!-- Team Member 1 -->
+                    <div class="col-md-4 team-member">
+<div class="team-background-image mb-3" alt="" style="background-image: url('./files/2.jpg')"></div>
+                        <p class="role mb-3">Jobb hos Norges Automobil Forbud</p>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    </div>
+                    <!-- Team Member 2 -->
+                    <div class="col-md-4 team-member">
+<div class="team-background-image mb-3" alt="" style="background-image: url('./files/1.webp')"></div>
+                        <p class="role mb-3">Jobb hos NAF Øvingsbaner</p>
+                        <p>Donec hendrerit ultricies ex, vitae hendrerit libero cursus ut.</p>
+                    </div>
+                    <!-- Team Member 3 -->
+                    <div class="col-md-4 team-member">
+					<a href="#">
+<div class="team-background-image mb-3" alt="" style="background-image: url('./files/3.webp')"></div>
+                        <p class="role mb-3">Jobb hos NAF senterne</p>
+                        <p>Orci varius natoque penatibus et magnis dis parturient pretium .</p>
+					</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+  
+
+
+
+
+  
+<div class="feature-section mb-5 pb-5" id="jobs-anchor" style="background-color: #eeeef2;">
+<div class="container mb-5 m-mb-0">
+    <h3 class="mb-5 m-px-2 m-mb-4">Unsolicited <span style="font-weight: 800">application</span></h3>
+
+    <div id="" class="row">
+
+<div class="col-12 col-md-4 col-lg-4 mb-4 agent-wrapper">
+    <a href="/job-details.html?open-application" class="" style="text-decoration: none; color: inherit;" aria-label="Open application">
+        <div class="card h-100">
+            <div class="card-body">
+		        <div class="card-category"><span>General</span></div>
+                <div class="card-title">Unsolicited application</div>
+                <p class="card-text">Talentech</p>
+			    <a href="/job-details.html?open-application" class="stretched-link">
+                <img src="./files/arrow-right-regular" class="" alt="Details" style="">
+		</a>
+            </div>
+        </div>
+    </a>
+</div>
+	    
+    </div>
+</div>
+</div>
+
+
+
+
+
+
+
+<div class="container my-5 py-5 m-my-0 m-pt-0" style="text-align: center;">
+    <div class="agent-wrapper">
+        <h2>Fant du ikke jobben du lette etter?</h2>
+        <div class="mt-4 mb-2">
+		<p>Abonner på stillinger, så får du en e-post når det er en ledig stilling som passer dine preferanser.</p>
+		</div>
+    </div>
+ 
+
+    <button id="agent" class="mt-3 btn btn-primary" style="font-weight:800">Registrer deg</button>
+
+
+<div class="modal fade modal-fullscreen-90w" id="exampleModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" id="closeModalButton" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <iframe id="modalIframe" src="" style="border: none; width: 100%; height: 450px;"></iframe>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+    document.getElementById('agent').addEventListener('click', function() {
+document.addEventListener('DOMContentLoaded', function() {
+        var iframeUrl = "https://web103.reachmee.com/ext/I019/834/subscribe?site=19&lang=UK&validator=fa38d2eb8febb7bc22c8a91e10a1e9de";
+        document.getElementById('modalIframe').src = iframeUrl;
+        $('#exampleModal').modal('show');
+    });
+});
+</script>
+
+		
+	
+</div>
+
+
+
+
+
+<section class="text-center bg-dark text-light py-5">
+    <div class="container">
+        <img src="./files/NAF-logo.jpeg" alt="NAF Logo" class="mb-3" style="max-width: 180px;">
+                <div class="mt-3 mb-4" style="max-width: 600px; margin: auto;">
+		 <p style="font-size: 1.25rem;">NAF er en av Norges mest kjente organisasjoner, med over 750.000 medlemmer og kunder. Det skal vi fortsette å være fremover, og da trenger vi flere gode medarbeidere, både i Forbundet, på våre øvingsbaner og ute på NAF-sentrene!</p>
+		</div>
+        <div class="">
+            <a href="https://www.facebook.com/nafnorge"><img src="./files/TT-f.svg" alt="Icon 1" class="mx-2" style="width: 30px; height: 30px;"></a>
+            <a href="https://www.linkedin.com/company/norges-automobil-forbund/"><img src="./files/TT-l.svg" alt="Icon 2" class="mx-2" style="width: 30px; height: 30px;"></a>
+            <a href="https://www.naf.no/kundeservice" target="_blank"><img src="./files/TT-e.svg" alt="Icon 4" class="mx-2" style="width: 30px; height: 30px;"></a>
+        </div>
+    </div>
+</section>
+
+
+<div class="container my-0 py-1 m-py-2">
+    <div class="d-flex flex-column flex-sm-row align-items-start align-items-sm-center"><!-- updated flex classes -->
+        <!-- "Powered by" section -->
+        <div>
+            <span class="mr-1">Powered by</span>
+            <img src="./files/TT-fav.svg" alt="Talentech Logo" style="width: 20px; vertical-align: middle; position: relative; bottom: 1px;">
+            <span class="ml-1" style="">Talentech</span>
+        </div>
+
+        <!-- Share section -->
+        <div class="share-container mt-2 mt-sm-0 ml-sm-auto"><!-- updated margin and alignment classes -->
+            <span class="d-block d-sm-inline mb-1"><!-- updated responsive classes -->
+                Share on social media: 
+                <a href="#" id="facebook-share-link" target="_blank" rel="noopener noreferrer">
+                    <img src="https://cdn.jsdelivr.net/npm/simple-icons/icons/facebook.svg" alt="Share on Facebook" width="16" height="16">
+                </a>
+                <a href="#" id="twitter-share-link" target="_blank" rel="noopener noreferrer">
+                    <img src="https://cdn.jsdelivr.net/npm/simple-icons/icons/x.svg" alt="Share on X" width="16" height="16">
+                </a>
+                <a href="#" id="linkedin-share-link" target="_blank" rel="noopener noreferrer">
+                    <img src="https://cdn.jsdelivr.net/npm/simple-icons/icons/linkedin.svg" alt="Share on LinkedIn" width="16" height="16">
+                </a>
+            </span>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Function to dynamically set the URLs for social media sharing
+    function setSocialMediaShareUrls() {
+        var facebookShareLink = document.getElementById('facebook-share-link');
+        var twitterShareLink = document.getElementById('twitter-share-link');
+        var linkedinShareLink = document.getElementById('linkedin-share-link');
+        var currentUrl = encodeURIComponent(window.location.href);
+
+        facebookShareLink.href = 'https://www.facebook.com/sharer/sharer.php?u=' + currentUrl;
+        twitterShareLink.href = 'https://twitter.com/intent/tweet?url=' + currentUrl;
+        linkedinShareLink.href = 'https://www.linkedin.com/shareArticle?url=' + currentUrl;
+    }
+
+    // Call the function to set social media share URLs
+    setSocialMediaShareUrls();
+</script>
+
+
+
+
+	
+	
+
+<script>
+$(document).ready(function () {
+    let jobs = []; // Array to store all jobs
+    let displayedJobs = 0; // Counter for the number of jobs currently displayed
+    const jobsToShowDesktop = 12; // Number of jobs to show on desktop before "Load More"
+    const jobsToShowMobile = 6; // Number of jobs to show on mobile before "Load More"
+    let jobsToShow = window.innerWidth > 768 ? jobsToShowDesktop : jobsToShowMobile;
+
+    // Adjust jobsToShow based on window resize
+    $(window).resize(function() {
+        jobsToShow = window.innerWidth > 768 ? jobsToShowDesktop : jobsToShowMobile;
+        displayedJobs = Math.min(jobsToShow, jobs.length); // Adjust displayedJobs based on new jobsToShow
+        displayJobs(); // Redisplay jobs based on new size
+        updateLoadMoreVisibility(); // Update button visibility after resize
+    });
+
+    // Function to populate filter dropdowns based on jobs
+    function populateFilters() {
+        const locationSet = new Set();
+        const jobTypeSet = new Set();
+
+        jobs.forEach(job => {
+            if (job.country) { // Check if job has a country
+                locationSet.add(job.country);
+            }
+            if (job.title) { // Check if job has a title
+                jobTypeSet.add(job.title);
+            }
+        });
+
+	    
+	// Populate location filter
+        $('#locationFilter').html('<option value="All">Alle steder</option>');
+        locationSet.forEach(country => {
+            $('#locationFilter').append(`<option value="${country}">${country}</option>`);
+        });
+
+        // Populate job type filter
+        $('#jobTypeFilter').html('<option value="All">Alle stillingstyper</option>');
+        jobTypeSet.forEach(type => {
+            $('#jobTypeFilter').append(`<option value="${type}">${type}</option>`);
+        });
+    }
+
+    // Function to display jobs based on filters
+    function displayJobs() {
+        $('#jobList').empty(); // Clear current jobs
+
+        let filteredJobs = jobs.slice(0, displayedJobs); // Get the subset of jobs to be displayed
+
+        // Apply filters
+        const selectedCountry = $('#locationFilter').val();
+        const selectedJobType = $('#jobTypeFilter').val();
+        filteredJobs = filteredJobs.filter(job => {
+            return (selectedCountry === 'All' || job.country === selectedCountry) &&
+                   (selectedJobType === 'All' || job.title === selectedJobType);
+        });
+
+        // Add job cards to the DOM
+        filteredJobs.forEach(job => {
+            $('#jobList').append(buildJobCard(job));
+        });
+
+        updateLoadMoreVisibility(); // Update the visibility of the "Load More" button
+    }
+
+    // Function to build HTML for a job card
+    function buildJobCard(job) {
+        // Assuming job-details.html is your detail page and it can handle job IDs
+        // Adjust accordingly if your detail page has a different URL structure
+        const jobDetailUrl = `job-details.html?jobId=${job.ad_id}`;
+        
+        // Use the second organization unit if available, otherwise use the first one
+        const organizationUnitName = job.organizations.length > 1 ? job.organizations[1].nameorgunit : job.organizations[0]?.nameorgunit || 'Not specified';
+        
+        // Determine the display location based on the areas and country
+        let displayLocation = job.country || '';
+        if (job.areas && job.areas.length > 0) {
+            displayLocation = job.areas.length > 1 ? job.areas[1].name : job.areas[0].name;
+        }
+        
+        return `
+<div class="col-12 col-md-4 col-lg-4 mb-4">
+    <a href="${jobDetailUrl}" class="" style="text-decoration: none; color: inherit;" aria-label="Job details">
+        <div class="card h-100">
+            <div class="card-body">
+		        <div class="card-category"><span>${organizationUnitName}</span></div>
+                <div class="card-title">${job.title}</div>
+                <p class="card-text">${displayLocation}</p>
+			    <a href="${jobDetailUrl}" class="stretched-link">
+                <img src="./files/arrow-right-regular.svg" class="" alt="Details" style="">
+		</a>
+            </div>
+        </div>
+    </a>
+</div>`;
+    }
+
+    // Function to update the visibility of the "Load More" button
+    function updateLoadMoreVisibility() {
+        if (displayedJobs >= jobs.length) {
+            $('#loadMore').hide();
+        } else {
+            $('#loadMore').show();
+        }
+    }
+
+    // Function to fetch jobs from the API
+    function fetchJobs() {
+        fetch('https://api.talentech.io/reachmee/feed/naf') // Ensure this URL is correct
+            .then(response => response.json())
+            .then(data => {
+                jobs = data; // Store fetched jobs
+                displayedJobs = Math.min(jobsToShow, jobs.length); // Initialize displayedJobs
+                populateFilters(); // Fill dropdowns with options
+                displayJobs(); // Show initial jobs
+            })
+            .catch(error => {
+                console.error('Error fetching jobs:', error);
+            });
+    }
+
+    // Load jobs when page is ready
+    fetchJobs();
+
+    // Event listener for "Load More" button
+    $('#loadMore').click(function() {
+        displayedJobs += jobsToShow; // Increase the number of displayed jobs
+        displayJobs(); // Display new set of jobs
+        updateLoadMoreVisibility(); // Check if we still need the "Load More" button
+    });
+
+    // Event listeners for filter dropdowns
+    $('#locationFilter').change(function() {
+        displayedJobs = jobsToShow; // Reset displayed jobs to show initial count based on current device
+        displayJobs(); // Apply filter and display jobs
+        updateLoadMoreVisibility(); // Update "Load More" button visibility based on filters
+    });
+
+    $('#jobTypeFilter').change(function() {
+        displayedJobs = jobsToShow; // Reset displayed jobs to show initial count based on current device
+        displayJobs(); // Apply filter and display jobs
+        updateLoadMoreVisibility(); // Update "Load More" button visibility based on filters
+    });
+});
+</script>
+
+
+
+
+	
+	
+	
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script>
+    async function fetchFeed() {
+        const response = await fetch('https://api.talentech.io/reachmee/feed/naf');
+        return await response.json();
+    }
+
+    async function geocodeArea(areaName) {
+        const response = await fetch(`https://nominatim.openstreetmap.org/search?q=${areaName}&format=json&limit=1`);
+        const data = await response.json();
+        return data.length > 0 ? {lat: parseFloat(data[0].lat), lon: parseFloat(data[0].lon)} : null;
+    }
+
+    async function initMap() {
+        const feed = await fetchFeed();
+        const areaNames = new Set();
+        const markers = [];
+
+        // Extract unique area names
+        feed.forEach(item => {
+            item.areas.forEach(area => {
+                areaNames.add(area.name);
+            });
+        });
+
+        // Initialize the map with custom settings and an initial zoom level
+        const map = L.map('mapid', {
+            attributionControl: false,
+            scrollWheelZoom: false
+	}).setView([59.9139, 10.7522], 5);
+
+        L.tileLayer('https://api.mapbox.com/styles/v1/inequi/cksdgny7b0vrk17ocyud79yck/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoiaW5lcXVpIiwiYSI6ImNsdTQ0c2FybTFiZG4ya3FzZjQxOW91ejUifQ.Z_vyEld041G0LshX2Mdtpw', {
+            maxZoom: 19,
+            attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+            id: 'mapbox/streets-v11',
+            tileSize: 512,
+            zoomOffset: -1,
+            accessToken: 'yourMapboxAccessToken'
+        }).addTo(map);
+
+        // Create a custom icon
+        var customIcon = L.icon({
+            iconUrl: './files/NAF-logo.jpeg',
+            iconSize: [24, 24],
+            iconAnchor: [8, 8],
+            popupAnchor: [1, -15]
+        });
+
+        // Geocode areas and add pins with custom icons and styled popups
+        for (const area of areaNames) {
+            const coords = await geocodeArea(area);
+            if (coords) {
+                const marker = L.marker([coords.lat, coords.lon], {icon: customIcon})
+                    .bindPopup(area)
+                    .addTo(map);
+                markers.push(marker);
+            }
+        }
+
+    }
+
+    document.addEventListener('DOMContentLoaded', initMap);
+</script>
+
+	
+	
+</body>
+
+</html>
