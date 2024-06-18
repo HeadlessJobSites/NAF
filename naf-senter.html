@@ -205,7 +205,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 <section class="team-section my-2 mt-5 py-5 m-pt-3 m-mb-0 m-mt-5" id="meet-the-team" style="background-color: rgb(233, 243, 230);">
-        <h2 class="container pt-5 mb-0 pb-0 m-px-4">Møt teamet hos <span style="font-weight: 800;">NAF</span></h2>
+        <h2 class="container pt-5 mb-0 pb-0 m-px-4">Møt teamet hos <span style="font-weight: 800;">NAF Senter</span></h2>
     <div class="container mt-0 pt-2 m-px-0">
         <div class="row mt-3 m-mt-2 m-mx-1">
             <!-- team 1 -->
@@ -224,7 +224,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 <section class="process-section mb-5 py-5 m-my-0 m-pt-0 m-pb-4" id="recruitment-process">
     <div class="container pt-5 m-px-4 m-pb-2">
-        <h2>Our <span style="font-weight: 800;">recruitment process</span></h2>
+        <h2>Vår <span style="font-weight: 800;">rekrutterings&shy;prosess</span></h2>
     </div>
     <div class="container">
         <div class="row">
@@ -958,8 +958,7 @@ $(document).ready(function () {
         var customIcon = L.icon({
             iconUrl: './files/NAF-logo.jpeg',
             iconSize: [34, 34],
-            iconAnchor: [15, 30],
-            popupAnchor: [1, -15]
+            iconAnchor: [15, 30]
         });
 
         // Process each job in the feed
@@ -979,16 +978,15 @@ $(document).ready(function () {
                 coords = { lat: 61.99589575051149, lon: 9.423291957454996 };
             }
 
-            // Add a pin for the job
-            const marker = L.marker([coords.lat, coords.lon], { icon: customIcon })
-                .bindPopup(item.areas.length > 0 ? item.areas[0].name : 'Norge')
-                .addTo(map);
+            // Add a pin for the job without popup
+            const marker = L.marker([coords.lat, coords.lon], { icon: customIcon }).addTo(map);
             markers.push(marker);
         }
     }
 
     document.addEventListener('DOMContentLoaded', initMap);
 </script>
+
 
 	
 	
