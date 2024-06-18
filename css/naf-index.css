@@ -21,6 +21,7 @@
 	border-radius: 2px;
 	overflow: hidden;
 }
+.department-split a,
 .team-member a {
 	color: #000 !important;
 }
