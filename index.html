@@ -852,8 +852,7 @@ $(document).ready(function () {
             }
 
             // Add a pin for the job
-            const marker = L.marker([coords.lat, coords.lon], { icon: customIcon })
-                .bindPopup(item.areas.length > 0 ? item.areas[0].name : 'Norge')
+            const marker = L.marker([coords.lat, coords.lon], { icon: customIcon, interactive: false })
                 .addTo(map);
             markers.push(marker);
         }
