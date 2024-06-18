@@ -13,6 +13,7 @@
     display: flex;
     align-items: center;
     overflow: visible;
+    border-radius: 2px;
 }
 .service-content {
     flex: 1;
@@ -26,7 +27,7 @@
     transform: translateY(-50%);
 }
 .service-image img {
-    height: 150px; /* Set the desired height */
+    height: 200px; /* Set the desired height */
     width: auto; /* Maintain aspect ratio */
 }
 @media (max-width: 768px) {
