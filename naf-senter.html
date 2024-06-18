@@ -425,32 +425,200 @@ document.addEventListener('DOMContentLoaded', () => {
 </div>
 </div>
 
+
+
+
+
+
+
+
+
+
+
 	
-<div class="feature-section pt-3 pb-2" id="jobs-anchor2" style="">
-<div class="container mt-3 mb-0 m-mb-0">
-    <h2 class="my-5 m-px-2 m-my-0">Andre ledige stillinger i <span style="font-weight: 800">NAF</span></h2>
-    <div class="row my-3">
-        <div class="col-md-3 mb-3">
-            <label for="locationFilter">Sted</label>
-            <select id="locationFilter" class="form-control">
-                <option value="All">Alle steder</option>
-                <!-- Location options will be dynamically added here -->
-            </select>
+
+	
+<div id="tt-feature-section-1" class="feature-section mb-5 pt-3 pb-5" id="jobs-anchor-1" style="background-color: #eeeef2;">
+    <div class="container mt-3 mb-5 m-mb-0">
+        <h2 class="my-5 m-my-0">Andre ledige stillinger i <span style="font-weight: 800">NAF</span></h2>
+        <div class="row my-3">
+            <div class="col-md-3 mb-3">
+                <label for="locationFilter-1">Steder</label>
+                <select id="locationFilter-1" class="form-control">
+                    <option value="All">Alle steder</option>
+                    <!-- Location options will be dynamically added here -->
+                </select>
+            </div>
+            <div class="col-md-3 mb-3">
+                <label for="jobTypeFilter-1">Stillingstyper</label>
+                <select id="jobTypeFilter-1" class="form-control">
+                    <option value="All">Alle stillingstyper</option>
+                    <!-- Job type options will be dynamically added here -->
+                </select>
+            </div>
         </div>
-        <div class="col-md-3 mb-3">
-            <label for="jobTypeFilter">Stillingstyper</label>
-            <select id="jobTypeFilter" class="form-control">
-                <option value="All">Alle stillingstyper</option>
-                <!-- Job type options will be dynamically added here -->
-            </select>
+        <div id="jobList-1" class="row"></div>
+        <div class="text-center mt-2">
+            <button id="loadMore-1" class="btn btn-primary">Se flere</button>
         </div>
     </div>
-    <div id="jobList" class="row"></div>
-	<div class="text-center mt-2">
-    <button id="loadMore" class="btn btn-primary">Se flere</button>
-	</div>
 </div>
-</div>
+
+<script>
+$(document).ready(function () {
+    let jobs1 = []; // Array to store all jobs
+    let displayedJobs1 = 0; // Counter for the number of jobs currently displayed
+    const jobsToShowDesktop1 = 12; // Number of jobs to show on desktop before "Load More"
+    const jobsToShowMobile1 = 6; // Number of jobs to show on mobile before "Load More"
+    let jobsToShow1 = window.innerWidth > 768 ? jobsToShowDesktop1 : jobsToShowMobile1;
+
+    // Adjust jobsToShow based on window resize
+    $(window).resize(function() {
+        jobsToShow1 = window.innerWidth > 768 ? jobsToShowDesktop1 : jobsToShowMobile1;
+        displayedJobs1 = Math.min(jobsToShow1, jobs1.length); // Adjust displayedJobs based on new jobsToShow
+        displayJobs1(); // Redisplay jobs based on new size
+        updateLoadMoreVisibility1(); // Update button visibility after resize
+    });
+
+    // Function to populate filter dropdowns based on jobs
+    function populateFilters1() {
+        const locationSet1 = new Set();
+        const jobTypeSet1 = new Set();
+
+        jobs1.forEach(job => {
+            if (job.country) { // Check if job has a country
+                locationSet1.add(job.country);
+            }
+            if (job.title) { // Check if job has a title
+                jobTypeSet1.add(job.title);
+            }
+        });
+
+        // Populate location filter
+        $('#locationFilter-1').html('<option value="All">Alle steder</option>');
+        locationSet1.forEach(country => {
+            $('#locationFilter-1').append(`<option value="${country}">${country}</option>`);
+        });
+
+        // Populate job type filter
+        $('#jobTypeFilter-1').html('<option value="All">Alle stillingstytper</option>');
+        jobTypeSet1.forEach(type => {
+            $('#jobTypeFilter-1').append(`<option value="${type}">${type}</option>`);
+        });
+    }
+
+    // Function to display jobs based on filters
+    function displayJobs1() {
+        $('#jobList-1').empty(); // Clear current jobs
+
+        let filteredJobs1 = jobs1.slice(0, displayedJobs1); // Get the subset of jobs to be displayed
+
+        // Apply filters
+        const selectedCountry1 = $('#locationFilter-1').val();
+        const selectedJobType1 = $('#jobTypeFilter-1').val();
+        filteredJobs1 = filteredJobs1.filter(job => {
+            return (selectedCountry1 === 'All' || job.country === selectedCountry1) &&
+                   (selectedJobType1 === 'All' || job.title === selectedJobType1);
+        });
+
+        // Add job cards to the DOM
+        filteredJobs1.forEach(job => {
+            $('#jobList-1').append(buildJobCard1(job));
+        });
+
+        updateLoadMoreVisibility1(); // Update the visibility of the "Load More" button
+    }
+
+    // Function to build HTML for a job card
+    function buildJobCard1(job) {
+        const jobDetailUrl1 = `job-details.html?jobId=${job.ad_id}`;
+        const organizationUnitName1 = job.organizations.length > 1 ? job.organizations[1].nameorgunit : job.organizations[0]?.nameorgunit || 'Not specified';
+        return `
+        <div class="col-12 col-md-4 col-lg-4 mb-4">
+            <a href="${jobDetailUrl1}" class="" style="text-decoration: none; color: inherit;">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <div class="card-category"><span>${organizationUnitName1}</span></div>
+                        <h5 class="card-title">${job.title}</h5>
+                        <p class="card-text">${job.country}</p>
+                        <a href="${jobDetailUrl1}" class="stretched-link">
+                            <img src="./files/arrow-right-regular.svg" class="" alt="Details" style="">
+                        </a>
+                    </div>
+                </div>
+            </a>
+        </div>`;
+    }
+
+    // Function to update the visibility of the "Load More" button
+    function updateLoadMoreVisibility1() {
+        if (displayedJobs1 >= jobs1.length) {
+            $('#loadMore-1').hide();
+        } else {
+            $('#loadMore-1').show();
+        }
+    }
+
+    // Function to fetch jobs from the API
+    $(document).ready(function () {
+        const currentJobId1 = new URLSearchParams(window.location.search).get('jobId');
+        fetchJobs1(currentJobId1); // Pass currentJobId to the fetchJobs function
+    });
+
+    function fetchJobs1(currentJobId1) {
+        fetch('https://api.talentech.io/reachmee/feed/naf')
+            .then(response => response.json())
+            .then(data => {
+                jobs1 = data.filter(job => job.ad_id !== parseInt(currentJobId1));
+                if (jobs1.length === 0) {
+                    $('#tt-feature-section-1').hide();
+                } else {
+                    displayedJobs1 = Math.min(jobsToShow1, jobs1.length);
+                    populateFilters1();
+                    displayJobs1();
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching jobs:', error);
+            });
+    }
+
+    // Load jobs when page is ready
+    fetchJobs1();
+
+    // Event listener for "Load More" button
+    $('#loadMore-1').click(function() {
+        displayedJobs1 += jobsToShow1; // Increase the number of displayed jobs
+        displayJobs1(); // Display new set of jobs
+        updateLoadMoreVisibility1(); // Check if we still need the "Load More" button
+    });
+
+    // Event listeners for filter dropdowns
+    $('#locationFilter-1').change(function() {
+        displayedJobs1 = jobsToShow1; // Reset displayed jobs to show initial count based on current device
+        displayJobs1(); // Apply filter and display jobs
+        updateLoadMoreVisibility1(); // Update "Load More" button visibility based on filters
+    });
+
+    $('#jobTypeFilter-1').change(function() {
+        displayedJobs1 = jobsToShow1; // Reset displayed jobs to show initial count based on current device
+        displayJobs1(); // Apply filter and display jobs
+        updateLoadMoreVisibility1(); // Update "Load More" button visibility based on filters
+    });
+});
+</script>
+
+
+
+
+
+
+
+
+
+
+	
+
 
 
 
