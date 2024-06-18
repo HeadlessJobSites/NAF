@@ -958,7 +958,8 @@ $(document).ready(function () {
         var customIcon = L.icon({
             iconUrl: './files/NAF-logo.jpeg',
             iconSize: [34, 34],
-            iconAnchor: [15, 30]
+            iconAnchor: [15, 30],
+            popupAnchor: [1, -15]
         });
 
         // Process each job in the feed
@@ -978,8 +979,9 @@ $(document).ready(function () {
                 coords = { lat: 61.99589575051149, lon: 9.423291957454996 };
             }
 
-            // Add a pin for the job without popup
-            const marker = L.marker([coords.lat, coords.lon], { icon: customIcon }).addTo(map);
+            // Add a pin for the job
+            const marker = L.marker([coords.lat, coords.lon], { icon: customIcon, interactive: false })
+                .addTo(map);
             markers.push(marker);
         }
     }
