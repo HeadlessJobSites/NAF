@@ -29,7 +29,7 @@
     height: 150px; /* Set the desired height */
     width: auto; /* Maintain aspect ratio */
 }
-@media (max-width: 576px) {
+@media (max-width: 768px) {
     .service-box {
         flex-direction: column;
         text-align: center;
