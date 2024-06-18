@@ -262,7 +262,7 @@ function buildIframe() {
 
 
 <section id="tt-talentech-section-2" class="team-section py-5 mb-5 pb-4 m-my-0 m-py-5">
-        <center><h2 class="container mb-0 pb-0">Møt teamet hos <span class="organization-unit" style="font-weight: 800;"></span><span style="font-weight: 800;">NAF</span></h2></center>
+        <center><h2 class="container mb-0 pb-0">Møt teamet hos <span class="organization-unit" style="font-weight: 800;"></span></h2></center>
     <div class="container mt-0 pt-2 m-ml-0 m-px-0">
         <div class="row mt-3 m-mt-2 m-mx-0">
 <div id="gobi-section"></div>		
@@ -286,7 +286,7 @@ function buildIframe() {
             <div class="col-md-4 px-0">
 <script src="https://widget.gobistories.com/gwi/6" async onload="gobi.discover()"></script>
 
-<div class="gobi-collection" data-gobi-collection-id="j2jom"></div>
+<div class="gobi-collection" data-gobi-collection-id="jwrbj"></div>
             </div>-->
             <!-- Existing Content in Right Column -->
             <div class="col-md-12 pl-5 m-pl-4">
@@ -438,7 +438,7 @@ window.addEventListener('message', function(event) {
 
 
 <div class="container my-5 py-5 m-my-0 m-pt-0" style="text-align: center;">
-    <div class="">
+    <div class="agent-wrapper">
         <h2>Fant du ikke stillingen for deg?</h2>
         <div class="mt-4 mb-2">
 		<p>Abonner på stillinger, så får du en e-post når det er en ledig stilling som passer dine preferanser.</p>
@@ -534,13 +534,13 @@ $(document).ready(function () {
 
 	    
 	// Populate location filter
-        $('#locationFilter').html('<option value="All">All locations</option>');
+        $('#locationFilter').html('<option value="All">Alle steder</option>');
         locationSet.forEach(country => {
             $('#locationFilter').append(`<option value="${country}">${country}</option>`);
         });
 
         // Populate job type filter
-        $('#jobTypeFilter').html('<option value="All">All job types</option>');
+        $('#jobTypeFilter').html('<option value="All">Alle stillingstytper</option>');
         jobTypeSet.forEach(type => {
             $('#jobTypeFilter').append(`<option value="${type}">${type}</option>`);
         });
@@ -679,7 +679,7 @@ $(document).ready(function() {
                 const titleWords = job.title.split(' ');
                 const firstWord = titleWords.shift();
                 const restOfTitle = titleWords.join(' ');
-                //$('.job-title').html(`<span style="font-weight:400;">${firstWord}</span> <span style="font-weight:800;">${restOfTitle}</span>`);
+                $('.job-title').html(`<span style="font-weight:400;">${firstWord}</span> <span style="font-weight:400;">${restOfTitle}</span>`);
 
                 // Update elements with job details
                 $('.job-title2').html(job.title);
