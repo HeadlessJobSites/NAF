@@ -25,6 +25,9 @@
 .team-member a {
 	color: #000 !important;
 }
+.department-split .role {
+	font-weight: bold;
+}
 .process-content {
 	background-color: rgb(241, 241, 241);
 	border-radius: 2px;
