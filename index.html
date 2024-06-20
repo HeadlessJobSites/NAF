@@ -873,7 +873,7 @@ $(document).ready(function () {
                 const job = jobs[jobIndex];
                 return `
                     <div>
-                        <a href="${job.url}" target="_blank">${job.title}</a>
+                        <a href="${job.url}">${job.title}</a>
                         ${jobs.length > 1 ? `
                         <div style="display: flex; justify-content: space-between; margin-top: 5px;">
                             <button style="background: none; border: none; cursor: pointer;" ${jobIndex === 0 ? 'disabled' : ''} onclick="prevJob()">&lt;</button>
