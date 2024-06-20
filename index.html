@@ -809,7 +809,7 @@ $(document).ready(function () {
 
     async function initMap() {
         const feed = await fetchFeed();
-        const markers = [];
+        const markers = {};
 
         // Initialize the map with custom settings and an initial zoom level
         const map = L.map('mapid', {
@@ -851,10 +851,59 @@ $(document).ready(function () {
                 coords = { lat: 61.99589575051149, lon: 9.423291957454996 };
             }
 
-            // Add a pin for the job
-            const marker = L.marker([coords.lat, coords.lon], { icon: customIcon, interactive: false })
-                .addTo(map);
-            markers.push(marker);
+            const key = `${coords.lat},${coords.lon}`;
+
+            if (!markers[key]) {
+                markers[key] = [];
+            }
+            markers[key].push({
+                title: item.title,
+                url: item.url
+            });
+        }
+
+        // Add markers to the map
+        for (const [key, jobs] of Object.entries(markers)) {
+            const [lat, lon] = key.split(',').map(parseFloat);
+            const marker = L.marker([lat, lon], { icon: customIcon }).addTo(map);
+
+            let jobIndex = 0;
+
+            const updatePopupContent = () => {
+                const job = jobs[jobIndex];
+                return `
+                    <div>
+                        <a href="${job.url}" target="_blank">${job.title}</a>
+                        <div style="display: flex; justify-content: space-between; margin-top: 5px;">
+                            <button ${jobIndex === 0 ? 'disabled' : ''} onclick="prevJob()">Prev</button>
+                            <button ${jobIndex === jobs.length - 1 ? 'disabled' : ''} onclick="nextJob()">Next</button>
+                        </div>
+                    </div>
+                `;
+            };
+
+            marker.bindPopup(updatePopupContent);
+
+            window.prevJob = () => {
+                if (jobIndex > 0) {
+                    jobIndex--;
+                    marker.setPopupContent(updatePopupContent());
+                    marker.openPopup();
+                }
+            };
+
+            window.nextJob = () => {
+                if (jobIndex < jobs.length - 1) {
+                    jobIndex++;
+                    marker.setPopupContent(updatePopupContent());
+                    marker.openPopup();
+                }
+            };
+
+            marker.on('click', () => {
+                jobIndex = 0;
+                marker.setPopupContent(updatePopupContent());
+            });
         }
     }
 
