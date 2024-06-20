@@ -1,8 +1,8 @@
 .leaflet-container a {
-    color: #000;
+    color: #000 !important;
 }
 .leaflet-popup-content {
-    margin: 20px;
+    margin: 20px !important;
 }
 .hero-content {
     max-width: 1200px;
