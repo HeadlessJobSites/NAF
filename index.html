@@ -858,7 +858,7 @@ $(document).ready(function () {
             }
             markers[key].push({
                 title: item.title,
-                url: item.url
+                url: `/job-details.html?jobId=${item.url.split('rmjob=')[1]}`
             });
         }
 
@@ -874,10 +874,12 @@ $(document).ready(function () {
                 return `
                     <div>
                         <a href="${job.url}" target="_blank">${job.title}</a>
+                        ${jobs.length > 1 ? `
                         <div style="display: flex; justify-content: space-between; margin-top: 5px;">
-                            <button ${jobIndex === 0 ? 'disabled' : ''} onclick="prevJob()">Prev</button>
-                            <button ${jobIndex === jobs.length - 1 ? 'disabled' : ''} onclick="nextJob()">Next</button>
+                            <button style="background: none; border: none; cursor: pointer;" ${jobIndex === 0 ? 'disabled' : ''} onclick="prevJob()">&lt;</button>
+                            <button style="background: none; border: none; cursor: pointer;" ${jobIndex === jobs.length - 1 ? 'disabled' : ''} onclick="nextJob()">&gt;</button>
                         </div>
+                        ` : ''}
                     </div>
                 `;
             };
