@@ -28,7 +28,7 @@
 .service-image {
     flex-shrink: 0;
     position: absolute;
-    right: -20px; /* Ensure image overlaps */
+    right: -50px; /* Ensure image overlaps */
     top: 50%;
     transform: translateY(-50%);
 }
