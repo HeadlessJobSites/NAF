@@ -793,7 +793,6 @@ $(document).ready(function () {
 
 
 	
-
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 <script>
     async function fetchFeed() {
@@ -858,6 +857,7 @@ $(document).ready(function () {
             }
             markers[key].push({
                 title: item.title,
+                location: area.name,
                 url: `./job-details.html?jobId=${item.url.split('rmjob=')[1]}`
             });
         }
@@ -872,12 +872,17 @@ $(document).ready(function () {
             const updatePopupContent = () => {
                 const job = jobs[jobIndex];
                 return `
-                    <div>
-                        <a href="${job.url}">${job.title}</a>
+                    <div style="background-color: #062e2a; color: #e9f3e7; padding: 10px; border-radius: 5px;">
+                        <div style="font-size: large;">${job.title}</div>
+                        <div style="color: rgba(233, 243, 231, 0.7);">Sted:</div>
+                        <div>${job.location}</div>
+                        <div style="display: flex; justify-content: flex-end; margin-top: 10px;">
+                            <a href="${job.url}" target="_blank" style="background-color: #ffdb16; color: #1a1a1a; padding: 5px 10px; text-decoration: none; border-radius: 5px;">Se stilling</a>
+                        </div>
                         ${jobs.length > 1 ? `
                         <div style="display: flex; justify-content: space-between; margin-top: 5px;">
-                            <button style="background: none; border: none; cursor: pointer;" ${jobIndex === 0 ? 'disabled' : ''} onclick="prevJob()">&lt;</button>
-                            <button style="background: none; border: none; cursor: pointer;" ${jobIndex === jobs.length - 1 ? 'disabled' : ''} onclick="nextJob()">&gt;</button>
+                            <button style="background: none; border: none; cursor: pointer; color: #e9f3e7;" ${jobIndex === 0 ? 'disabled' : ''} onclick="prevJob()">&lt;</button>
+                            <button style="background: none; border: none; cursor: pointer; color: #e9f3e7;" ${jobIndex === jobs.length - 1 ? 'disabled' : ''} onclick="nextJob()">&gt;</button>
                         </div>
                         ` : ''}
                     </div>
@@ -911,7 +916,6 @@ $(document).ready(function () {
 
     document.addEventListener('DOMContentLoaded', initMap);
 </script>
-
 
 
 
