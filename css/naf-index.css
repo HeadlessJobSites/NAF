@@ -21,6 +21,15 @@
 	border-radius: 2px;
 	overflow: hidden;
 }
+.leaflet-popup-content {
+    margin: 0;
+}
+.leaflet-popup-content-wrapper, .leaflet-popup-tip {
+    background: #062e2a;
+}
+.leaflet-container a.leaflet-popup-close-button {
+    color: #e9f3e8;
+}
 .department-split a,
 .team-member a {
 	color: #000 !important;
