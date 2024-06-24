@@ -874,9 +874,10 @@ $(document).ready(function () {
                 const job = jobs[jobIndex];
                 return `
                     <div style="background-color: #062e2a; color: #e9f3e7; padding: 10px; border-radius: 5px;">
-                        <div style="font-size: large;">${job.title}</div>
-                        <div style="color: rgba(233, 243, 231, 0.7);">Sted:</div>
-                        <div>${job.location}</div>
+                        <a href="${job.url}" target="_blank" style="font-size: large; color: #e9f3e7; text-decoration: none;">${job.title}</a>
+                        <div style="margin-top: 10px;">
+                            <span style="color: rgba(233, 243, 231, 0.7);">Sted:</span> <span>${job.location}</span>
+                        </div>
                         <div style="display: flex; justify-content: flex-end; margin-top: 10px;">
                             <a href="${job.url}" target="_blank" style="background-color: #ffdb16; color: #1a1a1a; padding: 5px 10px; text-decoration: none; border-radius: 5px;">Se stilling</a>
                         </div>
@@ -917,6 +918,7 @@ $(document).ready(function () {
 
     document.addEventListener('DOMContentLoaded', initMap);
 </script>
+
 
 
 
