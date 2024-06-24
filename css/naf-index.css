@@ -22,13 +22,13 @@
 	overflow: hidden;
 }
 .leaflet-popup-content {
-    margin: 0;
+    margin: 0 !important;
 }
 .leaflet-popup-content-wrapper, .leaflet-popup-tip {
-    background: #062e2a;
+    background: #062e2a !important;
 }
 .leaflet-container a.leaflet-popup-close-button {
-    color: #e9f3e8;
+    color: #e9f3e8 !important;
 }
 .department-split a,
 .team-member a {
