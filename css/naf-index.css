@@ -21,6 +21,10 @@
 	border-radius: 2px;
 	overflow: hidden;
 }
+.leaflet-container a.leaflet-popup-close-button {
+    width: 26px;
+    height: 14px;
+}
 .leaflet-popup-content {
     margin: 0 !important;
 }
