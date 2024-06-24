@@ -792,8 +792,6 @@ $(document).ready(function () {
 
 
 
-	
-
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 <script>
     async function fetchFeed() {
@@ -804,7 +802,7 @@ $(document).ready(function () {
     async function geocodeArea(areaName) {
         const response = await fetch(`https://nominatim.openstreetmap.org/search?q=${areaName}&format=json&limit=1`);
         const data = await response.json();
-        return data.length > 0 ? {lat: parseFloat(data[0].lat), lon: parseFloat(data[0].lon)} : null;
+        return data.length > 0 ? { lat: parseFloat(data[0].lat), lon: parseFloat(data[0].lon) } : null;
     }
 
     async function initMap() {
@@ -837,11 +835,13 @@ $(document).ready(function () {
         // Process each job in the feed
         for (const item of feed) {
             let coords = null;
+            let location = 'Norge';
 
             // Find the first valid area with coordinates
             for (const area of item.areas) {
                 coords = await geocodeArea(area.name);
                 if (coords) {
+                    location = area.name;
                     break;
                 }
             }
@@ -858,7 +858,7 @@ $(document).ready(function () {
             }
             markers[key].push({
                 title: item.title,
-                location: area.name,
+                location: location,
                 url: `./job-details.html?jobId=${item.url.split('rmjob=')[1]}`
             });
         }
