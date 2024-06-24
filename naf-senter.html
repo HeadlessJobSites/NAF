@@ -101,7 +101,7 @@ $(document).ready(function() {
             <source src="https://career.talentech.com/files/Compressed-TT.mp4" type="video/mp4">
         </video>-->
         <div class="hero-content">
-            <h1>NAF <span style="font-weight: 800;">Senter</span></h1>
+            <h1>Welcommen til <span style="font-weight: 800;">NAF Senter</span></h1>
             <a href="#company-section" class="btn btn-primary btn-lg"><strong>Bli kjent med oss</strong></a>
         </div>
     </div>
@@ -932,12 +932,12 @@ $(document).ready(function () {
     async function geocodeArea(areaName) {
         const response = await fetch(`https://nominatim.openstreetmap.org/search?q=${areaName}&format=json&limit=1`);
         const data = await response.json();
-        return data.length > 0 ? {lat: parseFloat(data[0].lat), lon: parseFloat(data[0].lon)} : null;
+        return data.length > 0 ? { lat: parseFloat(data[0].lat), lon: parseFloat(data[0].lon) } : null;
     }
 
     async function initMap() {
         const feed = await fetchFeed();
-        const markers = [];
+        const markers = {};
 
         // Initialize the map with custom settings and an initial zoom level
         const map = L.map('mapid', {
@@ -965,11 +965,13 @@ $(document).ready(function () {
         // Process each job in the feed
         for (const item of feed) {
             let coords = null;
+            let location = 'Norge';
 
             // Find the first valid area with coordinates
             for (const area of item.areas) {
                 coords = await geocodeArea(area.name);
                 if (coords) {
+                    location = area.name;
                     break;
                 }
             }
@@ -979,15 +981,77 @@ $(document).ready(function () {
                 coords = { lat: 61.99589575051149, lon: 9.423291957454996 };
             }
 
-            // Add a pin for the job
-            const marker = L.marker([coords.lat, coords.lon], { icon: customIcon, interactive: false })
-                .addTo(map);
-            markers.push(marker);
+            const key = `${coords.lat},${coords.lon}`;
+
+            if (!markers[key]) {
+                markers[key] = [];
+            }
+            markers[key].push({
+                title: item.title,
+                location: location,
+                url: `./job-details.html?jobId=${item.url.split('rmjob=')[1]}`
+            });
+        }
+
+        // Add markers to the map
+        for (const [key, jobs] of Object.entries(markers)) {
+            const [lat, lon] = key.split(',').map(parseFloat);
+            const marker = L.marker([lat, lon], { icon: customIcon }).addTo(map);
+
+            let jobIndex = 0;
+
+            const updatePopupContent = () => {
+                const job = jobs[jobIndex];
+                return `
+                    <div style="background-color: #062e2a; color: #e9f3e7; padding: 20px; border-radius: 12px;">
+                        <a href="${job.url}" target="_blank" style="font-size: large; color: #e9f3e7; text-decoration: none;">${job.title}</a>
+                        <div style="margin-top: 10px;">
+                            <span style="color: rgba(233, 243, 231, 0.7);">Sted:</span> <span>${job.location}</span>
+                        </div>
+                        <div style="display: flex; justify-content: flex-end; margin-top: 10px;">
+                            <a href="${job.url}" target="_blank" style="background-color: #ffdb16; color: #1a1a1a; padding: 5px 10px; text-decoration: none; border-radius: 5px;">Se stilling</a>
+                        </div>
+                        ${jobs.length > 1 ? `
+                        <div style="display: flex; justify-content: space-between; margin-top: 5px;">
+                            <button style="background: none; border: none; cursor: pointer; color: #e9f3e7;" ${jobIndex === 0 ? 'disabled' : ''} onclick="prevJob()">&lt;</button>
+                            <button style="background: none; border: none; cursor: pointer; color: #e9f3e7;" ${jobIndex === jobs.length - 1 ? 'disabled' : ''} onclick="nextJob()">&gt;</button>
+                        </div>
+                        ` : ''}
+                    </div>
+                `;
+            };
+
+            marker.bindPopup(updatePopupContent);
+
+            window.prevJob = () => {
+                if (jobIndex > 0) {
+                    jobIndex--;
+                    marker.setPopupContent(updatePopupContent());
+                    marker.openPopup();
+                }
+            };
+
+            window.nextJob = () => {
+                if (jobIndex < jobs.length - 1) {
+                    jobIndex++;
+                    marker.setPopupContent(updatePopupContent());
+                    marker.openPopup();
+                }
+            };
+
+            marker.on('click', () => {
+                jobIndex = 0;
+                marker.setPopupContent(updatePopupContent());
+            });
         }
     }
 
     document.addEventListener('DOMContentLoaded', initMap);
 </script>
+
+
+
+
 
 
 	
