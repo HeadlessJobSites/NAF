@@ -4,12 +4,6 @@
 .leaflet-popup-content {
     margin: 20px !important;
 }
-.leaflet-popup-content {
-    margin: 0;
-}
-.leaflet-popup-content-wrapper, .leaflet-popup-tip {
-    background: #062e2a;
-}
 .hero-content {
     max-width: 1200px;
     margin: 0 auto;
