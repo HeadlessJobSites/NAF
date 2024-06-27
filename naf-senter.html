@@ -347,6 +347,10 @@ $(document).ready(function() {
 
 
 
+
+
+	
+
 	
 	
 <div class="feature-section pt-3 pb-2" id="jobs-anchor" style="">
@@ -378,10 +382,24 @@ $(document).ready(function() {
     </div>
 </div>
 
+<div class="feature-section pt-3 pb-2" id="other-jobs-anchor" style="">
+    <div class="container mt-3 mb-0 m-mb-0">
+        <h2 class="my-5 m-px-2 m-my-0">Andre ledige stillinger hos <span style="font-weight: 800">NAF sentrene</span></h2>
+        <div id="otherJobList" class="row"></div>
+        <div class="text-center mt-2">
+            <button id="loadMoreOther" class="btn btn-primary">Se flere</button>
+        </div>
+        <div id="noOtherJobsMessage" class="text-center mt-4" style="display: none;">
+            Det er for tiden ingen ledige stillinger. Abonner på stillinger nedenfor, så får du en e-post når det er en ledig stilling som passer dine preferanser.
+        </div>
+    </div>
+</div>
+
 <script>
 $(document).ready(function () {
     let jobs = []; // Array to store all jobs
     let displayedJobs = 0; // Counter for the number of jobs currently displayed
+    let displayedOtherJobs = 0; // Counter for the number of other jobs currently displayed
     const jobsToShowDesktop = 12; // Number of jobs to show on desktop before "Load More"
     const jobsToShowMobile = 6; // Number of jobs to show on mobile before "Load More"
     let jobsToShow = window.innerWidth > 768 ? jobsToShowDesktop : jobsToShowMobile;
@@ -390,8 +408,11 @@ $(document).ready(function () {
     $(window).resize(function() {
         jobsToShow = window.innerWidth > 768 ? jobsToShowDesktop : jobsToShowMobile;
         displayedJobs = Math.min(jobsToShow, jobs.length); // Adjust displayedJobs based on new jobsToShow
+        displayedOtherJobs = Math.min(jobsToShow, otherJobs.length); // Adjust displayedOtherJobs based on new jobsToShow
         displayJobs(); // Redisplay jobs based on new size
+        displayOtherJobs(); // Redisplay other jobs based on new size
         updateLoadMoreVisibility(); // Update button visibility after resize
+        updateLoadMoreOtherVisibility(); // Update other button visibility after resize
     });
 
     // Function to populate filter dropdowns based on jobs
@@ -460,6 +481,32 @@ $(document).ready(function () {
         updateLoadMoreVisibility(); // Update the visibility of the "Load More" button
     }
 
+    // Function to display other jobs
+    function displayOtherJobs() {
+        $('#otherJobList').empty(); // Clear current jobs
+
+        let filteredOtherJobs = jobs.filter(job => job.occupation_area_id !== 28); // Filter jobs by occupation_area_id other than 28
+
+        if (filteredOtherJobs.length === 0) {
+            $('#noOtherJobsMessage').show(); // Show the no other jobs message
+            $('#otherJobList').hide(); // Hide the other job list
+            $('#loadMoreOther').hide(); // Hide the load more other button
+            return;
+        } else {
+            $('#noOtherJobsMessage').hide(); // Hide the no other jobs message
+            $('#otherJobList').show(); // Show the other job list
+        }
+
+        filteredOtherJobs = filteredOtherJobs.slice(0, displayedOtherJobs); // Get the subset of other jobs to be displayed
+
+        // Add job cards to the DOM
+        filteredOtherJobs.forEach(job => {
+            $('#otherJobList').append(buildJobCard(job));
+        });
+
+        updateLoadMoreOtherVisibility(); // Update the visibility of the "Load More Other" button
+    }
+
     // Function to build HTML for a job card
     function buildJobCard(job) {
         // Assuming job-details.html is your detail page and it can handle job IDs
@@ -494,10 +541,19 @@ $(document).ready(function () {
 
     // Function to update the visibility of the "Load More" button
     function updateLoadMoreVisibility() {
-        if (displayedJobs >= jobs.length) {
+        if (displayedJobs >= jobs.filter(job => job.occupation_area_id === 28).length) {
             $('#loadMore').hide();
         } else {
             $('#loadMore').show();
+        }
+    }
+
+    // Function to update the visibility of the "Load More Other" button
+    function updateLoadMoreOtherVisibility() {
+        if (displayedOtherJobs >= jobs.filter(job => job.occupation_area_id !== 28).length) {
+            $('#loadMoreOther').hide();
+        } else {
+            $('#loadMoreOther').show();
         }
     }
 
@@ -506,10 +562,12 @@ $(document).ready(function () {
         fetch('https://api.talentech.io/reachmee/feed/naf') // Ensure this URL is correct
             .then(response => response.json())
             .then(data => {
-                jobs = data.filter(job => job.occupation_area_id === 28); // Filter jobs by occupation_area_id 28
-                displayedJobs = Math.min(jobsToShow, jobs.length); // Initialize displayedJobs
+                jobs = data; // Store fetched jobs
+                displayedJobs = Math.min(jobsToShow, jobs.filter(job => job.occupation_area_id === 28).length); // Initialize displayedJobs
+                displayedOtherJobs = Math.min(jobsToShow, jobs.filter(job => job.occupation_area_id !== 28).length); // Initialize displayedOtherJobs
                 populateFilters(); // Fill dropdowns with options
                 displayJobs(); // Show initial jobs
+                displayOtherJobs(); // Show initial other jobs
             })
             .catch(error => {
                 console.error('Error fetching jobs:', error);
@@ -524,6 +582,13 @@ $(document).ready(function () {
         displayedJobs += jobsToShow; // Increase the number of displayed jobs
         displayJobs(); // Display new set of jobs
         updateLoadMoreVisibility(); // Check if we still need the "Load More" button
+    });
+
+    // Event listener for "Load More Other" button
+    $('#loadMoreOther').click(function() {
+        displayedOtherJobs += jobsToShow; // Increase the number of displayed other jobs
+        displayOtherJobs(); // Display new set of other jobs
+        updateLoadMoreOtherVisibility(); // Check if we still need the "Load More Other" button
     });
 
     // Event listeners for filter dropdowns
