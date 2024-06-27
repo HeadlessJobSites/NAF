@@ -22,6 +22,11 @@
 .talentech-section h2 {
     font-size: 2rem;
 }
+#noOtherJobsMessage {
+    padding-bottom: 90px;
+    max-width: 560px;
+    text-align: left !important;
+}
 .department .talentech-section h2 {
     font-size: 3rem;
     margin-bottom: 20px;
