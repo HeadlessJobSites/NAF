@@ -104,4 +104,16 @@
 
 
 
+@media (max-width: 768px) {
+.hero-logo {
+    bottom: 18px;
+    left: 18px;
+    width: 70px;
+}
+
+
+
+
+
+}
 
