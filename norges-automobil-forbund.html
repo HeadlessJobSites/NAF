@@ -356,7 +356,7 @@ $(document).ready(function() {
 <div class="feature-section mb-5 py-3 pb-2" id="jobs-anchor" style="">
     <div class="container mt-3 mb-0 m-mb-0">
         <h2 class="my-5 m-px-2 m-my-0">Flere ledige stillinger hos <span style="font-weight: 800">NAF sentrene</span></h2>
-        <div class="row my-3">
+        <div id="filters" class="row my-3">
             <div class="col-md-3 mb-3">
                 <label for="locationFilter">Sted</label>
                 <select id="locationFilter" class="form-control">
@@ -450,15 +450,17 @@ $(document).ready(function () {
     function displayJobs() {
         $('#jobList').empty(); // Clear current jobs
 
-        let filteredJobs = jobs.filter(job => job.occupation_area_id === 9999999999999999); // Filter jobs by occupation_area_id 28
+        let filteredJobs = jobs.filter(job => job.occupation_area_id === 28); // Filter jobs by occupation_area_id 28
 
         if (filteredJobs.length === 0) {
             $('#noJobsMessage').show(); // Show the no jobs message
+            $('#filters').hide(); // Hide the filters
             $('#jobList').hide(); // Hide the job list
             $('#loadMore').hide(); // Hide the load more button
             return;
         } else {
             $('#noJobsMessage').hide(); // Hide the no jobs message
+            $('#filters').show(); // Show the filters
             $('#jobList').show(); // Show the job list
         }
 
@@ -485,7 +487,7 @@ $(document).ready(function () {
     function displayOtherJobs() {
         $('#otherJobList').empty(); // Clear current jobs
 
-        let filteredOtherJobs = jobs.filter(job => job.occupation_area_id !== 9999999999999999); // Filter jobs by occupation_area_id other than 28
+        let filteredOtherJobs = jobs.filter(job => job.occupation_area_id !== 28); // Filter jobs by occupation_area_id other than 28
 
         if (filteredOtherJobs.length === 0) {
             $('#noOtherJobsMessage').show(); // Show the no other jobs message
@@ -541,7 +543,7 @@ $(document).ready(function () {
 
     // Function to update the visibility of the "Load More" button
     function updateLoadMoreVisibility() {
-        if (displayedJobs >= jobs.filter(job => job.occupation_area_id === 9999999999999999).length) {
+        if (displayedJobs >= jobs.filter(job => job.occupation_area_id === 28).length) {
             $('#loadMore').hide();
         } else {
             $('#loadMore').show();
@@ -550,7 +552,7 @@ $(document).ready(function () {
 
     // Function to update the visibility of the "Load More Other" button
     function updateLoadMoreOtherVisibility() {
-        if (displayedOtherJobs >= jobs.filter(job => job.occupation_area_id !== 9999999999999999).length) {
+        if (displayedOtherJobs >= jobs.filter(job => job.occupation_area_id !== 28).length) {
             $('#loadMoreOther').hide();
         } else {
             $('#loadMoreOther').show();
@@ -563,8 +565,8 @@ $(document).ready(function () {
             .then(response => response.json())
             .then(data => {
                 jobs = data; // Store fetched jobs
-                displayedJobs = Math.min(jobsToShow, jobs.filter(job => job.occupation_area_id === 9999999999999999).length); // Initialize displayedJobs
-                displayedOtherJobs = Math.min(jobsToShow, jobs.filter(job => job.occupation_area_id !== 9999999999999999).length); // Initialize displayedOtherJobs
+                displayedJobs = Math.min(jobsToShow, jobs.filter(job => job.occupation_area_id === 28).length); // Initialize displayedJobs
+                displayedOtherJobs = Math.min(jobsToShow, jobs.filter(job => job.occupation_area_id !== 28).length); // Initialize displayedOtherJobs
                 populateFilters(); // Fill dropdowns with options
                 displayJobs(); // Show initial jobs
                 displayOtherJobs(); // Show initial other jobs
@@ -605,7 +607,6 @@ $(document).ready(function () {
     });
 });
 </script>
-
 
 
 
