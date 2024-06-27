@@ -136,7 +136,12 @@
     width: 70px;
 }
 
-
+.department h1 {
+font-size: 2.5rem;
+}
+.department .talentech-section h2 {
+    font-size: 2rem;
+}
 
 
 
