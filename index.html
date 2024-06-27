@@ -579,9 +579,10 @@ $(document).ready(function () {
         const jobTypeSet = new Set();
 
         jobs.forEach(job => {
-            // Use areas for location
+            // Use the last area for location
             if (job.areas && job.areas.length > 0) {
-                job.areas.forEach(area => locationSet.add(area.name));
+                const lastArea = job.areas[job.areas.length - 1];
+                locationSet.add(lastArea.name);
             }
 
             // Use occupation_area for job type
@@ -638,7 +639,7 @@ $(document).ready(function () {
         // Determine the display location based on the areas and country
         let displayLocation = job.country || '';
         if (job.areas && job.areas.length > 0) {
-            displayLocation = job.areas.length > 1 ? job.areas[1].name : job.areas[0].name;
+            displayLocation = job.areas[job.areas.length - 1].name; // Use the last area
         }
 
         return `
@@ -706,7 +707,6 @@ $(document).ready(function () {
     });
 });
 </script>
-
 
 
 
