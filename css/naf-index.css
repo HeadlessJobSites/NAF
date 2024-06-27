@@ -22,6 +22,10 @@
 .talentech-section h2 {
     font-size: 2rem;
 }
+.department .talentech-section h2 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+}
 .btn-primary {
 	background-color: rgb(255, 219, 22) !important;
 	border-radius: 5px;
