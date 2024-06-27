@@ -351,7 +351,7 @@ function buildIframe() {
 
 
 
-    <div class="container my-5">
+    <div class="container my-5 service-box-wrapper">
         <div class="row">
             <div class="col-12">
                 <div class="service-box p-5 mx-3">
@@ -368,6 +368,32 @@ function buildIframe() {
             </div>
         </div>
     </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const params = new URLSearchParams(window.location.search);
+    const jobId = params.get('rmjob') ? parseInt(params.get('rmjob'), 10) : parseInt(params.get('jobId'), 10);
+
+    fetch('https://api.talentech.io/reachmee/feed/naf')
+        .then(response => response.json())
+        .then(jobs => {
+            const job = jobs.find(job => job.ad_id === jobId);
+            if (job) {
+                // Your existing code to populate job details...
+
+                // Check the occupation_area_id and hide the section if it's not 28
+                if (job.occupation_area_id !== 28) {
+                    document.querySelector('.service-box-wrapper').style.display = 'none';
+                }
+            } else {
+                console.error('Job not found.');
+            }
+        })
+        .catch(error => {
+            console.error('Error fetching job details:', error);
+        });
+});
+</script>
 
 
 
