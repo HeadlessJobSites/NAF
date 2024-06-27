@@ -110,7 +110,9 @@
 .bg-dark {
     background-color: rgb(6, 46, 42) !important;
 }
-
+.carousel-indicators {
+  bottom: 30px;
+}
 
 
 
