@@ -28,6 +28,9 @@
     max-width: 560px;
     text-align: left !important;
 }
+#noJobsMessage {
+    padding-bottom: 40px;
+}
 .department .talentech-section h2 {
     font-size: 3rem;
     margin-bottom: 20px;
