@@ -450,7 +450,7 @@ $(document).ready(function () {
     function displayJobs() {
         $('#jobList').empty(); // Clear current jobs
 
-        let filteredJobs = jobs.filter(job => job.occupation_area_id === 28); // Filter jobs by occupation_area_id 28
+        let filteredJobs = jobs.filter(job => job.occupation_area_id === 9999999999999999); // Filter jobs by occupation_area_id 28
 
         if (filteredJobs.length === 0) {
             $('#noJobsMessage').show(); // Show the no jobs message
@@ -485,7 +485,7 @@ $(document).ready(function () {
     function displayOtherJobs() {
         $('#otherJobList').empty(); // Clear current jobs
 
-        let filteredOtherJobs = jobs.filter(job => job.occupation_area_id !== 28); // Filter jobs by occupation_area_id other than 28
+        let filteredOtherJobs = jobs.filter(job => job.occupation_area_id !== 9999999999999999); // Filter jobs by occupation_area_id other than 28
 
         if (filteredOtherJobs.length === 0) {
             $('#noOtherJobsMessage').show(); // Show the no other jobs message
@@ -541,7 +541,7 @@ $(document).ready(function () {
 
     // Function to update the visibility of the "Load More" button
     function updateLoadMoreVisibility() {
-        if (displayedJobs >= jobs.filter(job => job.occupation_area_id === 28).length) {
+        if (displayedJobs >= jobs.filter(job => job.occupation_area_id === 9999999999999999).length) {
             $('#loadMore').hide();
         } else {
             $('#loadMore').show();
@@ -550,7 +550,7 @@ $(document).ready(function () {
 
     // Function to update the visibility of the "Load More Other" button
     function updateLoadMoreOtherVisibility() {
-        if (displayedOtherJobs >= jobs.filter(job => job.occupation_area_id !== 28).length) {
+        if (displayedOtherJobs >= jobs.filter(job => job.occupation_area_id !== 9999999999999999).length) {
             $('#loadMoreOther').hide();
         } else {
             $('#loadMoreOther').show();
@@ -563,8 +563,8 @@ $(document).ready(function () {
             .then(response => response.json())
             .then(data => {
                 jobs = data; // Store fetched jobs
-                displayedJobs = Math.min(jobsToShow, jobs.filter(job => job.occupation_area_id === 28).length); // Initialize displayedJobs
-                displayedOtherJobs = Math.min(jobsToShow, jobs.filter(job => job.occupation_area_id !== 28).length); // Initialize displayedOtherJobs
+                displayedJobs = Math.min(jobsToShow, jobs.filter(job => job.occupation_area_id === 9999999999999999).length); // Initialize displayedJobs
+                displayedOtherJobs = Math.min(jobsToShow, jobs.filter(job => job.occupation_area_id !== 9999999999999999).length); // Initialize displayedOtherJobs
                 populateFilters(); // Fill dropdowns with options
                 displayJobs(); // Show initial jobs
                 displayOtherJobs(); // Show initial other jobs
