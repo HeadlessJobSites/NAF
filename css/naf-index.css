@@ -42,6 +42,9 @@
     font-size: 3rem;
     margin-bottom: 20px;
 }
+.department .carousel-inner .row {
+        flex-wrap: wrap;
+}
 .btn-primary {
 	background-color: rgb(255, 219, 22) !important;
 	border-radius: 5px;
