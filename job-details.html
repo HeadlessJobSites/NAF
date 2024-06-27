@@ -138,7 +138,7 @@ $(document).ready(function() {
     <div class="container">
         <div class="row">
             <div class="col-md-3 col-6 job-info">
-                <span class="job-info-title">Folka</span>
+                <span class="job-info-title">Team</span>
                 <span class="organization-unit">NAF-folka</span>
             </div>
             <div class="col-md-3 col-6 job-info">
@@ -260,7 +260,7 @@ function buildIframe() {
 
 	
 
-
+<!--
 <section id="tt-talentech-section-2" class="team-section py-5 mb-0 pb-4 m-my-0 m-py-5">
         <center><h2 class="container mb-0 pt-5 pb-0"><div class="pt-4">Møt folka hos <span class="organization-unit" style="font-weight: 800;"></span></div></h2></center>
     <div class="container mt-0 pt-2 pb-5 m-ml-0 m-px-0"><div class="pb-3">
@@ -270,14 +270,14 @@ function buildIframe() {
         </div>
     </div>
 </section>
-	
+-->	
 
 
 
 
 
 
-<section class="process-section mb-5 py-5 m-my-0 m-pt-0 m-pb-4" id="recruitment-process" style="">
+<section class="process-section mb-5 py-5 m-my-0 m-pt-0 m-pb-4 recruitment-process-naf-senter" id="recruitment-process" style="">
     <div class="container pt-5 m-px-4 m-pb-2">
         <h2>Vår <span style="font-weight: 800;">rekrutterings&shy;prosess</span></h2>
     </div>
@@ -358,11 +358,11 @@ function buildIframe() {
                     <div class="service-content">
                         <h6>Om NAF Senter</h6>
                         <h2>Bli bedre kjent med oss</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum malesuada nulla vitae quam laoreet pellentesque.</p>
-                        <a href="./naf-senter"><button class="btn btn-primary apply-btn">Les mer om NAF Senter</button></a>
+                        <p>NAF sentrene er en del av Norges Automobil-Forbund, og som en av Norges største egeneide bilverkstedkjede utfører vi EU-kontroller, NAF-tester, servicer og reparasjoner for både NAF-medlemmer, privat- og næringskunder.</p>
+                        <a href="./naf-senter.html"><button class="btn btn-primary apply-btn">Les mer om NAF Senter</button></a>
                     </div>
                     <div class="service-image">
-                        <img src="./files/Naf-senter.webp" alt="NAF Senter">
+                        <img src="./files/NAF-senter-4.jpg" alt="NAF Senter">
                     </div>
                 </div>
             </div>
@@ -381,9 +381,10 @@ document.addEventListener('DOMContentLoaded', function() {
             if (job) {
                 // Your existing code to populate job details...
 
-                // Check the occupation_area_id and hide the section if it's not 28
-                if (job.occupation_area_id !== 999999999) {
+                // Check the occupation_area_id and hide sections if it's not 28
+                if (job.occupation_area_id !== 28) {
                     document.querySelector('.service-box-wrapper').style.display = 'none';
+                    document.querySelector('.recruitment-process-naf-senter').style.display = 'none';
                 }
             } else {
                 console.error('Job not found.');
@@ -393,6 +394,7 @@ document.addEventListener('DOMContentLoaded', function() {
             console.error('Error fetching job details:', error);
         });
 });
+
 </script>
 
 
