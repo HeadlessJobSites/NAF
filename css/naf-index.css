@@ -12,6 +12,9 @@
 	background-size: cover;
     background-position: center;
 }
+.ovingsbaner .hero-section .naf-hero {
+	background: url(../files/Øvingsbaner.jpg);
+}
 .hero-logo {
     position: absolute;
     bottom: 40px;
