@@ -137,80 +137,158 @@ document.addEventListener('DOMContentLoaded', function() {
 	
 	<div class="talentech-section" id="company-section">
     <div class="container mt-5 pt-4 m-mt-2">
-        <h2 class="m-px-2">Velkommen til <span style="font-weight: 800;">NAF</span></h2>
-        <p class="my-4  m-px-2"><strong>Neste kapittel i vår 100 år lange historie starter med deg.</strong></p>
-        <p class="m-px-2">NAF er en av Norges mest kjente organisasjoner, med over 750.000 medlemmer og kunder. Det skal vi fortsette å være fremover, og da trenger vi flere gode medarbeidere, både i Forbundet, på våre øvingsbaner og ute på NAF-sentrene!</p>
-        <p class="m-px-2">Vi ser etter problemløsere – enten du er en dyktig bilmekaniker, en kreativ UX-designer eller fremoverlent utvikler.  </p>
+        <h2 class="m-px-2">Vil du være med å ta oss inn i fremtiden? Neste kapittel i vår 100 år lange historie starter med deg!</h2>
+        <p class="m-px-2">NAF er en av Norges mest kjente merkevarer, med over 750.000 medlemmer og kunder. Det skal vi fortsette å være fremover, og da trenger vi flere dyktige folk.</p>
+        <p class="m-px-2">Vi ser etter problemløsere – enten du er en kreativ UX-designer, fremoverlent utvikler, supernysgjerrige analytiker, eller en dyktig bilmekaniker.</p>
     </div>
 </div>
 
 
 
+
+
+
+
+
+<style>
+.square-video {
+    width: 100%;
+    border-radius: 2px;
+    overflow: hidden;
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 aspect ratio */
+    height: 0;
+}
+.square-video iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+.video-controls {
+    position: absolute;
+    bottom: 40px;
+    right: 40px;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 5px;
+    border-radius: 5px;
+    z-index: 10;
+}
+.video-container {
+    position: relative;
+}
+.video-controls button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 16px;
+    margin-right: 10px;
+    cursor: pointer;
+    filter: brightness(0) invert(1);
+    width: 30px;
+    height: 30px;
+}
+</style>
 
 
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
-    const video = document.getElementById('talentechVideo');
     const muteBtn = document.getElementById('muteBtn');
     const muteIcon = muteBtn.querySelector('img');
 
-    // Function to toggle video play/pause
-    const togglePlayPause = () => {
-        if (video.paused || video.ended) {
-            video.play();
-        } else {
-            video.pause();
-        }
+    // Load YouTube IFrame API
+    const tag = document.createElement('script');
+    tag.src = "https://www.youtube.com/iframe_api";
+    const firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+    let player;
+    window.onYouTubeIframeAPIReady = function() {
+        player = new YT.Player('talentechVideo', {
+            videoId: '2efVVUn1gPY',
+            playerVars: {
+                'autoplay': 1,
+                'mute': 1,
+                'controls': 0,
+                'playsinline': 1
+            },
+            events: {
+                'onReady': onPlayerReady,
+                'onStateChange': onPlayerStateChange
+            }
+        });
     };
 
-    // Setup Intersection Observer for autoplay/pause based on visibility
-    // This part will now work on all devices
-    const observer = new IntersectionObserver((entries) => {
-        const [entry] = entries;
-        if (entry.isIntersecting) {
-            video.play();
-        } else {
-            video.pause();
+    function onPlayerReady(event) {
+        const player = event.target;
+
+        // Setup Intersection Observer for autoplay/pause based on visibility
+        const observer = new IntersectionObserver((entries) => {
+            const [entry] = entries;
+            if (entry.isIntersecting) {
+                player.playVideo();
+            } else {
+                player.pauseVideo();
+            }
+        }, {
+            root: null,
+            threshold: 0.5
+        });
+
+        observer.observe(player.getIframe());
+
+        if (window.innerWidth > 992) {
+            player.getIframe().addEventListener('click', () => {
+                togglePlayPause(player);
+            });
+
+            muteBtn.addEventListener('click', () => {
+                toggleMute(player);
+            });
         }
-    }, {
-        root: null,
-        threshold: 0.5
-    });
+    }
 
-    observer.observe(video);
+    function onPlayerStateChange(event) {
+        if (event.data == YT.PlayerState.ENDED) {
+            event.target.playVideo();
+        }
+    }
 
-    // Check if we are on desktop before adding event listeners for play/pause and mute controls
-    if (window.innerWidth > 992) {
-        // Click event for the video itself
-        video.addEventListener('click', () => {
-            togglePlayPause();
-        });
+    function togglePlayPause(player) {
+        if (player.getPlayerState() === YT.PlayerState.PLAYING) {
+            player.pauseVideo();
+        } else {
+            player.playVideo();
+        }
+    }
 
-        // Event listener for the mute button
-        muteBtn.addEventListener('click', () => {
-            video.muted = !video.muted;
-            muteIcon.src = video.muted ? "./files/volume-xmark-thin.svg" : "./files/volume-off-thin.svg";
-            muteIcon.alt = video.muted ? "Mute" : "Unmute";
-        });
+    function toggleMute(player) {
+        if (player.isMuted()) {
+            player.unMute();
+            muteIcon.src = "./files/volume-off-thin.svg";
+            muteIcon.alt = "Unmute";
+        } else {
+            player.mute();
+            muteIcon.src = "./files/volume-xmark-thin.svg";
+            muteIcon.alt = "Mute";
+        }
     }
 });
 </script>
 
-
-
-
-<div class="talentech-section pb-0 mb-5 m-mb-0">
+	<div class="talentech-section pb-0 mb-5 m-mb-0">
     <div class="container mt-4 pt-2 mb-5 pb-3 video-container m-my-0">
-        <video id="talentechVideo" class="square-video" playsinline autoplay muted>
-            <source src="./files/videoplayback.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
+        <div id="talentechVideo" class="square-video">
+            <!-- YouTube IFrame API will replace this div with an iframe -->
+        </div>
         <div class="video-controls">
             <button id="muteBtn"><img src="./files/volume-xmark-thin.svg" alt="Mute"></button>
         </div>
     </div>
 </div>
+
 
 
 
