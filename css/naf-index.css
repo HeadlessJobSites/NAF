@@ -8,8 +8,15 @@
     height: auto;
     transform: translate(-50%, -50%);
     z-index: -1;
-	background: url(../files/NAF-test.webp);
+	background: url(../files/NAF-forside.jpeg);
 	background-size: cover;
+}
+.hero-logo {
+    position: absolute;
+    bottom: 40px;
+    left: 40px;
+    width: 80px;
+    height: auto;
 }
 .btn-primary {
 	background-color: rgb(255, 219, 22) !important;
