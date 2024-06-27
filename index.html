@@ -149,82 +149,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-    <style>
-        .square-video {
-            width: 100%;
-            border-radius: 2px;
-            overflow: hidden;
-            position: relative;
-            padding-bottom: 56.25%; /* 16:9 aspect ratio */
-            height: 0;
-        }
-        .square-video iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        }
-        .video-controls {
-            position: absolute;
-            bottom: 40px;
-            right: 40px;
-            background-color: rgba(0, 0, 0, 0.5);
-            padding: 5px;
-            border-radius: 5px;
-            z-index: 10;
-        }
-        .video-container {
-            position: relative;
-        }
-        .video-controls button {
-            background: none;
-            border: none;
-            color: white;
-            font-size: 16px;
-            margin-right: 10px;
-            cursor: pointer;
-            filter: brightness(0) invert(1);
-            width: 30px;
-            height: 30px;
-        }
-    </style>
-    <title>Embed YouTube Video</title>
-</head>
-<body>
-    <div class="video-container">
+    <div class="video-container container">
         <div class="square-video">
-            <iframe id="youtubeVideo" src="https://www.youtube.com/embed/2efVVUn1gPY?autoplay=1&mute=1&controls=0&playsinline=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-        </div>
-        <div class="video-controls">
-            <button id="muteBtn"><img src="./files/volume-xmark-thin.svg" alt="Mute"></button>
+            <iframe id="youtubeVideo" src="https://www.youtube.com/embed/2efVVUn1gPY?autoplay=1&mute=1&controls=1&playsinline=1&rel=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
         </div>
     </div>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const muteBtn = document.getElementById('muteBtn');
-            const muteIcon = muteBtn.querySelector('img');
-            const iframe = document.getElementById('youtubeVideo');
-            let isMuted = true;
-
-            muteBtn.addEventListener('click', () => {
-                const src = iframe.src;
-                if (isMuted) {
-                    iframe.src = src.replace('mute=1', 'mute=0');
-                    muteIcon.src = "./files/volume-off-thin.svg";
-                    muteIcon.alt = "Unmute";
-                } else {
-                    iframe.src = src.replace('mute=0', 'mute=1');
-                    muteIcon.src = "./files/volume-xmark-thin.svg";
-                    muteIcon.alt = "Mute";
-                }
-                isMuted = !isMuted;
-            });
-        });
-    </script>
-
-
 	
 
 
