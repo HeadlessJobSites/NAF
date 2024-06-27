@@ -22,6 +22,7 @@
 .talentech-section h2 {
     font-size: 2rem;
 }
+#noJobsMessage,
 #noOtherJobsMessage {
     padding-bottom: 90px;
     max-width: 560px;
