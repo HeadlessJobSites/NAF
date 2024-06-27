@@ -348,9 +348,10 @@ $(document).ready(function() {
 
 
 	
+	
 <div class="feature-section pt-3 pb-2" id="jobs-anchor" style="">
     <div class="container mt-3 mb-0 m-mb-0">
-        <h2 class="my-5 m-px-2 m-my-0">Ledige <span style="font-weight: 800">stillinger</span></h2>
+        <h2 class="my-5 m-px-2 m-my-0">Flere ledige stillinger hos <span style="font-weight: 800">NAF sentrene</span></h2>
         <div class="row my-3">
             <div class="col-md-3 mb-3">
                 <label for="locationFilter">Sted</label>
@@ -371,49 +372,11 @@ $(document).ready(function() {
         <div class="text-center mt-2">
             <button id="loadMore" class="btn btn-primary">Se flere</button>
         </div>
-    </div>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-	
-
-	
-<div id="tt-feature-section-1" class="feature-section mb-5 pt-3 pb-5" id="jobs-anchor-1" style="background-color: #eeeef2;">
-    <div class="container mt-3 mb-5 m-mb-0">
-        <h3 class="my-5 m-my-0">Andre ledige stillinger i <span style="font-weight: 800">NAF</span></h3>
-        <div class="row my-3">
-            <div class="col-md-3 mb-3">
-                <label for="locationFilter-1">Steder</label>
-                <select id="locationFilter-1" class="form-control">
-                    <option value="All">Alle steder</option>
-                    <!-- Location options will be dynamically added here -->
-                </select>
-            </div>
-            <div class="col-md-3 mb-3">
-                <label for="jobTypeFilter-1">Stillingstyper</label>
-                <select id="jobTypeFilter-1" class="form-control">
-                    <option value="All">Alle stillingstyper</option>
-                    <!-- Job type options will be dynamically added here -->
-                </select>
-            </div>
-        </div>
-        <div id="jobList-1" class="row"></div>
-        <div class="text-center mt-2">
-            <button id="loadMore-1" class="btn btn-primary">Se flere</button>
+        <div id="noJobsMessage" class="text-center mt-4" style="display: none;">
+            Det er for tiden ingen ledige stillinger. Abonner på stillinger nedenfor, så får du en e-post når det er en ledig stilling som passer dine preferanser.
         </div>
     </div>
 </div>
-
 
 <script>
 $(document).ready(function () {
@@ -466,7 +429,19 @@ $(document).ready(function () {
     function displayJobs() {
         $('#jobList').empty(); // Clear current jobs
 
-        let filteredJobs = jobs.slice(0, displayedJobs); // Get the subset of jobs to be displayed
+        let filteredJobs = jobs.filter(job => job.occupation_area_id === 28); // Filter jobs by occupation_area_id 28
+
+        if (filteredJobs.length === 0) {
+            $('#noJobsMessage').show(); // Show the no jobs message
+            $('#jobList').hide(); // Hide the job list
+            $('#loadMore').hide(); // Hide the load more button
+            return;
+        } else {
+            $('#noJobsMessage').hide(); // Hide the no jobs message
+            $('#jobList').show(); // Show the job list
+        }
+
+        filteredJobs = filteredJobs.slice(0, displayedJobs); // Get the subset of jobs to be displayed
 
         // Apply filters
         const selectedLocation = $('#locationFilter').val();
@@ -531,7 +506,7 @@ $(document).ready(function () {
         fetch('https://api.talentech.io/reachmee/feed/naf') // Ensure this URL is correct
             .then(response => response.json())
             .then(data => {
-                jobs = data; // Store fetched jobs
+                jobs = data.filter(job => job.occupation_area_id === 28); // Filter jobs by occupation_area_id 28
                 displayedJobs = Math.min(jobsToShow, jobs.length); // Initialize displayedJobs
                 populateFilters(); // Fill dropdowns with options
                 displayJobs(); // Show initial jobs
