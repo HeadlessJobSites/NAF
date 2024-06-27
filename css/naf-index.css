@@ -10,6 +10,7 @@
     z-index: -1;
 	background: url(../files/NAF-forside.jpg);
 	background-size: cover;
+    background-position: center;
 }
 .hero-logo {
     position: absolute;
