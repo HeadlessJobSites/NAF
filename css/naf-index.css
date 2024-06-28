@@ -149,7 +149,9 @@
     left: 18px;
     width: 70px;
 }
-
+.front-page h1 {
+font-size: 2.75rem;
+}
 .department h1 {
 font-size: 2.5rem;
 }
