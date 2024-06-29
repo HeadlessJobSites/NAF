@@ -347,10 +347,9 @@ $(document).ready(function() {
 	
 
 	
-	
 <div class="feature-section mb-5 py-3 pb-2" id="jobs-anchor" style="">
     <div class="container mt-3 mb-0 m-mb-0">
-        <h2 class="my-5 m-px-2 m-my-0">Ledige stillinger hos <span style="font-weight: 800">NAF sentrene</span></h2>
+        <h2 class="my-5 m-px-2 m-my-0">Ledige stillinger hos <span style="font-weight: 800">Norges Automobil Forbund</span></h2>
         <div id="filters" class="row my-3">
             <div class="col-md-3 mb-3">
                 <label for="locationFilter">Sted</label>
@@ -372,12 +371,12 @@ $(document).ready(function() {
             <button id="loadMore" class="btn btn-primary">Se flere</button>
         </div>
         <div id="noJobsMessage" class="text-center mt-4" style="display: none;">
-            Det er for tiden ingen ledige stillinger. Abonner på stillinger nedenfor, så får du en e-post når det er en ledig stilling som passer dine preferanser.
+            Det er for tiden ingen ledige stillinger hos Norges Automobil Forbund. Abonner på stillinger nedenfor, så får du en e-post når det er en ledig stilling som passer dine preferanser.
         </div>
     </div>
 </div>
 
-<div class="feature-section pt-3 pb-2" id="other-jobs-anchor" style="background-color: #eeeef2;">
+<div class="feature-section pt-3 pb-5" id="other-jobs-anchor" style="background-color: #eeeef2;">
     <div class="container mt-3 mb-0 m-mb-0">
         <h3 class="my-5 m-px-2 m-mt-0">Andre ledige stillinger hos <span style="font-weight: 800">NAF</span></h3>
         <div id="otherJobList" class="row"></div>
@@ -445,7 +444,7 @@ $(document).ready(function () {
     function displayJobs() {
         $('#jobList').empty(); // Clear current jobs
 
-        let filteredJobs = jobs.filter(job => job.occupation_area_id === 28); // Filter jobs by occupation_area_id 28
+        let filteredJobs = jobs.filter(job => job.organizations[job.organizations.length - 1]?.orgunitseqno === 14); // Filter jobs by the last orgunitseqno being 14
 
         if (filteredJobs.length === 0) {
             $('#noJobsMessage').show(); // Show the no jobs message
@@ -482,7 +481,7 @@ $(document).ready(function () {
     function displayOtherJobs() {
         $('#otherJobList').empty(); // Clear current jobs
 
-        let filteredOtherJobs = jobs.filter(job => job.occupation_area_id !== 28); // Filter jobs by occupation_area_id other than 28
+        let filteredOtherJobs = jobs.filter(job => job.organizations[job.organizations.length - 1]?.orgunitseqno !== 14); // Filter jobs by the last orgunitseqno not being 14
 
         if (filteredOtherJobs.length === 0) {
             $('#noOtherJobsMessage').show(); // Show the no other jobs message
@@ -538,7 +537,7 @@ $(document).ready(function () {
 
     // Function to update the visibility of the "Load More" button
     function updateLoadMoreVisibility() {
-        if (displayedJobs >= jobs.filter(job => job.occupation_area_id === 28).length) {
+        if (displayedJobs >= jobs.filter(job => job.organizations[job.organizations.length - 1]?.orgunitseqno === 14).length) {
             $('#loadMore').hide();
         } else {
             $('#loadMore').show();
@@ -547,7 +546,7 @@ $(document).ready(function () {
 
     // Function to update the visibility of the "Load More Other" button
     function updateLoadMoreOtherVisibility() {
-        if (displayedOtherJobs >= jobs.filter(job => job.occupation_area_id !== 28).length) {
+        if (displayedOtherJobs >= jobs.filter(job => job.organizations[job.organizations.length - 1]?.orgunitseqno !== 14).length) {
             $('#loadMoreOther').hide();
         } else {
             $('#loadMoreOther').show();
@@ -560,8 +559,8 @@ $(document).ready(function () {
             .then(response => response.json())
             .then(data => {
                 jobs = data; // Store fetched jobs
-                displayedJobs = Math.min(jobsToShow, jobs.filter(job => job.occupation_area_id === 28).length); // Initialize displayedJobs
-                displayedOtherJobs = Math.min(jobsToShow, jobs.filter(job => job.occupation_area_id !== 28).length); // Initialize displayedOtherJobs
+                displayedJobs = Math.min(jobsToShow, jobs.filter(job => job.organizations[job.organizations.length - 1]?.orgunitseqno === 14).length); // Initialize displayedJobs
+                displayedOtherJobs = Math.min(jobsToShow, jobs.filter(job => job.organizations[job.organizations.length - 1]?.orgunitseqno !== 14).length); // Initialize displayedOtherJobs
                 populateFilters(); // Fill dropdowns with options
                 displayJobs(); // Show initial jobs
                 displayOtherJobs(); // Show initial other jobs
