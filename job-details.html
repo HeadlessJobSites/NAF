@@ -436,24 +436,42 @@ document.addEventListener('DOMContentLoaded', function() {
         <div id="applicationFormContainer"></div>
     </div>
 </section>
-
+	
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    // Ensure we only append the iframe once
-    if (!document.getElementById('applicationFormIframe')) {
-        const params = new URLSearchParams(window.location.search);
-        // Get 'rmjob' if present, otherwise get 'jobId'
-        const jobId = params.get('rmjob') || params.get('jobId');
-        const iframe = document.createElement('iframe');
-        iframe.style.width = "100%";
-        iframe.style.border = "none";
-        iframe.id = "applicationFormIframe";
-        // Adjust the iframe source URL to use the correct job ID
-        const iframeSrc = `https://web106.reachmee.com/ext/I020/787/apply?job_id=${jobId}&site=58&validator=8bd450e11350447150df52325f46f68b&lang=NO&ihelper=${encodeURIComponent('https://naf.attract.reachmee.com/jobs/rm?rmpage=job&rmjob=' + jobId)}`;
-        iframe.setAttribute('src', iframeSrc);
-			   
-        document.getElementById('applicationFormContainer').appendChild(iframe);
-    }
+    const params = new URLSearchParams(window.location.search);
+    // Get 'rmjob' if present, otherwise get 'jobId'
+    const jobId = params.get('rmjob') || params.get('jobId');
+
+    // Fetch job details (assuming you have an endpoint to get job details by jobId)
+    fetch(`https://api.talentech.io/reachmee/feed/NAF`) // Replace with your actual API endpoint
+        .then(response => response.json())
+        .then(jobs => {
+            const job = jobs.find(job => job.ad_id === parseInt(jobId));
+            if (job && job.hide_apply_button) {
+                // Display the message and button if hide_apply_button is true
+                const messageContainer = document.createElement('div');
+                messageContainer.innerHTML = `
+                    <center><p>Søknadsskjema er deaktivert for denne stillingen. Se stillingsbeskrivelsen for å sende inn søknad.</p>
+                    <a href="#tt-talentech-section-1" class="btn btn-primary">Se stillingstekst</a></center>
+                `;
+                document.getElementById('applicationFormContainer').appendChild(messageContainer);
+            } else {
+                // Display the application form if hide_apply_button is false
+                if (!document.getElementById('applicationFormIframe')) {
+                    const iframe = document.createElement('iframe');
+                    iframe.style.width = "100%";
+                    iframe.style.border = "none";
+                    iframe.id = "applicationFormIframe";
+                    const iframeSrc = `https://web106.reachmee.com/ext/I020/787/apply?job_id=${jobId}&site=5&validator=8bd450e11350447150df52325f46f68b&lang=UK&ihelper=${encodeURIComponent('https://naf.attract.reachmee.com/jobs/rm?rmpage=job&rmjob=' + jobId)}`;
+                    iframe.setAttribute('src', iframeSrc);
+                    document.getElementById('applicationFormContainer').appendChild(iframe);
+                }
+            }
+        })
+        .catch(error => {
+            console.error('Error fetching job details:', error);
+        });
 });
 
 // Consolidate message listener, adding security check
@@ -468,8 +486,6 @@ window.addEventListener('message', function(event) {
     }
 }, false);
 </script>
-
-
 
 
 
