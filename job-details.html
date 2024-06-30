@@ -36,7 +36,7 @@
 <body>
 
 <!-- UPDATE META TITLE AND DESCRIPTIONS DYNAMICALLY -->
-	<script>
+<script>
 document.addEventListener('DOMContentLoaded', function() {
     const params = new URLSearchParams(window.location.search);
     const jobId = params.get('rmjob') ? parseInt(params.get('rmjob'), 10) : parseInt(params.get('jobId'), 10);
@@ -46,23 +46,40 @@ document.addEventListener('DOMContentLoaded', function() {
         .then(jobs => {
             const job = jobs.find(job => job.ad_id === jobId);
             if (job) {
-                // Your existing code to populate job details...
-
                 // Update meta tags for social media sharing
-                const ogTitle = document.querySelector('meta[property="og:title"]');
-                const twitterTitle = document.querySelector('meta[name="twitter:title"]');
-                const ogDescription = document.createElement('meta');
-                ogDescription.setAttribute('property', 'og:description');
-                const twitterDescription = document.createElement('meta');
-                twitterDescription.setAttribute('name', 'twitter:description');
+                let ogTitle = document.querySelector('meta[property="og:title"]');
+                let twitterTitle = document.querySelector('meta[name="twitter:title"]');
+                let ogDescription = document.querySelector('meta[property="og:description"]');
+                let twitterDescription = document.querySelector('meta[name="twitter:description"]');
                 
+                if (!ogTitle) {
+                    ogTitle = document.createElement('meta');
+                    ogTitle.setAttribute('property', 'og:title');
+                    document.head.appendChild(ogTitle);
+                }
+                if (!twitterTitle) {
+                    twitterTitle = document.createElement('meta');
+                    twitterTitle.setAttribute('name', 'twitter:title');
+                    document.head.appendChild(twitterTitle);
+                }
+                if (!ogDescription) {
+                    ogDescription = document.createElement('meta');
+                    ogDescription.setAttribute('property', 'og:description');
+                    document.head.appendChild(ogDescription);
+                }
+                if (!twitterDescription) {
+                    twitterDescription = document.createElement('meta');
+                    twitterDescription.setAttribute('name', 'twitter:description');
+                    document.head.appendChild(twitterDescription);
+                }
+
                 ogTitle.setAttribute('content', job.title);
                 twitterTitle.setAttribute('content', job.title);
                 ogDescription.setAttribute('content', job.description);
                 twitterDescription.setAttribute('content', job.description);
-                
-                document.head.appendChild(ogDescription);
-                document.head.appendChild(twitterDescription);
+
+                // Optionally, also update the document title
+                document.title = job.title;
             } else {
                 console.error('Job not found.');
             }
@@ -72,6 +89,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
 });
 </script>
+
 <!-- END UPDATE META TITLE AND DESCRIPTIONS DYNAMICALLY -->
 
 
