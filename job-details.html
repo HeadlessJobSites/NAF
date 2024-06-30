@@ -1,96 +1,33 @@
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<!-- UPDATE META TITLE AND DESCRIPTIONS DYNAMICALLY -->
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    console.log("DOM fully loaded and parsed");
-    
-    const params = new URLSearchParams(window.location.search);
-    const jobId = params.get('rmjob') ? parseInt(params.get('rmjob'), 10) : parseInt(params.get('jobId'), 10);
-    console.log("Job ID:", jobId);
-
-    fetch('https://api.talentech.io/reachmee/feed/naf')
-        .then(response => response.json())
-        .then(jobs => {
-            console.log("Jobs fetched:", jobs);
-            const job = jobs.find(job => job.ad_id === jobId);
-            if (job) {
-                console.log("Job found:", job);
-
-                // Update meta tags for social media sharing
-                let ogTitle = document.querySelector('meta[property="og:title"]');
-                let twitterTitle = document.querySelector('meta[name="twitter:title"]');
-                let ogDescription = document.querySelector('meta[property="og:description"]');
-                let twitterDescription = document.querySelector('meta[name="twitter:description"]');
-                
-                if (!ogTitle) {
-                    ogTitle = document.createElement('meta');
-                    ogTitle.setAttribute('property', 'og:title');
-                    document.head.appendChild(ogTitle);
-                }
-                if (!twitterTitle) {
-                    twitterTitle = document.createElement('meta');
-                    twitterTitle.setAttribute('name', 'twitter:title');
-                    document.head.appendChild(twitterTitle);
-                }
-                if (!ogDescription) {
-                    ogDescription = document.createElement('meta');
-                    ogDescription.setAttribute('property', 'og:description');
-                    document.head.appendChild(ogDescription);
-                }
-                if (!twitterDescription) {
-                    twitterDescription = document.createElement('meta');
-                    twitterDescription.setAttribute('name', 'twitter:description');
-                    document.head.appendChild(twitterDescription);
-                }
-
-                ogTitle.setAttribute('content', job.title);
-                twitterTitle.setAttribute('content', job.title);
-                ogDescription.setAttribute('content', job.description);
-                twitterDescription.setAttribute('content', job.description);
-
-                console.log("Meta tags updated");
-                console.log("og:title", ogTitle);
-                console.log("twitter:title", twitterTitle);
-                console.log("og:description", ogDescription);
-                console.log("twitter:description", twitterDescription);
-
-                // Optionally, also update the document title
-                document.title = job.title;
-                console.log("Document title updated");
-            } else {
-                console.error('Job not found.');
-            }
-        })
-        .catch(error => {
-            console.error('Error fetching job details:', error);
-        });
-});
-</script>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Stillingsannonse</title>
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://career.talentech.com/css/job-details-style.css">
-    <link rel="stylesheet" href="./css/naf-job-details.css">
-    <link rel="stylesheet" href="./css/naf-index.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="https://kit.fontawesome.com/ca38a06270.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
-    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
-    <script type="text/javascript" src="https://web106.reachmee.com/customerjs/helper.js"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://career.talentech.com/css/job-details-style.css">
+<link rel="stylesheet" href="./css/naf-job-details.css">
+<link rel="stylesheet" href="./css/naf-index.css">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://kit.fontawesome.com/ca38a06270.js" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+<script type="text/javascript" src="https://web106.reachmee.com/customerjs/helper.js"></script>
 	
+<meta property="og:description" content="">
+<meta name="twitter:description" content="">
 
+
+	
 </head>
+
+
 <body>
-
-	
-
 
 <script>
 document.addEventListener("DOMContentLoaded", function() {
@@ -916,9 +853,45 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const params = new URLSearchParams(window.location.search);
+    const jobId = params.get('rmjob') ? parseInt(params.get('rmjob'), 10) : parseInt(params.get('jobId'), 10);
+
+    fetch('https://api.talentech.io/reachmee/feed/naf')
+        .then(response => response.json())
+        .then(jobs => {
+            const job = jobs.find(job => job.ad_id === jobId);
+            if (job) {
+                const title = job.title;
+                const descriptionHtml = job.description;
+                const tempDiv = document.createElement('div');
+                tempDiv.innerHTML = descriptionHtml;
+                const descriptionText = tempDiv.textContent || tempDiv.innerText || '';
+
+                // Update the meta tags dynamically
+                document.querySelector('meta[property="og:title"]').setAttribute('content', title);
+                document.querySelector('meta[name="twitter:title"]').setAttribute('content', title);
+                document.querySelector('meta[property="og:description"]').setAttribute('content', descriptionText);
+                document.querySelector('meta[name="twitter:description"]').setAttribute('content', descriptionText);
+
+                // Populate job details in the DOM
+                document.title = title;
+                document.getElementById('position-title').textContent = title;
+                document.querySelector('.job-description').innerHTML = descriptionHtml;
+                document.querySelector('.organization-unit').textContent = job.organizations && job.organizations.length > 1 ? job.organizations[1].nameorgunit : job.organizations[0]?.nameorgunit || 'Ikke spesifisert';
+                document.querySelector('.city').textContent = job.areas && job.areas.length > 0 ? job.areas[0].name : ' ';
+            } else {
+                console.error('Job not found.');
+            }
+        })
+        .catch(error => {
+            console.error('Error fetching job details:', error);
+        });
+});
+</script>
 
 	
-<script src="/js/share-some.js"></script>	
 </body>
 
 </html>
