@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ledige stillinger</title>
+    <title>Ledige stillinger NAF</title>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://career.talentech.com/css/index-style.css">
 <link rel="stylesheet" href="./css/naf-index.css">
@@ -708,6 +708,9 @@ $(document).ready(function () {
 </script>
 
 
+
+
+	
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 <script>
     async function fetchFeed() {
@@ -767,7 +770,7 @@ $(document).ready(function () {
             if (!markers[key]) {
                 markers[key] = { marker: L.marker([coords.lat, coords.lon], { icon: customIcon }).addTo(map), jobs: [], jobIndex: 0 };
             }
-            
+
             markers[key].jobs.push({
                 title: item.title,
                 location: location,
@@ -776,9 +779,7 @@ $(document).ready(function () {
         }
 
         Object.values(markers).forEach(markerObj => {
-            const marker = markerObj.marker;
-
-            marker.on('click', () => {
+            markerObj.marker.on('click', () => {
                 updatePopup(markerObj);
             });
         });
@@ -796,8 +797,8 @@ $(document).ready(function () {
                     </div>
                     ${markerObj.jobs.length > 1 ? `
                     <div style="display: flex; justify-content: space-between; margin-top: 5px;">
-                        <button onclick="changeJob(${markerObj.marker._leaflet_id}, -1)" style="background: none; border: none; cursor: pointer; color: #e9f3e7;">&lt;</button>
-                        <button onclick="changeJob(${markerObj.marker._leaflet_id}, 1)" style="background: none; border: none; cursor: pointer; color: #e9f3e7;">&gt;</button>
+                        <button onclick="changeJob(${markerObj.marker._leaflet_id}, -1, event)" style="background: none; border: none; cursor: pointer; color: #e9f3e7;">&lt;</button>
+                        <button onclick="changeJob(${markerObj.marker._leaflet_id}, 1, event)" style="background: none; border: none; cursor: pointer; color: #e9f3e7;">&gt;</button>
                     </div>
                     ` : ''}
                 </div>
@@ -805,16 +806,17 @@ $(document).ready(function () {
             markerObj.marker.bindPopup(popupContent).openPopup();
         }
 
-        window.changeJob = function(markerId, direction) {
+        window.changeJob = function(markerId, direction, e) {
+            e.stopPropagation(); // Prevents the map from handling click events
             const markerObj = Object.values(markers).find(m => m.marker._leaflet_id === markerId);
             markerObj.jobIndex += direction;
             if (markerObj.jobIndex >= markerObj.jobs.length) {
-                markerObj.jobIndex = 0;
+                markerObj.jobIndex = 0; // Loop back to first job
             } else if (markerObj.jobIndex < 0) {
-                markerObj.jobIndex = markerObj.jobs.length - 1;
+                markerObj.jobIndex = markerObj.jobs.length - 1; // Loop back to last job
             }
             updatePopup(markerObj);
-            return false; // Prevent page reload or navigation
+            return false; // Prevent default link behavior
         };
     }
 
