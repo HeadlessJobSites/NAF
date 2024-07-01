@@ -726,7 +726,6 @@ $(document).ready(function () {
         const feed = await fetchFeed();
         const markers = {};
 
-        // Initialize the map with custom settings and an initial zoom level
         const map = L.map('mapid', {
             attributionControl: false,
             scrollWheelZoom: false
@@ -741,7 +740,6 @@ $(document).ready(function () {
             accessToken: 'yourMapboxAccessToken'
         }).addTo(map);
 
-        // Create a custom icon
         var customIcon = L.icon({
             iconUrl: './files/NAF-logo.jpeg',
             iconSize: [34, 34],
@@ -749,12 +747,10 @@ $(document).ready(function () {
             popupAnchor: [1, -15]
         });
 
-        // Process each job in the feed
         for (const item of feed) {
             let coords = null;
             let location = 'Norge';
 
-            // Find the first valid area with coordinates
             for (const area of item.areas) {
                 coords = await geocodeArea(area.name);
                 if (coords) {
@@ -763,7 +759,6 @@ $(document).ready(function () {
                 }
             }
 
-            // If no valid area found, use default coordinates
             if (!coords) {
                 coords = { lat: 61.99589575051149, lon: 9.423291957454996 };
             }
@@ -771,66 +766,58 @@ $(document).ready(function () {
             const key = `${coords.lat},${coords.lon}`;
 
             if (!markers[key]) {
-                markers[key] = [];
+                markers[key] = {marker: L.marker([coords.lat, coords.lon], { icon: customIcon }).addTo(map), jobs: [], jobIndex: 0};
             }
-            markers[key].push({
+
+            markers[key].jobs.push({
                 title: item.title,
                 location: location,
                 url: `./job-details.html?jobId=${item.url.split('rmjob=')[1]}`
             });
         }
 
-        // Add markers to the map
-        for (const [key, jobs] of Object.entries(markers)) {
-            const [lat, lon] = key.split(',').map(parseFloat);
-            const marker = L.marker([lat, lon], { icon: customIcon }).addTo(map);
-
-            let jobIndex = 0;
-
-            const updatePopupContent = () => {
-                const job = jobs[jobIndex];
-                return `
-                    <div style="background-color: #062e2a; color: #e9f3e7; padding: 20px; border-radius: 12px;">
-                        <a href="${job.url}" target="_blank" style="font-size: large; color: #e9f3e7; text-decoration: none;">${job.title}</a>
-                        <div style="margin-top: 10px;">
-                            <span style="color: rgba(233, 243, 231, 0.7);">Sted:</span> <span>${job.location}</span>
-                        </div>
-                        <div style="display: flex; justify-content: flex-end; margin-top: 10px;">
-                            <a href="${job.url}" target="_blank" style="background-color: #ffdb16; color: #1a1a1a; padding: 5px 10px; text-decoration: none; border-radius: 5px;">Se stilling</a>
-                        </div>
-                        ${jobs.length > 1 ? `
-                        <div style="display: flex; justify-content: space-between; margin-top: 5px;">
-                            <button style="background: none; border: none; cursor: pointer; color: #e9f3e7;" ${jobIndex === 0 ? 'disabled' : ''} onclick="prevJob()">&lt;</button>
-                            <button style="background: none; border: none; cursor: pointer; color: #e9f3e7;" ${jobIndex === jobs.length - 1 ? 'disabled' : ''} onclick="nextJob()">&gt;</button>
-                        </div>
-                        ` : ''}
-                    </div>
-                `;
-            };
-
-            marker.bindPopup(updatePopupContent);
-
-            window.prevJob = () => {
-                if (jobIndex > 0) {
-                    jobIndex--;
-                    marker.setPopupContent(updatePopupContent());
-                    marker.openPopup();
-                }
-            };
-
-            window.nextJob = () => {
-                if (jobIndex < jobs.length - 1) {
-                    jobIndex++;
-                    marker.setPopupContent(updatePopupContent());
-                    marker.openPopup();
-                }
-            };
+        Object.values(markers).forEach(markerObj => {
+            const marker = markerObj.marker;
 
             marker.on('click', () => {
-                jobIndex = 0;
-                marker.setPopupContent(updatePopupContent());
+                updatePopup(markerObj);
             });
+        });
+
+        function updatePopup(markerObj) {
+            const job = markerObj.jobs[markerObj.jobIndex];
+            let popupContent = `
+                <div style="background-color: #062e2a; color: #e9f3e7; padding: 20px; border-radius: 12px;">
+                    <a href="${job.url}" target="_blank" style="font-size: large; color: #e9f3e7; text-decoration: none;">${job.title}</a>
+                    <div style="margin-top: 10px;">
+                        <span style="color: rgba(233, 243, 231, 0.7);">Sted:</span> <span>${job.location}</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-top: 10px;">
+                        <button onclick="prevJob(${markerObj.marker._leaflet_id})" style="background: none; border: none; cursor: pointer; color: #e9f3e7;">&lt;</button>
+                        <button onclick="nextJob(${markerObj.marker._leaflet_id})" style="background: none; border: none; cursor: pointer; color: #e9f3e7;">&gt;</button>
+                    </div>
+                </div>
+            `;
+            markerObj.marker.bindPopup(popupContent).openPopup();
         }
+
+        window.prevJob = function(markerId) {
+            const markerObj = Object.values(markers).find(m => m.marker._leaflet_id === markerId);
+            if (markerObj.jobIndex > 0) {
+                markerObj.jobIndex--;
+                updatePopup(markerObj);
+            }
+            return false;
+        };
+
+        window.nextJob = function(markerId) {
+            const markerObj = Object.values(markers).find(m => m.marker._leaflet_id === markerId);
+            if (markerObj.jobIndex < markerObj.jobs.length - 1) {
+                markerObj.jobIndex++;
+                updatePopup(markerObj);
+            }
+            return false;
+        };
     }
 
     document.addEventListener('DOMContentLoaded', initMap);
