@@ -15,6 +15,22 @@
 .ovingsbaner .hero-section .naf-hero {
 	background-image: url(../files/Øvingsbaner.jpg);
 }
+.popup-content {
+	min-width: 300px; /* Adjust width as needed */
+	max-width: 300px; /* Ensures the popup doesn't grow with content */
+	overflow: hidden; /* Prevents content from overflowing */
+}
+.chevron-button {
+	background: none;
+	border: none;
+	cursor: pointer;
+	color: #e9f3e7;
+}
+.chevron-icon {
+	width: 20px; /* Chevron size */
+	height: auto;
+	fill: #e9f3e7; /* Chevron color */
+}
 .hero-logo {
     position: absolute;
     bottom: 40px;
