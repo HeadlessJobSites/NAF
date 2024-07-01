@@ -785,26 +785,34 @@ $(document).ready(function () {
         });
 
         function updatePopup(markerObj) {
-            const job = markerObj.jobs[markerObj.jobIndex];
-            let popupContent = `
-                <div style="background-color: #062e2a; color: #e9f3e7; padding: 20px; border-radius: 12px;">
-                    <a href="${job.url}" target="_blank" style="font-size: large; color: #e9f3e7; text-decoration: none;">${job.title}</a>
-                    <div style="margin-top: 10px;">
-                        <span style="color: rgba(233, 243, 231, 0.7);">Sted:</span> <span>${job.location}</span>
-                    </div>
-                    <div style="display: flex; justify-content: flex-end; margin-top: 10px;">
-                        <a href="${job.url}" target="_blank" style="background-color: #ffdb16; color: #1a1a1a; padding: 5px 10px; text-decoration: none; border-radius: 5px;">Se stilling</a>
-                    </div>
-                    ${markerObj.jobs.length > 1 ? `
-                    <div style="display: flex; justify-content: space-between; margin-top: 5px;">
-                        <button onclick="changeJob(${markerObj.marker._leaflet_id}, -1, event)" style="background: none; border: none; cursor: pointer; color: #e9f3e7;">&lt;</button>
-                        <button onclick="changeJob(${markerObj.marker._leaflet_id}, 1, event)" style="background: none; border: none; cursor: pointer; color: #e9f3e7;">&gt;</button>
-                    </div>
-                    ` : ''}
-                </div>
-            `;
-            markerObj.marker.bindPopup(popupContent).openPopup();
-        }
+    const job = markerObj.jobs[markerObj.jobIndex];
+    let popupContent = `
+        <div class="popup-content">
+            <a href="${job.url}" target="_blank" style="font-size: large; color: #e9f3e7; text-decoration: none;">${job.title}</a>
+            <div style="margin-top: 10px;">
+                <span style="color: rgba(233, 243, 231, 0.7);">Sted:</span> <span>${job.location}</span>
+            </div>
+            <div style="display: flex; justify-content: flex-end; margin-top: 10px;">
+                <a href="${job.url}" target="_blank" style="background-color: #ffdb16; color: #1a1a1a; padding: 5px 10px; text-decoration: none; border-radius: 5px;">Se stilling</a>
+            </div>
+            ${markerObj.jobs.length > 1 ? `
+            <div style="display: flex; justify-content: space-between; margin-top: 5px;">
+                <button class="chevron-button" onclick="changeJob(${markerObj.marker._leaflet_id}, -1, event)">
+                    <svg class="chevron-icon" viewbox="0 0 20 20">
+                        <path d="M12.146 5.146a.5.5 0 0 1 .708 0 .5.5 0 0 1 0 .708L8.707 10l4.147 4.146a.5.5 0 0 1-.708.708l-4.5-4.5a.5.5 0 0 1 0-.708l4.5-4.5a.5.5 0 0 1 .708 0z"/>
+                    </svg>
+                </button>
+                <button class="chevron-button" onclick="changeJob(${markerObj.marker._leaflet_id}, 1, event)">
+                    <svg class="chevron-icon" viewbox="0 0 20 20">
+                        <path d="M7.854 5.146a.5.5 0 0 1 0 .708L11.293 10l-3.439 3.439a.5.5 0 0 1-.707-.708L10.293 10 7.146 6.854a.5.5 0 1 1 .708-.708z"/>
+                    </svg>
+                </button>
+            </div>
+            ` : ''}
+        </div>
+    `;
+    markerObj.marker.bindPopup(popupContent).openPopup();
+}
 
         window.changeJob = function(markerId, direction, e) {
             e.stopPropagation(); // Prevents the map from handling click events
