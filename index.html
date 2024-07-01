@@ -708,7 +708,6 @@ $(document).ready(function () {
 </script>
 
 
-
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 <script>
     async function fetchFeed() {
@@ -766,9 +765,9 @@ $(document).ready(function () {
             const key = `${coords.lat},${coords.lon}`;
 
             if (!markers[key]) {
-                markers[key] = {marker: L.marker([coords.lat, coords.lon], { icon: customIcon }).addTo(map), jobs: [], jobIndex: 0};
+                markers[key] = { marker: L.marker([coords.lat, coords.lon], { icon: customIcon }).addTo(map), jobs: [], jobIndex: 0 };
             }
-
+            
             markers[key].jobs.push({
                 title: item.title,
                 location: location,
@@ -792,31 +791,30 @@ $(document).ready(function () {
                     <div style="margin-top: 10px;">
                         <span style="color: rgba(233, 243, 231, 0.7);">Sted:</span> <span>${job.location}</span>
                     </div>
-                    <div style="display: flex; justify-content: space-between; margin-top: 10px;">
-                        <button onclick="prevJob(${markerObj.marker._leaflet_id})" style="background: none; border: none; cursor: pointer; color: #e9f3e7;">&lt;</button>
-                        <button onclick="nextJob(${markerObj.marker._leaflet_id})" style="background: none; border: none; cursor: pointer; color: #e9f3e7;">&gt;</button>
+                    <div style="display: flex; justify-content: flex-end; margin-top: 10px;">
+                        <a href="${job.url}" target="_blank" style="background-color: #ffdb16; color: #1a1a1a; padding: 5px 10px; text-decoration: none; border-radius: 5px;">Se stilling</a>
                     </div>
+                    ${markerObj.jobs.length > 1 ? `
+                    <div style="display: flex; justify-content: space-between; margin-top: 5px;">
+                        <button onclick="changeJob(${markerObj.marker._leaflet_id}, -1)" style="background: none; border: none; cursor: pointer; color: #e9f3e7;">&lt;</button>
+                        <button onclick="changeJob(${markerObj.marker._leaflet_id}, 1)" style="background: none; border: none; cursor: pointer; color: #e9f3e7;">&gt;</button>
+                    </div>
+                    ` : ''}
                 </div>
             `;
             markerObj.marker.bindPopup(popupContent).openPopup();
         }
 
-        window.prevJob = function(markerId) {
+        window.changeJob = function(markerId, direction) {
             const markerObj = Object.values(markers).find(m => m.marker._leaflet_id === markerId);
-            if (markerObj.jobIndex > 0) {
-                markerObj.jobIndex--;
-                updatePopup(markerObj);
+            markerObj.jobIndex += direction;
+            if (markerObj.jobIndex >= markerObj.jobs.length) {
+                markerObj.jobIndex = 0;
+            } else if (markerObj.jobIndex < 0) {
+                markerObj.jobIndex = markerObj.jobs.length - 1;
             }
-            return false;
-        };
-
-        window.nextJob = function(markerId) {
-            const markerObj = Object.values(markers).find(m => m.marker._leaflet_id === markerId);
-            if (markerObj.jobIndex < markerObj.jobs.length - 1) {
-                markerObj.jobIndex++;
-                updatePopup(markerObj);
-            }
-            return false;
+            updatePopup(markerObj);
+            return false; // Prevent page reload or navigation
         };
     }
 
