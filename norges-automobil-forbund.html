@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NAF</title>
+    <title>NAF - Norges Automobil Forbund</title>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://career.talentech.com/css/index-style.css">
 <link rel="stylesheet" href="./css/naf-index.css">
@@ -411,8 +411,6 @@ $(document).ready(function () {
     // Adjust jobsToShow based on window resize
     $(window).resize(function() {
         jobsToShow = window.innerWidth > 768 ? jobsToShowDesktop : jobsToShowMobile;
-        displayedJobs = Math.min(jobsToShow, jobs.length); // Adjust displayedJobs based on new jobsToShow
-        displayedOtherJobs = Math.min(jobsToShow, otherJobs.length); // Adjust displayedOtherJobs based on new jobsToShow
         displayJobs(); // Redisplay jobs based on new size
         displayOtherJobs(); // Redisplay other jobs based on new size
         updateLoadMoreVisibility(); // Update button visibility after resize
@@ -468,8 +466,6 @@ $(document).ready(function () {
             $('#jobList').show(); // Show the job list
         }
 
-        filteredJobs = filteredJobs.slice(0, displayedJobs); // Get the subset of jobs to be displayed
-
         // Apply filters
         const selectedLocation = $('#locationFilter').val();
         const selectedJobType = $('#jobTypeFilter').val();
@@ -478,6 +474,9 @@ $(document).ready(function () {
             return (selectedLocation === 'All' || jobLocations.includes(selectedLocation)) &&
                    (selectedJobType === 'All' || job.occupation_area === selectedJobType);
         });
+
+        // Get the subset of jobs to be displayed
+        filteredJobs = filteredJobs.slice(0, displayedJobs); 
 
         // Add job cards to the DOM
         filteredJobs.forEach(job => {
@@ -503,7 +502,8 @@ $(document).ready(function () {
             $('#otherJobList').show(); // Show the other job list
         }
 
-        filteredOtherJobs = filteredOtherJobs.slice(0, displayedOtherJobs); // Get the subset of other jobs to be displayed
+        // Get the subset of other jobs to be displayed
+        filteredOtherJobs = filteredOtherJobs.slice(0, displayedOtherJobs); 
 
         // Add job cards to the DOM
         filteredOtherJobs.forEach(job => {
@@ -611,6 +611,7 @@ $(document).ready(function () {
     });
 });
 </script>
+
 
 
 
