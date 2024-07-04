@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NAF - Norges Automobil Forbund</title>
+    <title>NAF</title>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://career.talentech.com/css/index-style.css">
 <link rel="stylesheet" href="./css/naf-index.css">
@@ -494,7 +494,7 @@ $(document).ready(function () {
         $('#otherJobList').empty(); // Clear current jobs
 
         let filteredOtherJobs = jobs.filter(job => 
-            !(job.organizations.length === 1 && job.organizations[0].orgunitseqno === 2)
+            job.organizations.length !== 1 || job.organizations[0].orgunitseqno !== 2
         ); // Filter jobs that do not exclusively have orgunitseqno 2
 
         if (filteredOtherJobs.length === 0) {
@@ -560,7 +560,7 @@ $(document).ready(function () {
 
     // Function to update the visibility of the "Load More Other" button
     function updateLoadMoreOtherVisibility() {
-        if (displayedOtherJobs >= jobs.filter(job => !(job.organizations.length === 1 && job.organizations[0].orgunitseqno === 2)).length) {
+        if (displayedOtherJobs >= jobs.filter(job => job.organizations.length !== 1 || job.organizations[0].orgunitseqno !== 2).length) {
             $('#loadMoreOther').hide();
         } else {
             $('#loadMoreOther').show();
@@ -574,7 +574,7 @@ $(document).ready(function () {
             .then(data => {
                 jobs = data; // Store fetched jobs
                 displayedJobs = Math.min(jobsToShow, jobs.filter(job => job.organizations.length === 1 && job.organizations[0]?.orgunitseqno === 2).length); // Initialize displayedJobs
-                displayedOtherJobs = Math.min(jobsToShow, jobs.filter(job => !(job.organizations.length === 1 && job.organizations[0]?.orgunitseqno === 2)).length); // Initialize displayedOtherJobs
+                displayedOtherJobs = Math.min(jobsToShow, jobs.filter(job => job.organizations.length !== 1 || job.organizations[0]?.orgunitseqno !== 2).length); // Initialize displayedOtherJobs
                 populateFilters(); // Fill dropdowns with options
                 displayJobs(); // Show initial jobs
                 displayOtherJobs(); // Show initial other jobs
@@ -615,7 +615,6 @@ $(document).ready(function () {
     });
 });
 </script>
-
 
 
 
