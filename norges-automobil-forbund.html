@@ -411,6 +411,8 @@ $(document).ready(function () {
     // Adjust jobsToShow based on window resize
     $(window).resize(function() {
         jobsToShow = window.innerWidth > 768 ? jobsToShowDesktop : jobsToShowMobile;
+        displayedJobs = Math.min(jobsToShow, jobs.length); // Adjust displayedJobs based on new jobsToShow
+        displayedOtherJobs = Math.min(jobsToShow, otherJobs.length); // Adjust displayedOtherJobs based on new jobsToShow
         displayJobs(); // Redisplay jobs based on new size
         displayOtherJobs(); // Redisplay other jobs based on new size
         updateLoadMoreVisibility(); // Update button visibility after resize
@@ -466,6 +468,8 @@ $(document).ready(function () {
             $('#jobList').show(); // Show the job list
         }
 
+        filteredJobs = filteredJobs.slice(0, displayedJobs); // Get the subset of jobs to be displayed
+
         // Apply filters
         const selectedLocation = $('#locationFilter').val();
         const selectedJobType = $('#jobTypeFilter').val();
@@ -474,9 +478,6 @@ $(document).ready(function () {
             return (selectedLocation === 'All' || jobLocations.includes(selectedLocation)) &&
                    (selectedJobType === 'All' || job.occupation_area === selectedJobType);
         });
-
-        // Get the subset of jobs to be displayed
-        filteredJobs = filteredJobs.slice(0, displayedJobs); 
 
         // Add job cards to the DOM
         filteredJobs.forEach(job => {
@@ -502,8 +503,7 @@ $(document).ready(function () {
             $('#otherJobList').show(); // Show the other job list
         }
 
-        // Get the subset of other jobs to be displayed
-        filteredOtherJobs = filteredOtherJobs.slice(0, displayedOtherJobs); 
+        filteredOtherJobs = filteredOtherJobs.slice(0, displayedOtherJobs); // Get the subset of other jobs to be displayed
 
         // Add job cards to the DOM
         filteredOtherJobs.forEach(job => {
@@ -519,8 +519,8 @@ $(document).ready(function () {
         // Adjust accordingly if your detail page has a different URL structure
         const jobDetailUrl = `job-details.html?jobId=${job.ad_id}`;
 
-        // Use the last organization unit
-        const organizationUnitName = job.organizations[job.organizations.length - 1].nameorgunit;
+        // Use the second organization unit if available, otherwise use the first one
+        const organizationUnitName = job.organizations.length > 1 ? job.organizations[1].nameorgunit : job.organizations[0]?.nameorgunit || 'Not specified';
 
         // Determine the display location based on the areas and country
         let displayLocation = job.country || '';
@@ -564,20 +564,20 @@ $(document).ready(function () {
     }
 
     // Function to fetch jobs from the API
-    async function fetchJobs() {
-        try {
-            const response = await fetch('https://api.talentech.io/reachmee/feed/naf'); // Ensure this URL is correct
-            const data = await response.json();
-            jobs = data; // Store fetched jobs
-            displayedJobs = Math.min(jobsToShow, jobs.filter(job => job.organizations[job.organizations.length - 1]?.orgunitseqno === 2).length); // Initialize displayedJobs
-            displayedOtherJobs = Math.min(jobsToShow, jobs.filter(job => job.organizations[job.organizations.length - 1]?.orgunitseqno !== 2).length); // Initialize displayedOtherJobs
-            console.log("Fetched jobs:", jobs);
-            populateFilters(); // Fill dropdowns with options
-            displayJobs(); // Show initial jobs
-            displayOtherJobs(); // Show initial other jobs
-        } catch (error) {
-            console.error('Error fetching jobs:', error);
-        }
+    function fetchJobs() {
+        fetch('https://api.talentech.io/reachmee/feed/naf') // Ensure this URL is correct
+            .then(response => response.json())
+            .then(data => {
+                jobs = data; // Store fetched jobs
+                displayedJobs = Math.min(jobsToShow, jobs.filter(job => job.organizations[job.organizations.length - 1]?.orgunitseqno === 2).length); // Initialize displayedJobs
+                displayedOtherJobs = Math.min(jobsToShow, jobs.filter(job => job.organizations[job.organizations.length - 1]?.orgunitseqno !== 2).length); // Initialize displayedOtherJobs
+                populateFilters(); // Fill dropdowns with options
+                displayJobs(); // Show initial jobs
+                displayOtherJobs(); // Show initial other jobs
+            })
+            .catch(error => {
+                console.error('Error fetching jobs:', error);
+            });
     }
 
     // Load jobs when page is ready
@@ -611,7 +611,6 @@ $(document).ready(function () {
     });
 });
 </script>
-
 
 
 
