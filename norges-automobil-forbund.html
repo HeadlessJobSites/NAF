@@ -403,65 +403,23 @@ $(document).ready(function () {
         updateLoadMoreOtherVisibility(); // Update other button visibility after resize
     });
 
-    // Function to populate filter dropdowns based on jobs
-    function populateFilters() {
-        const locationSet = new Set();
-        const jobTypeSet = new Set();
-
-        jobs.forEach(job => {
-            // Use the last area for location
-            if (job.areas && job.areas.length > 0) {
-                const lastArea = job.areas[job.areas.length - 1];
-                locationSet.add(lastArea.name);
-            }
-
-            // Use occupation_area for job type
-            if (job.occupation_area) {
-                jobTypeSet.add(job.occupation_area);
-            }
-        });
-
-        // Populate location filter
-        $('#locationFilter').html('<option value="All">Alle steder</option>');
-        locationSet.forEach(location => {
-            $('#locationFilter').append(`<option value="${location}">${location}</option>`);
-        });
-
-        // Populate job type filter
-        $('#jobTypeFilter').html('<option value="All">Alle stillingstyper</option>');
-        jobTypeSet.forEach(type => {
-            $('#jobTypeFilter').append(`<option value="${type}">${type}</option>`);
-        });
-    }
-
-    // Function to display jobs based on filters
+    // Function to display jobs
     function displayJobs() {
         $('#jobList').empty(); // Clear current jobs
 
-        let filteredJobs = jobs.filter(job => job.organizations[job.organizations.length - 1]?.orgunitseqno === 2); // Filter jobs by the last orgunitseqno being 14
+        let filteredJobs = jobs.filter(job => job.organizations[job.organizations.length - 1]?.orgunitseqno === 2); // Filter jobs by the last orgunitseqno being 2
 
         if (filteredJobs.length === 0) {
             $('#noJobsMessage').show(); // Show the no jobs message
-            $('#filters').hide(); // Hide the filters
             $('#jobList').hide(); // Hide the job list
             $('#loadMore').hide(); // Hide the load more button
             return;
         } else {
             $('#noJobsMessage').hide(); // Hide the no jobs message
-            $('#filters').show(); // Show the filters
             $('#jobList').show(); // Show the job list
         }
 
         filteredJobs = filteredJobs.slice(0, displayedJobs); // Get the subset of jobs to be displayed
-
-        // Apply filters
-        const selectedLocation = $('#locationFilter').val();
-        const selectedJobType = $('#jobTypeFilter').val();
-        filteredJobs = filteredJobs.filter(job => {
-            const jobLocations = job.areas.map(area => area.name);
-            return (selectedLocation === 'All' || jobLocations.includes(selectedLocation)) &&
-                   (selectedJobType === 'All' || job.occupation_area === selectedJobType);
-        });
 
         // Add job cards to the DOM
         filteredJobs.forEach(job => {
@@ -475,7 +433,7 @@ $(document).ready(function () {
     function displayOtherJobs() {
         $('#otherJobList').empty(); // Clear current jobs
 
-        let filteredOtherJobs = jobs.filter(job => job.organizations[job.organizations.length - 1]?.orgunitseqno !== 2); // Filter jobs by the last orgunitseqno not being 14
+        let filteredOtherJobs = jobs.filter(job => job.organizations[job.organizations.length - 1]?.orgunitseqno !== 2); // Filter jobs by the last orgunitseqno not being 2
 
         if (filteredOtherJobs.length === 0) {
             $('#noOtherJobsMessage').show(); // Show the no other jobs message
@@ -555,7 +513,6 @@ $(document).ready(function () {
                 jobs = data; // Store fetched jobs
                 displayedJobs = Math.min(jobsToShow, jobs.filter(job => job.organizations[job.organizations.length - 1]?.orgunitseqno === 2).length); // Initialize displayedJobs
                 displayedOtherJobs = Math.min(jobsToShow, jobs.filter(job => job.organizations[job.organizations.length - 1]?.orgunitseqno !== 2).length); // Initialize displayedOtherJobs
-                populateFilters(); // Fill dropdowns with options
                 displayJobs(); // Show initial jobs
                 displayOtherJobs(); // Show initial other jobs
             })
@@ -579,19 +536,6 @@ $(document).ready(function () {
         displayedOtherJobs += jobsToShow; // Increase the number of displayed other jobs
         displayOtherJobs(); // Display new set of other jobs
         updateLoadMoreOtherVisibility(); // Check if we still need the "Load More Other" button
-    });
-
-    // Event listeners for filter dropdowns
-    $('#locationFilter').change(function() {
-        displayedJobs = jobsToShow; // Reset displayed jobs to show initial count based on current device
-        displayJobs(); // Apply filter and display jobs
-        updateLoadMoreVisibility(); // Update "Load More" button visibility based on filters
-    });
-
-    $('#jobTypeFilter').change(function() {
-        displayedJobs = jobsToShow; // Reset displayed jobs to show initial count based on current device
-        displayJobs(); // Apply filter and display jobs
-        updateLoadMoreVisibility(); // Update "Load More" button visibility based on filters
     });
 });
 </script>
