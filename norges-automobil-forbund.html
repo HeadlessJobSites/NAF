@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NAF</title>
+    <title>NAF-</title>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://career.talentech.com/css/index-style.css">
 <link rel="stylesheet" href="./css/naf-index.css">
@@ -424,14 +424,6 @@ $(document).ready(function () {
 
         filteredJobs = filteredJobs.slice(0, displayedJobs); // Get the subset of jobs to be displayed
 
-        // Apply filters
-        const selectedLocation = $('#locationFilter').val();
-        const selectedJobType = $('#jobTypeFilter').val();
-        filteredJobs = filteredJobs.filter(job => {
-            const jobLocations = job.areas.map(area => area.name);
-            return (selectedLocation === 'All' || jobLocations.includes(selectedLocation)) &&
-                   (selectedJobType === 'All' || job.occupation_area === selectedJobType);
-        });
 
         // Add job cards to the DOM
         filteredJobs.forEach(job => {
@@ -551,18 +543,6 @@ $(document).ready(function () {
         updateLoadMoreOtherVisibility(); // Check if we still need the "Load More Other" button
     });
 
-    // Event listeners for filter dropdowns
-    $('#locationFilter').change(function() {
-        displayedJobs = jobsToShow; // Reset displayed jobs to show initial count based on current device
-        displayJobs(); // Apply filter and display jobs
-        updateLoadMoreVisibility(); // Update "Load More" button visibility based on filters
-    });
-
-    $('#jobTypeFilter').change(function() {
-        displayedJobs = jobsToShow; // Reset displayed jobs to show initial count based on current device
-        displayJobs(); // Apply filter and display jobs
-        updateLoadMoreVisibility(); // Update "Load More" button visibility based on filters
-    });
 });
 </script>
 
