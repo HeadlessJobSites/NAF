@@ -564,20 +564,20 @@ $(document).ready(function () {
     }
 
     // Function to fetch jobs from the API
-    function fetchJobs() {
-        fetch('https://api.talentech.io/reachmee/feed/naf') // Ensure this URL is correct
-            .then(response => response.json())
-            .then(data => {
-                jobs = data; // Store fetched jobs
-                displayedJobs = Math.min(jobsToShow, jobs.filter(job => job.organizations[job.organizations.length - 1]?.orgunitseqno === 2).length); // Initialize displayedJobs
-                displayedOtherJobs = Math.min(jobsToShow, jobs.filter(job => job.organizations[job.organizations.length - 1]?.orgunitseqno !== 2).length); // Initialize displayedOtherJobs
-                populateFilters(); // Fill dropdowns with options
-                displayJobs(); // Show initial jobs
-                displayOtherJobs(); // Show initial other jobs
-            })
-            .catch(error => {
-                console.error('Error fetching jobs:', error);
-            });
+    async function fetchJobs() {
+        try {
+            const response = await fetch('https://api.talentech.io/reachmee/feed/naf'); // Ensure this URL is correct
+            const data = await response.json();
+            jobs = data; // Store fetched jobs
+            displayedJobs = Math.min(jobsToShow, jobs.filter(job => job.organizations[job.organizations.length - 1]?.orgunitseqno === 2).length); // Initialize displayedJobs
+            displayedOtherJobs = Math.min(jobsToShow, jobs.filter(job => job.organizations[job.organizations.length - 1]?.orgunitseqno !== 2).length); // Initialize displayedOtherJobs
+            console.log("Fetched jobs:", jobs);
+            populateFilters(); // Fill dropdowns with options
+            displayJobs(); // Show initial jobs
+            displayOtherJobs(); // Show initial other jobs
+        } catch (error) {
+            console.error('Error fetching jobs:', error);
+        }
     }
 
     // Load jobs when page is ready
@@ -611,8 +611,6 @@ $(document).ready(function () {
     });
 });
 </script>
-
-
 
 
 
