@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NAF - </title>
+    <title>NAF</title>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://career.talentech.com/css/index-style.css">
 <link rel="stylesheet" href="./css/naf-index.css">
@@ -400,7 +400,7 @@ $(document).ready(function () {
         displayJobs(); // Redisplay jobs based on new size
         displayOtherJobs(); // Redisplay other jobs based on new size
         updateLoadMoreVisibility(); // Update button visibility after resize
-        updateLoadMoreOtherVisibility(); // Update other button visibility after resize
+        updateLoadMoreOtherVisibility(); // Update button visibility after resize
     });
 
     // Function to display jobs
@@ -457,20 +457,16 @@ $(document).ready(function () {
 
     // Function to build HTML for a job card
     function buildJobCard(job) {
-        // Assuming job-details.html is your detail page and it can handle job IDs
-        // Adjust accordingly if your detail page has a different URL structure
-        const jobDetailUrl = job-details.html?jobId=${job.ad_id};
+        const jobDetailUrl = `job-details.html?jobId=${job.ad_id}`;
 
-        // Use the second organization unit if available, otherwise use the first one
         const organizationUnitName = job.organizations.length > 1 ? job.organizations[1].nameorgunit : job.organizations[0]?.nameorgunit || 'Not specified';
 
-        // Determine the display location based on the areas and country
         let displayLocation = job.country || '';
         if (job.areas && job.areas.length > 0) {
             displayLocation = job.areas[job.areas.length - 1].name; // Use the last area
         }
 
-        return 
+        return `
 <div class="col-12 col-md-4 col-lg-4 mb-4">
     <a href="${jobDetailUrl}" class="" style="text-decoration: none; color: inherit;" aria-label="Job details">
         <div class="card h-100">
@@ -484,7 +480,7 @@ $(document).ready(function () {
             </div>
         </div>
     </a>
-</div>;
+</div>`;
     }
 
     // Function to update the visibility of the "Load More" button
