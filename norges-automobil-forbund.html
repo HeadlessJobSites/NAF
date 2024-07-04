@@ -360,22 +360,6 @@ $(document).ready(function() {
 <div class="feature-section mb-5 py-3 pb-2" id="jobs-anchor" style="">
     <div class="container mt-3 mb-0 m-mb-0">
         <h2 class="my-5 m-px-2 m-my-0">Ledige stillinger hos <span style="font-weight: 800">Norges Automobil Forbund</span></h2>
-        <div id="filters" class="row my-3">
-            <div class="col-md-3 mb-3">
-                <label for="locationFilter">Sted</label>
-                <select id="locationFilter" class="form-control">
-                    <option value="All">Alle steder</option>
-                    <!-- Location options will be dynamically added here -->
-                </select>
-            </div>
-            <div class="col-md-3 mb-3">
-                <label for="jobTypeFilter">Stillingstyper</label>
-                <select id="jobTypeFilter" class="form-control">
-                    <option value="All">Alle stillingstyper</option>
-                    <!-- Job type options will be dynamically added here -->
-                </select>
-            </div>
-        </div>
         <div id="jobList" class="row"></div>
         <div class="text-center mt-2">
             <button id="loadMore" class="btn btn-primary">Se flere</button>
@@ -419,69 +403,23 @@ $(document).ready(function () {
         updateLoadMoreOtherVisibility(); // Update other button visibility after resize
     });
 
-    // Function to populate filter dropdowns based on jobs
-    function populateFilters() {
-        const locationSet = new Set();
-        const jobTypeSet = new Set();
-
-        jobs.forEach(job => {
-            // Use the last area for location
-            if (job.areas && job.areas.length > 0) {
-                const lastArea = job.areas[job.areas.length - 1];
-                locationSet.add(lastArea.name);
-            }
-
-            // Use occupation_area for job type
-            if (job.occupation_area) {
-                jobTypeSet.add(job.occupation_area);
-            }
-        });
-
-        // Populate location filter
-        $('#locationFilter').html('<option value="All">Alle steder</option>');
-        locationSet.forEach(location => {
-            $('#locationFilter').append(`<option value="${location}">${location}</option>`);
-        });
-
-        // Populate job type filter
-        $('#jobTypeFilter').html('<option value="All">Alle stillingstyper</option>');
-        jobTypeSet.forEach(type => {
-            $('#jobTypeFilter').append(`<option value="${type}">${type}</option>`);
-        });
-    }
-
-    // Function to display jobs based on filters
+    // Function to display jobs
     function displayJobs() {
         $('#jobList').empty(); // Clear current jobs
 
-        let filteredJobs = jobs.filter(job => job.organizations[job.organizations.length - 1]?.orgunitseqno === 2); // Filter jobs by the last orgunitseqno being 2
-
-        console.log('Filtered Jobs:', filteredJobs); // Debug: log the filtered jobs
+        let filteredJobs = jobs.filter(job => job.organizations[job.organizations.length - 1]?.orgunitseqno === 2); // Filter jobs by the last orgunitseqno being 14
 
         if (filteredJobs.length === 0) {
             $('#noJobsMessage').show(); // Show the no jobs message
-            $('#filters').hide(); // Hide the filters
             $('#jobList').hide(); // Hide the job list
             $('#loadMore').hide(); // Hide the load more button
             return;
         } else {
             $('#noJobsMessage').hide(); // Hide the no jobs message
-            $('#filters').show(); // Show the filters
             $('#jobList').show(); // Show the job list
         }
 
         filteredJobs = filteredJobs.slice(0, displayedJobs); // Get the subset of jobs to be displayed
-
-        // Apply filters
-        const selectedLocation = $('#locationFilter').val();
-        const selectedJobType = $('#jobTypeFilter').val();
-        filteredJobs = filteredJobs.filter(job => {
-            const jobLocations = job.areas.map(area => area.name);
-            return (selectedLocation === 'All' || jobLocations.includes(selectedLocation)) &&
-                   (selectedJobType === 'All' || job.occupation_area === selectedJobType);
-        });
-
-        console.log('Filtered Jobs After Applying Filters:', filteredJobs); // Debug: log the filtered jobs after applying dropdown filters
 
         // Add job cards to the DOM
         filteredJobs.forEach(job => {
@@ -495,7 +433,7 @@ $(document).ready(function () {
     function displayOtherJobs() {
         $('#otherJobList').empty(); // Clear current jobs
 
-        let filteredOtherJobs = jobs.filter(job => job.organizations[job.organizations.length - 1]?.orgunitseqno !== 2); // Filter jobs by the last orgunitseqno not being 2
+        let filteredOtherJobs = jobs.filter(job => job.organizations[job.organizations.length - 1]?.orgunitseqno !== 2); // Filter jobs by the last orgunitseqno not being 14
 
         if (filteredOtherJobs.length === 0) {
             $('#noOtherJobsMessage').show(); // Show the no other jobs message
@@ -521,7 +459,7 @@ $(document).ready(function () {
     function buildJobCard(job) {
         // Assuming job-details.html is your detail page and it can handle job IDs
         // Adjust accordingly if your detail page has a different URL structure
-        const jobDetailUrl = `job-details.html?jobId=${job.ad_id}`;
+        const jobDetailUrl = job-details.html?jobId=${job.ad_id};
 
         // Use the second organization unit if available, otherwise use the first one
         const organizationUnitName = job.organizations.length > 1 ? job.organizations[1].nameorgunit : job.organizations[0]?.nameorgunit || 'Not specified';
@@ -532,7 +470,7 @@ $(document).ready(function () {
             displayLocation = job.areas[job.areas.length - 1].name; // Use the last area
         }
 
-        return `
+        return 
 <div class="col-12 col-md-4 col-lg-4 mb-4">
     <a href="${jobDetailUrl}" class="" style="text-decoration: none; color: inherit;" aria-label="Job details">
         <div class="card h-100">
@@ -546,7 +484,7 @@ $(document).ready(function () {
             </div>
         </div>
     </a>
-</div>`;
+</div>;
     }
 
     // Function to update the visibility of the "Load More" button
@@ -575,7 +513,6 @@ $(document).ready(function () {
                 jobs = data; // Store fetched jobs
                 displayedJobs = Math.min(jobsToShow, jobs.filter(job => job.organizations[job.organizations.length - 1]?.orgunitseqno === 2).length); // Initialize displayedJobs
                 displayedOtherJobs = Math.min(jobsToShow, jobs.filter(job => job.organizations[job.organizations.length - 1]?.orgunitseqno !== 2).length); // Initialize displayedOtherJobs
-                populateFilters(); // Fill dropdowns with options
                 displayJobs(); // Show initial jobs
                 displayOtherJobs(); // Show initial other jobs
             })
@@ -599,19 +536,6 @@ $(document).ready(function () {
         displayedOtherJobs += jobsToShow; // Increase the number of displayed other jobs
         displayOtherJobs(); // Display new set of other jobs
         updateLoadMoreOtherVisibility(); // Check if we still need the "Load More Other" button
-    });
-
-    // Event listeners for filter dropdowns
-    $('#locationFilter').change(function() {
-        displayedJobs = jobsToShow; // Reset displayed jobs to show initial count based on current device
-        displayJobs(); // Apply filter and display jobs
-        updateLoadMoreVisibility(); // Update "Load More" button visibility based on filters
-    });
-
-    $('#jobTypeFilter').change(function() {
-        displayedJobs = jobsToShow; // Reset displayed jobs to show initial count based on current device
-        displayJobs(); // Apply filter and display jobs
-        updateLoadMoreVisibility(); // Update "Load More" button visibility based on filters
     });
 });
 </script>
