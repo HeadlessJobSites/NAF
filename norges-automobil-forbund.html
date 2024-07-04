@@ -450,25 +450,29 @@ $(document).ready(function () {
         });
     }
 
+    // Set of organizational units for main and other jobs
+    const mainOrgUnits = new Set([2]);
+    const otherOrgUnits = new Set([14]);
+
     // Function to display jobs based on filters
     function displayJobs() {
         $('#jobList').empty(); // Clear current jobs
 
-        let filteredJobs = jobs.filter(job => job.organizations[job.organizations.length - 1]?.orgunitseqno === 2); // Filter jobs by the last orgunitseqno being 14
+        let filteredJobs = jobs.filter(job =>
+            job.organizations.some(org => mainOrgUnits.has(org.orgunitseqno))
+        );
 
         if (filteredJobs.length === 0) {
-            $('#noJobsMessage').show(); // Show the no jobs message
-            $('#filters').hide(); // Hide the filters
-            $('#jobList').hide(); // Hide the job list
-            $('#loadMore').hide(); // Hide the load more button
+            $('#noJobsMessage').show();
+            $('#jobList').hide();
+            $('#loadMore').hide();
             return;
         } else {
-            $('#noJobsMessage').hide(); // Hide the no jobs message
-            $('#filters').show(); // Show the filters
-            $('#jobList').show(); // Show the job list
+            $('#noJobsMessage').hide();
+            $('#jobList').show();
         }
 
-        filteredJobs = filteredJobs.slice(0, displayedJobs); // Get the subset of jobs to be displayed
+        filteredJobs = filteredJobs.slice(0, displayedJobs); // Subset of jobs to be displayed
 
         // Apply filters
         const selectedLocation = $('#locationFilter').val();
@@ -491,19 +495,21 @@ $(document).ready(function () {
     function displayOtherJobs() {
         $('#otherJobList').empty(); // Clear current jobs
 
-        let filteredOtherJobs = jobs.filter(job => job.organizations[job.organizations.length - 1]?.orgunitseqno !== 2); // Filter jobs by the last orgunitseqno not being 14
+        let filteredOtherJobs = jobs.filter(job =>
+            job.organizations.some(org => otherOrgUnits.has(org.orgunitseqno))
+        );
 
         if (filteredOtherJobs.length === 0) {
-            $('#noOtherJobsMessage').show(); // Show the no other jobs message
-            $('#otherJobList').hide(); // Hide the other job list
-            $('#loadMoreOther').hide(); // Hide the load more other button
+            $('#noOtherJobsMessage').show();
+            $('#otherJobList').hide();
+            $('#loadMoreOther').hide();
             return;
         } else {
-            $('#noOtherJobsMessage').hide(); // Hide the no other jobs message
-            $('#otherJobList').show(); // Show the other job list
+            $('#noOtherJobsMessage').hide();
+            $('#otherJobList').show();
         }
 
-        filteredOtherJobs = filteredOtherJobs.slice(0, displayedOtherJobs); // Get the subset of other jobs to be displayed
+        filteredOtherJobs = filteredOtherJobs.slice(0, displayedOtherJobs); // Subset of other jobs to be displayed
 
         // Add job cards to the DOM
         filteredOtherJobs.forEach(job => {
@@ -515,17 +521,11 @@ $(document).ready(function () {
 
     // Function to build HTML for a job card
     function buildJobCard(job) {
-        // Assuming job-details.html is your detail page and it can handle job IDs
-        // Adjust accordingly if your detail page has a different URL structure
         const jobDetailUrl = `job-details.html?jobId=${job.ad_id}`;
-
-        // Use the second organization unit if available, otherwise use the first one
         const organizationUnitName = job.organizations.length > 1 ? job.organizations[1].nameorgunit : job.organizations[0]?.nameorgunit || 'Not specified';
-
-        // Determine the display location based on the areas and country
         let displayLocation = job.country || '';
         if (job.areas && job.areas.length > 0) {
-            displayLocation = job.areas[job.areas.length - 1].name; // Use the last area
+            displayLocation = job.areas[job.areas.length - 1].name;
         }
 
         return `
@@ -545,71 +545,67 @@ $(document).ready(function () {
 </div>`;
     }
 
-    // Function to update the visibility of the "Load More" button
+    // Functions to update visibility of "Load More" buttons
     function updateLoadMoreVisibility() {
-        if (displayedJobs >= jobs.filter(job => job.organizations[job.organizations.length - 1]?.orgunitseqno === 2).length) {
+        if (displayedJobs >= jobs.filter(job => job.organizations.some(org => mainOrgUnits.has(org.orgunitseqno))).length) {
             $('#loadMore').hide();
         } else {
             $('#loadMore').show();
         }
     }
 
-    // Function to update the visibility of the "Load More Other" button
     function updateLoadMoreOtherVisibility() {
-        if (displayedOtherJobs >= jobs.filter(job => job.organizations[job.organizations.length - 1]?.orgunitseqno !== 2).length) {
+        if (displayedOtherJobs >= jobs.filter(job => job.organizations.some(org => otherOrgUnits.has(org.orgunitseqno))).length) {
             $('#loadMoreOther').hide();
         } else {
             $('#loadMoreOther').show();
         }
     }
 
-    // Function to fetch jobs from the API
-    function fetchJobs() {
-        fetch('https://api.talentech.io/reachmee/feed/naf') // Ensure this URL is correct
-            .then(response => response.json())
-            .then(data => {
-                jobs = data; // Store fetched jobs
-                displayedJobs = Math.min(jobsToShow, jobs.filter(job => job.organizations[job.organizations.length - 1]?.orgunitseqno === 2).length); // Initialize displayedJobs
-                displayedOtherJobs = Math.min(jobsToShow, jobs.filter(job => job.organizations[job.organizations.length - 1]?.orgunitseqno !== 2).length); // Initialize displayedOtherJobs
-                populateFilters(); // Fill dropdowns with options
-                displayJobs(); // Show initial jobs
-                displayOtherJobs(); // Show initial other jobs
-            })
-            .catch(error => {
-                console.error('Error fetching jobs:', error);
-            });
-    }
-
-    // Load jobs when page is ready
-    fetchJobs();
-
-    // Event listener for "Load More" button
+    // Event listeners for "Load More" buttons
     $('#loadMore').click(function() {
-        displayedJobs += jobsToShow; // Increase the number of displayed jobs
-        displayJobs(); // Display new set of jobs
-        updateLoadMoreVisibility(); // Check if we still need the "Load More" button
+        displayedJobs += jobsToShow;
+        displayJobs();
+        updateLoadMoreVisibility();
     });
 
-    // Event listener for "Load More Other" button
     $('#loadMoreOther').click(function() {
-        displayedOtherJobs += jobsToShow; // Increase the number of displayed other jobs
-        displayOtherJobs(); // Display new set of other jobs
-        updateLoadMoreOtherVisibility(); // Check if we still need the "Load More Other" button
+        displayedOtherJobs += jobsToShow;
+        displayOtherJobs();
+        updateLoadMoreOtherVisibility();
     });
 
     // Event listeners for filter dropdowns
     $('#locationFilter').change(function() {
-        displayedJobs = jobsToShow; // Reset displayed jobs to show initial count based on current device
-        displayJobs(); // Apply filter and display jobs
-        updateLoadMoreVisibility(); // Update "Load More" button visibility based on filters
+        displayedJobs = jobsToShow;
+        displayJobs();
+        updateLoadMoreVisibility();
     });
 
     $('#jobTypeFilter').change(function() {
-        displayedJobs = jobsToShow; // Reset displayed jobs to show initial count based on current device
-        displayJobs(); // Apply filter and display jobs
-        updateLoadMoreVisibility(); // Update "Load More" button visibility based on filters
+        displayedJobs = jobsToShow;
+        displayJobs();
+        updateLoadMoreVisibility();
     });
+
+    // Load jobs when page is ready
+    fetchJobs();
 });
+
+// Fetch jobs from your data source
+function fetchJobs() {
+    fetch('https://api.talentech.io/reachmee/feed/naf')
+        .then(response => response.json())
+        .then(data => {
+            jobs = data;
+            populateFilters();
+            displayJobs();
+            displayOtherJobs();
+        })
+        .catch(error => {
+            console.error('Error fetching jobs:', error);
+        });
+}
 </script>
 
 
