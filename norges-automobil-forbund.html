@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NAF</title>
+    <title>NAF - </title>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://career.talentech.com/css/index-style.css">
 <link rel="stylesheet" href="./css/naf-index.css">
@@ -456,6 +456,8 @@ $(document).ready(function () {
 
         let filteredJobs = jobs.filter(job => job.organizations[job.organizations.length - 1]?.orgunitseqno === 2); // Filter jobs by the last orgunitseqno being 2
 
+        console.log('Filtered Jobs:', filteredJobs); // Debug: log the filtered jobs
+
         if (filteredJobs.length === 0) {
             $('#noJobsMessage').show(); // Show the no jobs message
             $('#filters').hide(); // Hide the filters
@@ -478,6 +480,8 @@ $(document).ready(function () {
             return (selectedLocation === 'All' || jobLocations.includes(selectedLocation)) &&
                    (selectedJobType === 'All' || job.occupation_area === selectedJobType);
         });
+
+        console.log('Filtered Jobs After Applying Filters:', filteredJobs); // Debug: log the filtered jobs after applying dropdown filters
 
         // Add job cards to the DOM
         filteredJobs.forEach(job => {
