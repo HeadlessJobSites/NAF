@@ -59,7 +59,7 @@
 }
 .hero-section {
 	position: relative;
-	height: 100vh;
+	height: 75vh;
 	overflow: hidden;
 	background-color: rgb(0 0 0 / 62%);
 }
@@ -78,8 +78,8 @@
 .hero-content {
 	position: relative;
 	text-align: center;
-	top: 50%;
-	transform: translateY(-50%);
+	top: 40%;
+	transform: translateY(-40%);
 	color: white;
 }
 .job-listing {
