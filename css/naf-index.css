@@ -1,3 +1,10 @@
+.hero-section {
+    height: 75vh;
+}
+.hero-content {
+    top: 40%;
+    transform: translateY(-40%);
+}
 .hero-section .naf-hero {
     position: absolute;
     top: 50%;
