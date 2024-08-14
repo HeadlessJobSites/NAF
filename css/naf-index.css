@@ -1,7 +1,7 @@
 .navbar .navbar-brand {
     display: none;
 }
-.navbar-dark .navbar-brand {
+.navbar-dark.bg-dark .navbar-brand {
     display: inherit;
 }
 .hero-section {
