@@ -1,8 +1,8 @@
 .navbar .navbar-brand {
-    display: none;
+    visibility: hidden;
 }
 .navbar-dark.bg-dark .navbar-brand {
-    display: inherit;
+    visibility: inherit;
 }
 .hero-section {
     height: 75vh;
