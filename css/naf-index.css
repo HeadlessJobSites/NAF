@@ -188,6 +188,9 @@ h4 {
 .process-content {
     font-size: 0.8rem;
 }
+.naf-footer p {
+    font-size: 1rem !important;
+}
 .hero-logo {
     bottom: 18px;
     left: 18px;
