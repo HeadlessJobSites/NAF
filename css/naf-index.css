@@ -179,6 +179,10 @@ h2 {
 h4 {
 	font-size: 1rem;
 }
+.blockquote-footer,
+.blockquote p {
+	font-size: 1rem;
+}
 .card-title {
     font-size: 1.2rem;
 }
