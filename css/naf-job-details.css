@@ -36,6 +36,11 @@
     height: 200px; /* Set the desired height */
     width: auto; /* Maintain aspect ratio */
 }
+@media (max-width: 992px) {
+    .mobile-only {
+        justify-content: right;
+    }
+}
 @media (max-width: 768px) {
     .service-box {
         flex-direction: column;
