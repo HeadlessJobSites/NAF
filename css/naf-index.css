@@ -170,6 +170,9 @@
 }
 
 @media (max-width: 768px) {
+.process-content {
+    font-size: 0.8rem;
+}
 .hero-logo {
     bottom: 18px;
     left: 18px;
