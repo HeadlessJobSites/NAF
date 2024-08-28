@@ -163,7 +163,7 @@
     text-align: center;*/
 }
 
-.values-heading {
+.benefits-section h4 .values-heading {
     margin: 0 auto;
     text-align: center;
     font-size: 2rem;
@@ -178,7 +178,7 @@
 
 @media (max-width: 768px) {
 
-.values-heading {
+.benefits-section h4 .values-heading {
     font-size: 1.25rem;
     margin-bottom: 48px;
     margin: 0 auto;
