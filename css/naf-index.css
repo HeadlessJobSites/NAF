@@ -180,7 +180,7 @@
 
 .benefits-section h4 .values-heading {
     font-size: 1.25rem;
-    margin-bottom: 48px;
+    margin-bottom: 48px !important;
     margin: 0 auto;
     text-align: center;
 }	
