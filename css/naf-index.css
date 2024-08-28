@@ -1,6 +1,13 @@
 .navbar .navbar-brand {
     visibility: hidden;
 }
+.values-heading {
+    margin: 0 auto;
+    text-align: center;
+    font-size: 2rem;
+    max-width: 720px;
+    margin-bottom: 60px;
+}	
 .navbar-dark.bg-dark .navbar-brand {
     visibility: inherit;
 }
@@ -170,6 +177,11 @@
 }
 
 @media (max-width: 768px) {
+
+.values-heading {
+    font-size: 1.25rem;
+    margin-bottom: 48px;
+}	
 body {
 	font-size: 0.9rem;
 }
