@@ -1,13 +1,6 @@
 .navbar .navbar-brand {
     visibility: hidden;
 }
-.values-heading {
-    margin: 0 auto;
-    text-align: center;
-    font-size: 2rem;
-    max-width: 720px;
-    margin-bottom: 60px;
-}	
 .navbar-dark.bg-dark .navbar-brand {
     visibility: inherit;
 }
@@ -169,7 +162,14 @@
     /*margin: 0 auto;
     text-align: center;*/
 }
-	
+
+.values-heading {
+    margin: 0 auto;
+    text-align: center;
+    font-size: 2rem;
+    max-width: 720px;
+    margin-bottom: 60px;
+}	
 .benefits-section h4 div.offer-subtitle {
     /*font-size: 2.25rem;
     font-weight: 700;*/
@@ -181,6 +181,8 @@
 .values-heading {
     font-size: 1.25rem;
     margin-bottom: 48px;
+    margin: 0 auto;
+    text-align: center;
 }	
 body {
 	font-size: 0.9rem;
