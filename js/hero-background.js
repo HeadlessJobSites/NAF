@@ -48,7 +48,7 @@ function setHeroBackgroundVideo() {
 
         video.appendChild(source);
         heroSection.appendChild(video);
-    }
+    } 
 }
 
 
