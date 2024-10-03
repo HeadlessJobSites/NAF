@@ -12,3 +12,4 @@
 
     // Call the function to set social media share URLs
     setSocialMediaShareUrls();
+ 
