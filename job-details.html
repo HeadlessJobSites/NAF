@@ -675,19 +675,39 @@ document.addEventListener('DOMContentLoaded', function() {
         <div class="mt-2 mt-sm-0 ml-sm-auto"><!-- updated margin and alignment classes -->
             <span class="d-block d-sm-inline mb-1"><!-- updated responsive classes -->
                 Del på sosiale medier: 
-                <a href="#" id="facebook-share-link" target="_blank" rel="noopener noreferrer">
+                <a href="#" class="facebook-share-link" target="_blank" rel="noopener noreferrer">
                     <img src="https://cdn.jsdelivr.net/npm/simple-icons/icons/facebook.svg" alt="Share on Facebook" width="16" height="16">
                 </a>
-                <a href="#" id="twitter-share-link" target="_blank" rel="noopener noreferrer">
+                <a href="#" class="twitter-share-link" target="_blank" rel="noopener noreferrer">
                     <img src="https://cdn.jsdelivr.net/npm/simple-icons/icons/x.svg" alt="Share on X" width="16" height="16">
                 </a>
-                <a href="#" id="linkedin-share-link" target="_blank" rel="noopener noreferrer">
+                <a href="#" class="linkedin-share-link" target="_blank" rel="noopener noreferrer">
                     <img src="https://cdn.jsdelivr.net/npm/simple-icons/icons/linkedin.svg" alt="Share on LinkedIn" width="16" height="16">
                 </a>
             </span>
         </div>
     </div>
 </div>
+
+
+	
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    setSocialMediaShareUrls();
+});
+
+function setSocialMediaShareUrls() {
+    var facebookShareLinks = document.querySelectorAll('.facebook-share-link');
+    var twitterShareLinks = document.querySelectorAll('.twitter-share-link');
+    var linkedinShareLinks = document.querySelectorAll('.linkedin-share-link');
+    var currentUrl = encodeURIComponent(window.location.href);
+
+    facebookShareLinks.forEach(link => link.href = 'https://www.facebook.com/sharer/sharer.php?u=' + currentUrl);
+    twitterShareLinks.forEach(link => link.href = 'https://twitter.com/intent/tweet?url=' + currentUrl);
+    linkedinShareLinks.forEach(link => link.href = 'https://www.linkedin.com/shareArticle?url=' + currentUrl);
+}
+</script>
+
 
 
 
@@ -957,7 +977,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 	
-<script src="./js/share-some.js"></script>	
 </body>
 
 </html>
