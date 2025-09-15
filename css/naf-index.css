@@ -27,12 +27,12 @@
 }
 /* Default background image class applied via js */
 .naf-hero.image-bg {
-    background: url(../files/NAF-forside.jpg);
+    background: url(../files/NAF-hero.jpg);
     background-size: cover;
     background-position: center;
 }
 .naf-hero.hero-front {
-    background: url(../files/NAF-forside.jpg);
+    background: url(../files/NAF-hero.jpg);
     background-size: cover;
     background-position: center;
 }
@@ -240,6 +240,7 @@ font-size: 2rem;
     font-size: 1.5rem;
 }
 }
+
 
 
 
