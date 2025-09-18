@@ -134,7 +134,7 @@ document.addEventListener("DOMContentLoaded", function() {
         </div>
         <div class="d-flex d-lg-none my-2 mobile-only">
             <!--<a class="nav-link new-link mr-1" href="#tt-talentech-section-2">Møt folka <i class="fa-thin fa-arrow-down"></i></a>-->
-            <a class="nav-link new-link ml-1" href="#recruitment-process">Rekrutteringsprosess <i class="fa-thin fa-arrow-down"></i></a>
+            <a class="nav-link new-link ml-1 recruitment-nav" href="#recruitment-process">Rekrutteringsprosess <i class="fa-thin fa-arrow-down"></i></a>
         </div>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
@@ -479,6 +479,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (job.occupation_area_id !== 28) {
                     document.querySelector('.service-box-wrapper').style.display = 'none';
                     document.querySelector('.recruitment-process-naf-senter').style.display = 'none';
+                    document.querySelector('.recruitment-nav').style.display = 'none';
                     document.querySelector('.new-link').style.display = 'none';
                 }
             } else {
